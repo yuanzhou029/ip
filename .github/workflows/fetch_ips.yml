@@ -8,12 +8,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Download IP file
         run: curl -o ip.txt https://ipdb.api.030101.xyz/?type=cfv4\;proxy\&down=true
 
-      - name: Add downloaded file to Git
+      - name: Set up Git
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
+
+      - name: Add downloaded file to Git
+        run: |
           git add ip.txt
           git commit -m "Add ip.txt file"
