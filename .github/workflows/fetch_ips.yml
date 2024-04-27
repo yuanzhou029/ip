@@ -19,15 +19,12 @@ jobs:
           content=$(cat ip.txt)
           echo "$content" > ./ip.txt
 
-      - name: Set up Git
+      - name: Commit and push changes
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-
-      - name: Commit and push changes
-        run: |
           git add ip.txt
           git commit -m "Update ip.txt file"
-          git push https://github.com/yuanzhou029/ip.git HEAD:main
+          git push origin HEAD:main
         env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
