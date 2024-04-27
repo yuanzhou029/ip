@@ -1,10 +1,8 @@
 name: 查询日本IP
-
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch: # 手动触发
+    branches:       
+      - main  # 可以根据需要更改分
 jobs:
   query_ips:
     runs-on: ubuntu-latest
