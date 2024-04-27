@@ -18,17 +18,7 @@ def get_japan_ips():
     for ip in ips:
         try:
             response = reader.country(ip)
-            if response.country.iso_code == 'JP':
-                japan_ips.append(ip)
-            if response.country.iso_code == 'KR':
-                japan_ips.append(ip)
-            if response.country.iso_code == 'HK':
-                japan_ips.append(ip)
-            if response.country.iso_code == 'TW':
-                japan_ips.append(ip)
-            if response.country.iso_code == 'SG':
-                japan_ips.append(ip)
-            if response.country.iso_code == 'VN':
+            if response.country.iso_code in ['JP', 'KR', 'HK', 'TW', 'SG', 'VN']:
                 japan_ips.append(ip)
         except:
             pass
@@ -40,19 +30,22 @@ def save_to_file(ips, filename):
         for ip in ips:
             file.write(f"{ip}\n")
 
-def clear_and_commit(filename):
-    # 删除 ip.txt 文件
-    os.remove('ip.txt')
+def clear_ip_file(filename):
+    # 清空 ip.txt 文件的内容
+    with open(filename, 'w') as file:
+        file.write('')
 
+def commit_and_push(filename):
     # 提交和推送到远程存储库
     repo_dir = os.getcwd()
     repo = Repo(repo_dir)
-    repo.git.add('--all')
-    repo.index.commit("Update japan_ips.txt and delete ip.txt")
+    repo.git.add(filename)
+    repo.index.commit("Update japan_ips.txt")
     origin = repo.remote('origin')
     origin.push()
 
 if __name__ == "__main__":
     japan_ips = get_japan_ips()
     save_to_file(japan_ips, 'japan_ips.txt')
-    clear_and_commit('ip.txt')
+    clear_ip_file('ip.txt')
+    commit_and_push('japan_ips.txt')
