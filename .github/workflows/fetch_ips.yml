@@ -28,4 +28,6 @@ jobs:
         run: |
           git add ip.txt
           git commit -m "Update ip.txt file"
-          git push
+          git push https://github.com/yuanzhou029/ip.git HEAD:main
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
