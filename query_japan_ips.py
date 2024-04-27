@@ -28,7 +28,7 @@ def get_japan_ips():
 def save_to_file(ips, filename):
     with open(filename, 'w') as file:
         for ip in ips:
-            file.write(f"{ip} #日本\n")
+            file.write(f"{ip}\n")
 
 def clear_and_commit(filename):
     # 删除 ip.txt 文件
