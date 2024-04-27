@@ -22,5 +22,8 @@ jobs:
       - name: 安装requests库
         run: pip install requests
 
+      - name: 安装GeoIP2库
+        run: pip install geoip2
+
       - name: 运行Python脚本
         run: python query_japan_ips.py
