@@ -1,7 +1,7 @@
 name: Query Japan IPs
 
 on:
-  workflow_dispatch: # 手动触发
+  workflow_dispatch:
 
 jobs:
   query_ips:
@@ -16,8 +16,8 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install GeoIP2 library
-        run: pip install geoip2
+      - name: Install GitPython
+        run: pip install gitpython
 
       - name: Run Python script
         run: python query_japan_ips.py
