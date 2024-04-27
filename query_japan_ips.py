@@ -30,21 +30,19 @@ def save_to_file(ips, filename):
         for ip in ips:
             file.write(f"{ip}\n")
 
-def commit_and_push(filename):
-    # 获取存储库根目录
+def clear_and_commit(filename):
+    # 删除 ip.txt 文件
+    os.remove('ip.txt')
+
+    # 提交和推送到远程存储库
     repo_dir = os.getcwd()
-
-    # 切换到存储库根目录
-    os.chdir(repo_dir)
-
-    # 使用GitPython库进行提交和推送
     repo = Repo(repo_dir)
-    repo.git.add(filename)
-    repo.index.commit("Update Japan IPs")  # 提交更改
+    repo.git.add('--all')
+    repo.index.commit("Update japan_ips.txt and delete ip.txt")
     origin = repo.remote('origin')
-    origin.push()  # 推送更改到远程存储库
+    origin.push()
 
 if __name__ == "__main__":
     japan_ips = get_japan_ips()
     save_to_file(japan_ips, 'japan_ips.txt')
-    commit_and_push('japan_ips.txt')
+    clear_and_commit('ip.txt')
