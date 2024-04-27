@@ -1,23 +1,26 @@
-name: Query Japan IPs
+name: 查询日本IP
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # 手动触发
 
 jobs:
   query_ips:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: 检出存储库
         uses: actions/checkout@v2
 
-      - name: Set up Python
+      - name: 设置Python环境
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
 
-      - name: Install GitPython
+      - name: 安装GitPython库
         run: pip install gitpython
 
-      - name: Run Python script
+      - name: 安装requests库
+        run: pip install requests
+
+      - name: 运行Python脚本
         run: python query_japan_ips.py
