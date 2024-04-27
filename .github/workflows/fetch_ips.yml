@@ -19,12 +19,8 @@ jobs:
       - name: Install requests library
         run: pip install requests
 
-      - name: Print current working directory
-        run: pwd
-        id: print_pwd
-
       - name: Run Python script to download IP addresses
-        run: python ${{ steps.print_pwd.outputs.stdout }}/download_ip.py
+        run: python download_ip.py
 
       - name: Commit and push changes
         run: |
