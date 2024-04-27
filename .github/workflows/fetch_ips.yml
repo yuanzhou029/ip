@@ -21,4 +21,4 @@ jobs:
           git config --local user.name "GitHub Actions"
           git add ip_list.txt
           git commit -m "Update IP addresses"
-          git push https://${{ secrets.ACCESS_TOKEN }}@github.com/${{ github.repository }} HEAD:main
+          git push https://github.com/yuanzhou029/ip.git HEAD:main
