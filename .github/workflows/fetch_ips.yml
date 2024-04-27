@@ -1,31 +1,20 @@
-name: Fetch and Filter IPs
+name: Download IP Addresses
 
 on:
   workflow_dispatch:
 
 jobs:
-  fetch_and_filter_ips:
+  download_ips:
     runs-on: ubuntu-latest
 
     steps:
       - name: Download IP addresses
         run: curl -o ip_list.txt "https://ipdb.api.030101.xyz/?type=cfv4;proxy&down=true"
 
-      - name: Install jq
-        run: sudo apt-get install -y jq
-
-      - name: Filter IP addresses by country
-        run: |
-          # Filter IPs by country (Japan, Korea, Singapore, Hong Kong, Taiwan)
-          filtered_ips=$(jq -r '. | select(.country_code | contains("JP", "KR", "SG", "HK", "TW")) | .ip' ip_list.txt)
-
-          # Save filtered IPs to 123.txt file
-          echo "$filtered_ips" > 123.txt
-
       - name: Commit and push changes
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add 123.txt
+          git add ip_list.txt
           git commit -m "Update IP addresses"
           git push
