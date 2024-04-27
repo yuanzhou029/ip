@@ -1,8 +1,7 @@
 name: Fetch and Filter IPs
 
 on:
-  schedule:
-    - cron: '0 */6 * * *' # 每6小时执行一次，你可以根据需要调整时间
+  workflow_dispatch:
 
 jobs:
   fetch_and_filter_ips:
