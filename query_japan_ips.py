@@ -8,13 +8,17 @@ def query_ip_info(ip):
     # 发送 GET 请求
     response = requests.get(api_url)
 
-    # 解析 JSON 响应
-    data = response.json()
+    # 检查响应状态码和内容类型
+    if response.status_code == 200 and response.headers.get("Content-Type") == "application/json":
+        # 解析 JSON 响应
+        data = response.json()
 
-    # 提取地理信息中的国家
-    country = data.get("country", "未知")
+        # 提取地理信息中的国家
+        country = data.get("country", "未知")
 
-    return country
+        return country
+    else:
+        return "未知"
 
 def save_japan_ips_to_file(ips, filename):
     # 将获取到的日本 IP 地址写入文件
