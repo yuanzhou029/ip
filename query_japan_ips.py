@@ -32,10 +32,7 @@ def save_to_file(ips, filename):
 
 def clear_ip_file(filename):
     with open(filename, 'w') as file:
-        file.close()
-    with open(filename, 'w') as file:
-        file.truncate(0)
-
+        file.write('')  # 清空文件内容
 
 def commit_and_push(filename):
     # 获取存储库根目录
@@ -53,7 +50,6 @@ def commit_and_push(filename):
     repo.index.commit("Update Japan IPs")  # 提交更改
     origin = repo.remote('origin')
     origin.push()  # 推送更改到远程存储库
-
 if __name__ == "__main__":
     clear_ip_file('ip.txt')  # 清空 ip.txt 文件内容
     japan_ips = get_japan_ips()
