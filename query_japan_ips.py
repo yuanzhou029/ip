@@ -1,3 +1,4 @@
+import os
 import requests
 import json
 import geoip2.database
@@ -30,7 +31,14 @@ def save_to_file(ips, filename):
             file.write(f"{ip} # 日本\n")
 
 def commit_and_push(filename):
-    repo = Repo('.')  # 当前目录为Git存储库
+    # 获取存储库根目录
+    repo_dir = os.getcwd()
+
+    # 切换到存储库根目录
+    os.chdir(repo_dir)
+
+    # 使用GitPython库进行提交和推送
+    repo = Repo(repo_dir)
     repo.git.add(filename)
     repo.index.commit("Update Japan IPs")  # 提交更改
     origin = repo.remote('origin')
