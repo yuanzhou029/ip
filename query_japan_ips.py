@@ -5,7 +5,6 @@ from git import Repo
 def query_ip_info(ip_address):
     # 加载 GeoIP2 数据库
     reader = geoip2.database.Reader('GeoLite2-Country.mmdb')
-
     try:
         # 查询 IP 地址的地理位置信息
         response = reader.country(ip_address)
