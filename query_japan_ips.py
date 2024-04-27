@@ -1,24 +1,50 @@
-name: Query Japan IPs
+import os
+import requests
+import json
+import geoip2.database
+from git import Repo
 
-on:
-  workflow_dispatch:  # 手动触发工作流程
+def get_japan_ips():
+    # 使用API查询IP地址
+    response = requests.get("https://ipdb.api.030101.xyz/?type=cfv4;proxy&down=true")
+    ips = response.text.split('\n')
 
-jobs:
-  query_ips:
-    runs-on: ubuntu-latest
+    # 加载GeoIP2数据库
+    reader = geoip2.database.Reader('GeoLite2-Country.mmdb')
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    japan_ips = []
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
+    # 查询IP地址的地理位置，如果是日本则添加到列表中
+    for ip in ips:
+        try:
+            response = reader.country(ip)
+            if response.country.iso_code == 'JP':
+                japan_ips.append(ip)
+        except:
+            pass
 
-      - name: Install GeoIP2 and GitPython
-        run: |
-          pip install geoip2 GitPython
+    return japan_ips
 
-      - name: Run Python script
-        run: python query_japan_ips.py
+def save_to_file(ips, filename):
+    with open(filename, 'w') as file:
+        for ip in ips:
+            file.write(f"{ip} # 日本\n")
+
+def commit_and_push(filename):
+    # 获取存储库根目录
+    repo_dir = os.getcwd()
+
+    # 切换到存储库根目录
+    os.chdir(repo_dir)
+
+    # 使用GitPython库进行提交和推送
+    repo = Repo(repo_dir)
+    repo.git.add(filename)
+    repo.index.commit("Update Japan IPs")  # 提交更改
+    origin = repo.remote('origin')
+    origin.push()  # 推送更改到远程存储库
+
+if __name__ == "__main__":
+    japan_ips = get_japan_ips()
+    save_to_file(japan_ips, 'japan_ips.txt')
+    commit_and_push('japan_ips.txt')
