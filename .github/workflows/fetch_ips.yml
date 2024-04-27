@@ -8,20 +8,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Download IP addresses
+        run: curl -o ip_list.txt "https://ipdb.api.030101.xyz/?type=cfv4;proxy&down=true"
 
-      - name: Install required tools
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Filter IP addresses by country
         run: |
-          sudo apt-get update
-          sudo apt-get install -y jq curl
-
-      - name: Fetch IP addresses
-        run: |
-          ips=$(curl -s "https://ipdb.api.030101.xyz/?type=cfv4;proxy&down=true")
-
           # Filter IPs by country (Japan, Korea, Singapore, Hong Kong, Taiwan)
-          filtered_ips=$(echo "$ips" | jq -r '. | select(.country_code | contains("JP", "KR", "SG", "HK", "TW")) | .ip')
+          filtered_ips=$(jq -r '. | select(.country_code | contains("JP", "KR", "SG", "HK", "TW")) | .ip' ip_list.txt)
 
           # Save filtered IPs to 123.txt file
           echo "$filtered_ips" > 123.txt
