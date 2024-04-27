@@ -41,15 +41,16 @@ def commit_and_push(filename):
     # 切换到存储库根目录
     os.chdir(repo_dir)
 
-    # 清空 ip.txt 文件
-    clear_ip_file('ip.txt')
+    # 删除 ip.txt 文件
+    os.remove(filename)
 
     # 使用GitPython库进行提交和推送
     repo = Repo(repo_dir)
-    repo.git.add(filename)
-    repo.index.commit("Update Japan IPs")  # 提交更改
+    repo.git.add('--all')
+    repo.index.commit("Delete ip.txt file")  # 提交更改
     origin = repo.remote('origin')
     origin.push()  # 推送更改到远程存储库
+
 if __name__ == "__main__":
     clear_ip_file('ip.txt')  # 清空 ip.txt 文件内容
     japan_ips = get_japan_ips()
