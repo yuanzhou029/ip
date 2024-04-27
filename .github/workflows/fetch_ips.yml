@@ -11,14 +11,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Download IP addresses
-        run: curl -o ip_list.txt "https://ipdb.api.030101.xyz/?type=cfv4;proxy&down=true"
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
 
-      - name: Commit and push changes
-        if: success() # 仅在前面的步骤成功后执行
-        run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          git add ip_list.txt
-          git commit -m "Update IP addresses"
-          git push https://github.com/yuanzhou029/ip.git HEAD:main
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run Python script
+        run: python download_ips.py
