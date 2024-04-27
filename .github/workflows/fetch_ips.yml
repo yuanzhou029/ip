@@ -28,4 +28,8 @@ jobs:
           git config --local user.name "GitHub Actions"
           git add ip.txt
           git commit -m "Update IP addresses"
-          git push
+          git push https://github.com/${{ github.repository }} HEAD:main
+          # 使用个人访问令牌进行推送
+          # git push https://github.com/${{ secrets.REPO_NAME }} HEAD:main
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
