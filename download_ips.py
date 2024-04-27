@@ -1,6 +1,6 @@
 import requests
 
-def download_ip_list(url, filename):
+def download_ip_file(url, filename):
     try:
         response = requests.get(url)
         if response.status_code == 200:
@@ -14,5 +14,5 @@ def download_ip_list(url, filename):
 
 if __name__ == "__main__":
     url = "https://ipdb.api.030101.xyz/?type=cfv4;proxy&down=true"
-    filename = "ip_list.txt"
-    download_ip_list(url, filename)
+    filename = "ip.txt"
+    download_ip_file(url, filename)
