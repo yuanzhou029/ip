@@ -30,6 +30,11 @@ def save_to_file(ips, filename):
         for ip in ips:
             file.write(f"{ip}\n")
 
+def clear_ip_file(filename):
+    # 清空存储库中的 ip.txt 文件内容
+    with open(filename, 'w') as file:
+        file.write('')
+
 def commit_and_push(filename):
     # 获取存储库根目录
     repo_dir = os.getcwd()
@@ -47,4 +52,5 @@ def commit_and_push(filename):
 if __name__ == "__main__":
     japan_ips = get_japan_ips()
     save_to_file(japan_ips, 'japan_ips.txt')
+    clear_ip_file('ip.txt')  # 清空存储库中的 ip.txt 文件内容
     commit_and_push('japan_ips.txt')
