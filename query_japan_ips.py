@@ -1,17 +1,42 @@
 import os
 import requests
+import json
 import geoip2.database
 from git import Repo
 
-def get_ips_by_country(country_code):
+def get_japan_ips():
     # 使用API查询IP地址
-    response = requests.get(f"https://ipdb.api.030101.xyz/?type=cfv4;proxy&down=true&country={country_code}")
+    response = requests.get("https://ipdb.api.030101.xyz/?type=cfv4;proxy&down=true")
     ips = response.text.split('\n')
 
-    return ips
+    # 加载GeoIP2数据库
+    reader = geoip2.database.Reader('GeoLite2-Country.mmdb')
+
+    japan_ips = []
+
+    # 查询IP地址的地理位置，如果是日本则添加到列表中
+    for ip in ips:
+        try:
+            response = reader.country(ip)
+            if response.country.iso_code == 'JP':
+                japan_ips.append(ip)
+            if response.country.iso_code == 'KR':
+                japan_ips.append(ip)
+            if response.country.iso_code == 'HK':
+                japan_ips.append(ip)
+            if response.country.iso_code == 'TW':
+                japan_ips.append(ip)
+            if response.country.iso_code == 'SG':
+                japan_ips.append(ip)
+            if response.country.iso_code == 'VN':
+                japan_ips.append(ip)
+        except:
+            pass
+
+    return japan_ips
 
 def save_to_file(ips, filename):
-    with open(filename, 'a') as file:
+    with open(filename, 'w') as file:
         for ip in ips:
             file.write(f"{ip}\n")
 
@@ -28,9 +53,6 @@ def clear_and_commit(filename):
     origin.push()
 
 if __name__ == "__main__":
-    countries = ['JP', 'KR', 'HK', 'TW', 'SG', 'VN']  # 需要获取IP的国家代码列表
-    for country_code in countries:
-        ips = get_ips_by_country(country_code)
-        save_to_file(ips, 'japan_ips.txt')
-    
+    japan_ips = get_japan_ips()
+    save_to_file(japan_ips, 'japan_ips.txt')
     clear_and_commit('ip.txt')
