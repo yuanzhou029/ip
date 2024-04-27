@@ -44,6 +44,9 @@ def commit_and_push(filename):
     # 切换到存储库根目录
     os.chdir(repo_dir)
 
+    # 清空 ip.txt 文件
+    clear_ip_file('ip.txt')
+
     # 使用GitPython库进行提交和推送
     repo = Repo(repo_dir)
     repo.git.add(filename)
