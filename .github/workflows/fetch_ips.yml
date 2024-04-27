@@ -22,10 +22,13 @@ jobs:
       - name: Run Python script to download IP addresses
         run: python download_ip.py
 
-      - name: Commit and push changes
+      - name: Set git user
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
+
+      - name: Commit and push changes
+        run: |
           git add ip.txt
           git commit -m "Update IP addresses"
           git push https://github.com/${{ github.repository }} HEAD:main
