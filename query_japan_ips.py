@@ -32,7 +32,10 @@ def save_to_file(ips, filename):
 
 def clear_ip_file(filename):
     with open(filename, 'w') as file:
+        file.close()
+    with open(filename, 'w') as file:
         file.truncate(0)
+
 
 def commit_and_push(filename):
     # 获取存储库根目录
