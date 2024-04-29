@@ -3,7 +3,7 @@ name: Download IP Addresses
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 8 * * *" # 每天8点运行, 时区+8
+    - cron: "0 4 * * *" # 每天8点运行, 时区+8
 
 jobs:
   download_ips:
