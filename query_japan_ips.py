@@ -30,14 +30,13 @@ def save_to_file(ips, filename):
         for ip in ips:
             file.write(f"{ip}\n")
 
-def  delete_ip_file (文件名):
+def delete_ip_file(filename):
     # 删除 ip.txt 文件
-    尝试：
-        操作系统。删除（文件名）
-        print ( f" {文件名}已被删除。" )
-    除了 异常 e ：​
-        print ( f"删除{ filename }时发生错误: { e } " )
-
+    try:
+        os.remove(filename)
+        print(f"{filename} has been deleted.")
+    except Exception as e:
+        print(f"Error occurred while deleting {filename}: {e}")
 
 
 def commit_and_push(filenames):
