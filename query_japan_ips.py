@@ -35,8 +35,9 @@ def delete_ip_file(filename):
     try:
         os.remove(filename)
         print(f"{filename} has been deleted.")
-    except FileNotFoundError:
-        print(f"{filename} does not exist.")
+    except Exception as e:
+        print(f"Error occurred while deleting {filename}: {e}")
+
 
 
 def commit_and_push(filename):
