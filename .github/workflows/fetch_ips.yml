@@ -2,7 +2,7 @@ name: Download IP Addresses
 
 on:
   schedule:
-    - cron:  '03 21 * * *'
+    - cron:  '6 13 * * *'
 
 jobs:
   download_ips:
