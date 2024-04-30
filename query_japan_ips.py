@@ -40,12 +40,18 @@ def delete_ip_file(filename):
 
 
 
-def commit_and_push(filename):
+def commit_and_push(filenames):
     # 提交和推送到远程存储库
     repo_dir = os.getcwd()
     repo = Repo(repo_dir)
-    repo.git.add(filename)
-    repo.index.commit("Update japan_ips.txt")
+    
+    for filename in filenames:
+        try:
+            repo.git.add(filename) # 如果文件被删除，这个命令会抛出异常
+        except Exception as e:
+            print(f"Error occurred while adding {filename}: {e}")
+    
+    repo.index.commit("Update files")
     origin = repo.remote('origin')
     origin.push()
 
@@ -53,4 +59,5 @@ if __name__ == "__main__":
     japan_ips = get_japan_ips()
     save_to_file(japan_ips, 'japan_ips.txt')
     delete_ip_file('ip.txt')
-    commit_and_push('japan_ips.txt')
+    commit_and_push(['japan_ips.txt', 'ip.txt'])
+
