@@ -51,5 +51,5 @@ def commit_and_push(filename):
 if __name__ == "__main__":
     japan_ips = get_japan_ips()
     save_to_file(japan_ips, 'japan_ips.txt')
-    clear_ip_file('ip.txt')
+    delete_ip_file('ip.txt')
     commit_and_push('japan_ips.txt')
