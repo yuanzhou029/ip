@@ -30,10 +30,14 @@ def save_to_file(ips, filename):
         for ip in ips:
             file.write(f"{ip}\n")
 
-def clear_ip_file(filename):
-    # 清空 ip.txt 文件的内容
-    with open(filename, 'w') as file:
-        file.write('')
+def delete_ip_file(filename):
+    # 删除 ip.txt 文件
+    try:
+        os.remove(filename)
+        print(f"{filename} has been deleted.")
+    except FileNotFoundError:
+        print(f"{filename} does not exist.")
+
 
 def commit_and_push(filename):
     # 提交和推送到远程存储库
