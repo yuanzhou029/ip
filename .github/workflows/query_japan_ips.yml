@@ -1,8 +1,7 @@
 name: 查询日本IP
 on:
   push:
-    branches:
-      - main
+  
 jobs:
   query_ips:
     runs-on: ubuntu-latest
