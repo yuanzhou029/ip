@@ -1,8 +1,8 @@
 name: 查询日本IP
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: "0 5 * * *" # 每天5点运行, 时区+8
+  push:
+    branches:
+      - main
 jobs:
   query_ips:
     runs-on: ubuntu-latest
