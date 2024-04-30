@@ -30,11 +30,14 @@ def save_to_file(ips, filename):
         for ip in ips:
             file.write(f"{ip}\n")
 
-def clear_ip_file(filename):
-    # 创建或打开文件
-    with open(filename, 'w') as file:
-        # 通过打开文件并立即关闭它来清空文件的内容
-        pass
+def  delete_ip_file (文件名):
+    # 删除 ip.txt 文件
+    尝试：
+        操作系统。删除（文件名）
+        print ( f" {文件名}已被删除。" )
+    除了 异常 e ：​
+        print ( f"删除{ filename }时发生错误: { e } " )
+
 
 
 def commit_and_push(filenames):
@@ -55,6 +58,6 @@ def commit_and_push(filenames):
 if __name__ == "__main__":
     japan_ips = get_japan_ips()
     save_to_file(japan_ips, 'japan_ips.txt')
-    clear_ip_file('ip.txt')
+    delete_ip_file('ip.txt')
     commit_and_push(['japan_ips.txt', 'ip.txt'])
 
