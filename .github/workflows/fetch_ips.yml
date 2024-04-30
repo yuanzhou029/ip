@@ -1,10 +1,9 @@
 name: Download IP Addresses
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron:  '15 13 * * *'
-
+    - cron:  '30 21 * * *'
+    
 jobs:
   download_ips:
     runs-on: ubuntu-latest
