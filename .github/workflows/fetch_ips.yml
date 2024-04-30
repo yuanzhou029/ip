@@ -13,35 +13,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Download IP file
-        run: curl -o ip.txt https://ipdb.api.030101.xyz/?type=cfv4\;proxy\&down=true
-
-      - name: Read downloaded file and write content to ip.txt
-        run: |
-          content=$(cat ip.txt)
-          echo "$content" > ./ip.txt
-
-      - name: Set up Git
-        run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-
-      - name: Commit and push changes
-        run: |
-          git add ip.txt
-          git commit -m "Update ip.txt file"
-          git push https://github.com/yuanzhou029/ip.git HEAD:main
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          
-      - name: 检出存储库
-        uses: actions/checkout@v2
-
       - name: 设置Python环境
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-
       - name: 安装GitPython库
         run: pip install gitpython
 
@@ -50,6 +25,14 @@ jobs:
 
       - name: 安装GeoIP2库
         run: pip install geoip2
+        
+      - name: Download IP file
+        run: curl -o ip.txt https://ipdb.api.030101.xyz/?type=cfv4\;proxy\&down=true
+
+      - name: Read downloaded file and write content to ip.txt
+        run: |
+          content=$(cat ip.txt)
+          echo "$content" > ./ip.txt
 
       - name: 运行Python脚本
         run: python query_japan_ips.py
