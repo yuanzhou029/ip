@@ -1,10 +1,9 @@
-name: Download and Process IP Addresses
+name: Download IP Addresses
 
 on:
   schedule:
     - cron:  '30 21 * * *'  #北京时间5:30分
-  workflow_dispatch:
-
+  workflow_dispatch:  
 jobs:
   download_ips:
     runs-on: ubuntu-latest
@@ -17,31 +16,22 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
+      - name: 安装GitPython库
+        run: pip install gitpython
 
-      - name: 安装依赖库
-        run: |
-          pip install gitpython requests geoip2
+      - name: 安装requests库
+        run: pip install requests
 
-      - name: 下载IP地址文件
+      - name: 安装GeoIP2库
+        run: pip install geoip2
+        
+      - name: Download IP file
         run: curl -o ip.txt https://ipdb.api.030101.xyz/?type=cfv4\;proxy\&down=true
 
-      - name: 下载并解压ZIP文件
+      - name: Read downloaded file and write content to ip.txt
         run: |
-          curl -L https://zip.baipiao.eu.org -o baipiao.zip
-          unzip baipiao.zip
-
-      - name: 合并TXT文件到ip2.txt
-        run: find . -name "*.txt" -exec cat {} \; > ip2.txt
-
-      - name: 去重ip2.txt并添加到ip.txt
-        run: |
-          sort ip2.txt | uniq >> ip.txt
+          content=$(cat ip.txt)
+          echo "$content" > ./ip.txt
 
       - name: 运行Python脚本
         run: python query_japan_ips.py
-
-      - name: 提交并推送更改
-        run: |
-          git config user.name 'GitHub Actions Bot'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add
