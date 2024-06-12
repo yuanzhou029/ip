@@ -5,10 +5,22 @@ import geoip2.database
 from git import Repo
 import zipfile
 
-def get_japan_ips():
+def get_japan_ips(filename="ip.txt"):
+    """
+    使用API查询IP地址，先将所有IP保存到ip.txt，
+    然后筛选符合条件的日本IP地址并返回。
+
+    Args:
+        filename (str, optional): 要保存IP地址的文件名. Defaults to "ip.txt".
+    """
     # 使用API查询IP地址
     response = requests.get("https://ipdb.api.030101.xyz/?type=cfv4;proxy&down=true")
     ips = response.text.split('\n')
+
+    # 先将所有IP地址保存到ip.txt
+    with open(filename, 'w') as f:
+        for ip in ips:
+            f.write(ip + '\n')
 
     # 加载GeoIP2数据库
     reader = geoip2.database.Reader('GeoLite2-Country.mmdb')
@@ -26,18 +38,11 @@ def get_japan_ips():
 
     return japan_ips
 
-def save_to_file(ips, filename):
-    with open(filename, 'w') as file:
-        for ip in ips:
-            file.write(f"{ip}\n")
+# 调用函数，获取日本IP地址
+japan_ips = get_japan_ips()
 
-def delete_ip_file(filename):
-    # 删除 ip.txt 文件
-    try:
-        os.remove(filename)
-        print(f"{filename} has been deleted.")
-    except Exception as e:
-        print(f"Error occurred while deleting {filename}: {e}")
+# 现在 japan_ips 列表中包含了筛选后的日本IP地址，
+# 并且所有获取到的IP地址都已经保存到 ip.txt 文件中了
 
 
 def commit_and_push(filenames):
