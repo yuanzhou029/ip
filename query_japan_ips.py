@@ -79,21 +79,6 @@ def commit_and_push(filenames):
     origin = repo.remote('origin')
     origin.push()
 
-def commit_and_push(filenames):
-    """提交和推送到远程存储库"""
-    repo_dir = os.getcwd()
-    repo = Repo(repo_dir)
-    
-    for filename in filenames:
-        try:
-            repo.git.add(filename) 
-        except Exception as e:
-            print(f"Error occurred while adding {filename}: {e}")
-    
-    repo.index.commit("Update files")
-    origin = repo.remote('origin')
-    origin.push()
-
 def download_and_merge_txt(url, output_filename):
     """
     下载一个zip文件，解压并合并所有txt文件，去重后保存到指定文件。
@@ -160,5 +145,4 @@ if __name__ == "__main__":
     # 在这里调用 commit_and_push，确保 ip.txt 仍然存在
     commit_and_push(['japan_ips.txt', 'ip.txt', 'zip.txt']) 
 
-    # 如果你需要在提交后删除 ip.txt，可以在这里进行
-    # os.remove('ip.txt') 
+    # ... (其他代码与之前相同) ...
