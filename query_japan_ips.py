@@ -106,6 +106,16 @@ def download_and_merge_txt(url, output_filename):
         for filename in os.listdir():
             if filename.endswith(".txt") and filename != output_filename:
                 os.remove(filename)
+def save_to_file(ips, filename):
+    """将IP地址列表保存到指定文件。
+
+    Args:
+        ips (list): IP地址列表
+        filename (str): 要保存的文件名
+    """
+    with open(filename, 'w') as f:
+        for ip in ips:
+            f.write(ip + '\n')                
 
 if __name__ == "__main__":
     japan_ips = get_japan_ips()
@@ -116,4 +126,4 @@ if __name__ == "__main__":
     commit_and_push(['japan_ips.txt', 'ip.txt', 'zip.txt']) 
 
     # 如果你需要在提交后删除 ip.txt，可以在这里进行
-    delete_ip_file('ip.txt') 
+    # delete_ip_file('ip.txt')
