@@ -61,6 +61,28 @@ def commit_and_push(filenames):
     """提交和推送到远程存储库"""
     repo_dir = os.getcwd()
     repo = Repo(repo_dir)
+
+    # 在提交前修改 ip.txt，只保留前20行
+    with open("ip.txt", "r+") as f:
+        lines = f.readlines()
+        f.seek(0)
+        f.writelines(lines[:20])
+        f.truncate()
+
+    for filename in filenames:
+        try:
+            repo.git.add(filename) 
+        except Exception as e:
+            print(f"Error occurred while adding {filename}: {e}")
+    
+    repo.index.commit("Update files")
+    origin = repo.remote('origin')
+    origin.push()
+
+def commit_and_push(filenames):
+    """提交和推送到远程存储库"""
+    repo_dir = os.getcwd()
+    repo = Repo(repo_dir)
     
     for filename in filenames:
         try:
