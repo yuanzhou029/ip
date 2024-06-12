@@ -66,7 +66,7 @@ def commit_and_push(filenames):
     with open("ip.txt", "r+") as f:
         lines = f.readlines()
         f.seek(0)
-        f.writelines(lines[:20])
+        f.writelines(lines[:15])
         f.truncate()
 
     for filename in filenames:
