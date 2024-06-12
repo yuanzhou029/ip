@@ -13,6 +13,7 @@ def get_japan_ips(filename="ip.txt"):
     Args:
         filename (str, optional): 要保存IP地址的文件名. Defaults to "ip.txt".
     """
+
     # 使用API查询IP地址
     response = requests.get("https://ipdb.api.030101.xyz/?type=cfv4;proxy&down=true")
     ips = response.text.split('\n')
@@ -41,8 +42,7 @@ def get_japan_ips(filename="ip.txt"):
 # 调用函数，获取日本IP地址
 japan_ips = get_japan_ips()
 
-# 现在 japan_ips 列表中包含了筛选后的日本IP地址，
-# 并且所有获取到的IP地址都已经保存到 ip.txt 文件中了
+print(japan_ips)
 
 
 def commit_and_push(filenames):
