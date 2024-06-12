@@ -1,9 +1,8 @@
 import os
 import requests
-import json
+import zipfile
 import geoip2.database
 from git import Repo
-import zipfile
 
 def get_and_filter_ips(input_filename="ip.txt", output_filename="japan_ips.txt"):
     """
@@ -21,6 +20,8 @@ def get_and_filter_ips(input_filename="ip.txt", output_filename="japan_ips.txt")
 
         with open(input_filename, 'w') as f:
             f.write(response.text)
+
+        print(f"IP地址已保存到 {input_filename}")  # 提示信息
 
     except requests.exceptions.RequestException as e:
         print(f"获取IP地址时出错: {e}")
@@ -53,27 +54,24 @@ def get_and_filter_ips(input_filename="ip.txt", output_filename="japan_ips.txt")
         return  # 提前结束函数
 
     # 4. 保存筛选后的IP地址
-    with open(output_filename, 'w') as f:
-        for ip in japan_ips:
-            f.write(ip + '\n')
-
+    save_to_file(japan_ips, output_filename)  # 使用 save_to_file 函数
     print(f"筛选后的IP地址已保存到 {output_filename}")
 
-
 def commit_and_push(filenames):
-    # 提交和推送到远程存储库
+    """提交和推送到远程存储库"""
     repo_dir = os.getcwd()
     repo = Repo(repo_dir)
     
     for filename in filenames:
         try:
-            repo.git.add(filename) # 如果文件被删除，这个命令会抛出异常
+            repo.git.add(filename) 
         except Exception as e:
             print(f"Error occurred while adding {filename}: {e}")
     
     repo.index.commit("Update files")
     origin = repo.remote('origin')
     origin.push()
+
 def download_and_merge_txt(url, output_filename):
     """
     下载一个zip文件，解压并合并所有txt文件，去重后保存到指定文件。
@@ -121,6 +119,7 @@ def download_and_merge_txt(url, output_filename):
         for filename in os.listdir():
             if filename.endswith(".txt") and filename != output_filename:
                 os.remove(filename)
+
 def save_to_file(ips, filename):
     """将IP地址列表保存到指定文件。
 
@@ -133,11 +132,11 @@ def save_to_file(ips, filename):
             f.write(ip + '\n')                
 
 if __name__ == "__main__":
-    download_and_merge_txt("https://zip.baipiao.eu.org", "zip.txt")
-    save_to_file(japan_ips, 'japan_ips.txt')
+    download_and_merge_txt("https://zip.baipiao.eu.org", "zip.txt") 
+    get_and_filter_ips()  # 获取并筛选IP地址
     
     # 在这里调用 commit_and_push，确保 ip.txt 仍然存在
     commit_and_push(['japan_ips.txt', 'ip.txt', 'zip.txt']) 
 
     # 如果你需要在提交后删除 ip.txt，可以在这里进行
-    # delete_ip_file('ip.txt')
+    # os.remove('ip.txt') 
