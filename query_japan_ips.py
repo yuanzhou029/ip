@@ -106,5 +106,9 @@ if __name__ == "__main__":
     japan_ips = get_japan_ips()
     download_and_merge_txt("https://zip.baipiao.eu.org", "zip.txt")
     save_to_file(japan_ips, 'japan_ips.txt')
-    commit_and_push(['japan_ips.txt', 'ip.txt', 'zip.txt'])
+    
+    # 在这里调用 commit_and_push，确保 ip.txt 仍然存在
+    commit_and_push(['japan_ips.txt', 'ip.txt', 'zip.txt']) 
 
+    # 如果你需要在提交后删除 ip.txt，可以在这里进行
+    delete_ip_file('ip.txt') 
