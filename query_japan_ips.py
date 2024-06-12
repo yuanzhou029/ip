@@ -133,7 +133,6 @@ def save_to_file(ips, filename):
             f.write(ip + '\n')                
 
 if __name__ == "__main__":
-    japan_ips = get_japan_ips()
     download_and_merge_txt("https://zip.baipiao.eu.org", "zip.txt")
     save_to_file(japan_ips, 'japan_ips.txt')
     
