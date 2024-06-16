@@ -89,7 +89,7 @@ break_end() {
 }
 
 kejilion() {
-            k
+            yz
             exit
 }
 
