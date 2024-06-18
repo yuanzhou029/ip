@@ -1863,6 +1863,17 @@ case $choice in
               clear
               bash <(curl -sSL https://linuxmirrors.cn/docker.sh)
               ;;
+          9）
+              clear
+              mkdir -p /etc/docker
+              tee /etc/docker/daemon.json <<-'EOF'
+              {
+               "registry-mirrors": ["https://docker.51281868.xyz"]
+              }
+              EOF
+              systemctl daemon-reload
+              systemctl restart docker
+              ;;   
 
           11)
               clear
