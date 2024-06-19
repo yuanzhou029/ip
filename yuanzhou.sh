@@ -1250,7 +1250,7 @@ clear
 
 while true; do
 clear
-sleep 3
+sleep 2
 echo -e "${hong1}#############################################################${bai}"
 echo -e "${lv1}yuanzhou04@gmail.com ${bai}"
 echo -e "${lv1}https://yz.yz029.us.kg/ ${bai}"
@@ -6491,6 +6491,7 @@ EOF
                               read -p "请填写小鸡的IPV6是否开启（Y/N）：" docker_ipv6
                               read -p "请填写小鸡的系统（debian ，ubuntu ，centos ，alpine  可以自定义版本号 留空则为 debian）：" docker_system
                               echo "您输入的小鸡配置信息：容器名字:$docker_name CPU:$docker_cpu 内存：$docker_Memory SSH密码：$docker_password SSH端口：$docker_ssh 外网起端口：$Sdocker_Starting_port 外网止端口：$docker_Start_Port IPV6是否开启：$docker_ipv6 系统：$docker_system"
+                              echo "./onedocker.sh "$docker_name" "$docker_cpu" "$docker_Memory" "$docker_password" "$docker_ssh" "$Sdocker_Starting_port" "$docker_Start_Port" "$download_speed" "$docker_ipv6" "$docker_system""
                               read -p "请确认以上信息 (Y/N): " confirm
                               if [[ "$confirm" == "Y" || "$confirm" == "y" ]]; then
                                 echo "配置信息已确认."
