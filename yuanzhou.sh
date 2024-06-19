@@ -6397,7 +6397,9 @@ EOF
                   case $sub_choice in
                       1)
                           clear
-                          bash <(wget -qO- --no-check-certificate https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/pre_check.sh) 
+                          bash <(wget -qO- --no-check-certificate https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/pre_check.sh)
+                          echo "按任意键继续..."
+                          read -r -n 1 
                           ;;
                       2)
                           lear
