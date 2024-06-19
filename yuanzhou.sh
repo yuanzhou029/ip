@@ -1133,10 +1133,10 @@ clear
 while true; do
 clear
 
-echo -e ${qingse}###############################
+echo -e "${qingse}###############################${bai}"
 echo "yuanzhou04@gmail.com "
 echo "https://yz.yz029.us.kg/ "
-echo "#####################################"
+echo -e"${qingse}################################${bai}"
 echo -e "${qingse}一键脚本工具 v$sh_v （支持Ubuntu/Debian/CentOS/Alpine系统）${bai}"
 echo -e "${qingse}-输入${huang}k${qingse}可快速启动此脚本-${bai}"
 echo "------------------------"
