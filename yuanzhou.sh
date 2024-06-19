@@ -1248,6 +1248,118 @@ clear
 
 
 
+Docker_container(){
+  while true; do
+    clear
+    echo "Docker容器列表"
+    docker ps -a
+    echo ""
+    echo "容器操作"
+    echo "------------------------"
+    echo "1. 创建新的容器"
+    echo "------------------------"
+    echo "2. 启动指定容器             6. 启动所有容器"
+    echo "3. 停止指定容器             7. 暂停所有容器"
+    echo "4. 删除指定容器             8. 删除所有容器"
+    echo "5. 重启指定容器             9. 重启所有容器"
+    echo "------------------------"
+    echo "11. 进入指定容器           12. 查看容器日志           13. 查看容器网络"
+    echo "------------------------"
+    echo "0. 返回上一级选单"
+    echo "------------------------"
+    read -p "请输入你的选择: " sub_choice
+
+      case $sub_choice in
+        1)
+            read -p "请输入创建命令: " dockername
+            $dockername
+            ;;
+
+        2)
+            read -p "请输入容器名: " dockername
+            docker start $dockername
+            ;;
+        3)
+            read -p "请输入容器名: " dockername
+            docker stop $dockername
+            ;;
+        4)
+            read -p "请输入容器名: " dockername
+            docker rm -f $dockername
+            ;;
+        5)
+            read -p "请输入容器名: " dockername
+            docker restart $dockername
+            ;;
+        6)
+            docker start $(docker ps -a -q)
+            ;;
+        7)
+            docker stop $(docker ps -q)
+            ;;
+        8)
+            read -p "$(echo -e "${hong}确定删除所有容器吗？(Y/N): ${bai}")" choice
+            case "$choice" in
+            [Yy])
+            docker rm -f $(docker ps -a -q)
+            ;;
+            [Nn])
+            ;;
+        *)
+            echo "无效的选择，请输入 Y 或 N。"
+            ;;
+            esac
+            ;;
+        9)
+            docker restart $(docker ps -q)
+            ;;
+        11)
+            read -p "请输入容器名: " dockername
+            docker exec -it $dockername /bin/sh
+            break_end
+            ;;
+        12)
+            read -p "请输入容器名: " dockername
+            docker logs $dockername
+            break_end
+            ;;
+            13)
+            echo ""
+            container_ids=$(docker ps -q)
+
+            echo "------------------------------------------------------------"
+            printf "%-25s %-25s %-25s\n" "容器名称" "网络名称" "IP地址"
+
+            for container_id in $container_ids; do
+                container_info=$(docker inspect --format '{{ .Name }}{{ range $network, $config := .NetworkSettings.Networks }} {{ $network }} {{ $config.IPAddress }}{{ end }}' "$container_id")
+
+                container_name=$(echo "$container_info" | awk '{print $1}')
+                network_info=$(echo "$container_info" | cut -d' ' -f2-)
+
+                while IFS= read -r line; do
+                network_name=$(echo "$line" | awk '{print $1}')
+                ip_address=$(echo "$line" | awk '{print $2}')
+
+                printf "%-20s %-20s %-15s\n" "$container_name" "$network_name" "$ip_address"
+                done <<< "$network_info"
+            done
+
+            break_end
+            ;;
+
+        0)
+            break  # 跳出循环，退出菜单
+            ;;
+
+        *)
+            break  # 跳出循环，退出菜单
+            ;;
+            esac
+        done
+     }
+########################################################################################################
+
+
 
 while true; do
 clear
@@ -1608,116 +1720,7 @@ case $choice in
 
               ;;
           3)
-              Docker_container(){
-                while true; do
-                  clear
-                  echo "Docker容器列表"
-                  docker ps -a
-                  echo ""
-                  echo "容器操作"
-                  echo "------------------------"
-                  echo "1. 创建新的容器"
-                  echo "------------------------"
-                  echo "2. 启动指定容器             6. 启动所有容器"
-                  echo "3. 停止指定容器             7. 暂停所有容器"
-                  echo "4. 删除指定容器             8. 删除所有容器"
-                  echo "5. 重启指定容器             9. 重启所有容器"
-                  echo "------------------------"
-                  echo "11. 进入指定容器           12. 查看容器日志           13. 查看容器网络"
-                  echo "------------------------"
-                  echo "0. 返回上一级选单"
-                  echo "------------------------"
-                  read -p "请输入你的选择: " sub_choice
-
-                  case $sub_choice in
-                      1)
-                          read -p "请输入创建命令: " dockername
-                          $dockername
-                          ;;
-
-                      2)
-                          read -p "请输入容器名: " dockername
-                          docker start $dockername
-                          ;;
-                      3)
-                          read -p "请输入容器名: " dockername
-                          docker stop $dockername
-                          ;;
-                      4)
-                          read -p "请输入容器名: " dockername
-                          docker rm -f $dockername
-                          ;;
-                      5)
-                          read -p "请输入容器名: " dockername
-                          docker restart $dockername
-                          ;;
-                      6)
-                          docker start $(docker ps -a -q)
-                          ;;
-                      7)
-                          docker stop $(docker ps -q)
-                          ;;
-                      8)
-                          read -p "$(echo -e "${hong}确定删除所有容器吗？(Y/N): ${bai}")" choice
-                          case "$choice" in
-                            [Yy])
-                              docker rm -f $(docker ps -a -q)
-                              ;;
-                            [Nn])
-                              ;;
-                            *)
-                              echo "无效的选择，请输入 Y 或 N。"
-                              ;;
-                          esac
-                          ;;
-                      9)
-                          docker restart $(docker ps -q)
-                          ;;
-                      11)
-                          read -p "请输入容器名: " dockername
-                          docker exec -it $dockername /bin/sh
-                          break_end
-                          ;;
-                      12)
-                          read -p "请输入容器名: " dockername
-                          docker logs $dockername
-                          break_end
-                          ;;
-                      13)
-                          echo ""
-                          container_ids=$(docker ps -q)
-
-                          echo "------------------------------------------------------------"
-                          printf "%-25s %-25s %-25s\n" "容器名称" "网络名称" "IP地址"
-
-                          for container_id in $container_ids; do
-                              container_info=$(docker inspect --format '{{ .Name }}{{ range $network, $config := .NetworkSettings.Networks }} {{ $network }} {{ $config.IPAddress }}{{ end }}' "$container_id")
-
-                              container_name=$(echo "$container_info" | awk '{print $1}')
-                              network_info=$(echo "$container_info" | cut -d' ' -f2-)
-
-                              while IFS= read -r line; do
-                                  network_name=$(echo "$line" | awk '{print $1}')
-                                  ip_address=$(echo "$line" | awk '{print $2}')
-
-                                  printf "%-20s %-20s %-15s\n" "$container_name" "$network_name" "$ip_address"
-                              done <<< "$network_info"
-                          done
-
-                          break_end
-                          ;;
-
-                      0)
-                          break  # 跳出循环，退出菜单
-                          ;;
-
-                      *)
-                          break  # 跳出循环，退出菜单
-                          ;;
-                  esac
-              done
-              }
-              #Docker_container
+              Docker_container
               ;;
           4)
               while true; do
