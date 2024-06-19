@@ -6438,7 +6438,6 @@ EOF
                                 else
                                 if
                                 echo "配置信息已取消，请重新填写."
-                              fi
                           done
                            }
                            get_server_config
