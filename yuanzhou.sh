@@ -6433,7 +6433,7 @@ EOF
                               if [[ "$confirm" == "Y" || "$confirm" == "y" ]]; then
                                 echo "配置信息已确认."
                                 ./buildone.sh "$name" "$cpu" "$Memory" "$Mharddisk" "$ssh" "$Starting_port" "$Start_Port" "$download_speed" "$Upload_speed" "$ipv6" "$system"
-                                read -p "${lv1}buildone.sh 执行完毕，是否返回配置信息填写 (Y/N)? ${bai}" return_choice
+                              read -p "${lv1}buildone.sh 执行完毕，是否返回配置信息填写 (Y/N)? ${bai}" return_choice
                               if [[ "$return_choice" == "Y" && "$return_choice" == "y" ]]; then
                                 break
                               fi 
