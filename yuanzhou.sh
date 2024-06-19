@@ -9,7 +9,13 @@ lan='\033[0;34m'
 hong='\033[31m'
 qingse='\033[1;96m'
 hui='\e[37m'
-
+huang1='\033[1;93m'
+bai1='\033[1;0m'
+lv1='\033[1;92m'
+lan1='\033[1;94m'
+hong1='\033[1;91m'
+hui='\e[1;97m'
+cognzhi= '\033[0m'
 cp ./yuanzhou.sh /usr/local/bin/yz > /dev/null 2>&1
 
 
@@ -6410,7 +6416,7 @@ EOF
                       5)
                           function get_server_config(){
                             while true; do  # 使用循环，直到用户确认信息
-                              echo "./buildone.sh 服务器名称 CPU核数 内存大小 硬盘大小 SSH端口 外网起端口 外网止端口 下载速度 上传速度 是否启用IPV6(Y or N) 系统(留空则为debian11)"
+                              echo -e ${hong} "依次填写：服务器名称 CPU核数 内存大小 硬盘大小 SSH端口 外网起端口 外网止端口 下载速度 上传速度 是否启用IPV6(Y or N) 系统(留空则为debian11)"${cognzhi}
                               read -p "请填写小鸡的服务器名称：" name
                               read -p "请填写小鸡的CPU核数：" cpu
                               read -p "请填写小鸡的内存大小：" Memory
