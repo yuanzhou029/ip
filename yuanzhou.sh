@@ -15,10 +15,10 @@ cp ./yuanzhou.sh /usr/local/bin/yz > /dev/null 2>&1
 
 
 
-#ip_address() {
-#ipv4_address=$(curl -s ipv4.ip.sb)
-#ipv6_address=$(curl -s --max-time 1 ipv6.ip.sb)
-#}
+ip_address() {
+ipv4_address=$(curl -s ipv4.ip.sb)
+ipv6_address=$(curl -s --max-time 1 ipv6.ip.sb)
+}
 
 #系统信息查询函数
 System_query(){
@@ -6345,7 +6345,7 @@ EOF
       echo "全自动脚本开小鸡"
       echo "在原有的母鸡上开出若干个小机"
       echo "------------------------"
-      echo "1. 安装集群环境"
+      echo "1. 服务器信息"
       echo "------------------------"
       echo "2. 集群控制中心"
       echo "------------------------"
@@ -6360,7 +6360,7 @@ EOF
       case $sub_choice in
           1)
             clear
-            ip_address
+           #获取函数  通过函数获取服务器信息机IP地址
             System_query
             ;;
           2)
