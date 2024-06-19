@@ -7,14 +7,14 @@ bai='\033[0m'
 lv='\033[0;32m'
 lan='\033[0;34m'
 hong='\033[31m'
-qingse='\033[1;96m'
+qingse='\033[1;36m'
 hui='\e[37m'
 huang1='\033[1;93m'
 bai1='\033[1;0m'
-lv1='\033[1;92m'
-lan1='\033[1;94m'
-hong1='\033[1;91m'
-hui='\e[1;97m'
+lv1='\033[1;32m'
+lan1='\033[1;34m'
+hong1='\033[1;31m'
+hui='\e[1;37m'
 cognzhi= '\033[0m'
 cp ./yuanzhou.sh /usr/local/bin/yz > /dev/null 2>&1
 
@@ -6433,9 +6433,9 @@ EOF
                               if [[ "$confirm" == "Y" || "$confirm" == "y" ]]; then
                                 echo "配置信息已确认."
                                 ./buildone.sh "$server_name" "$cpu_cores" "$memory_size" "$harddisk_size" "$ssh_port" "$starting_port" "$end_port" "$download_speed" "$upload_speed" "$ipv6_enabled" "$system"
-                                break  # 跳出循环
+                                break ${bai}  # 跳出循环
                               else
-                                echo "配置信息已取消，请重新填写."
+                                echo "配置信息已取消，请重新填写."${bai}
                               fi
                             done
                            }
