@@ -1250,7 +1250,7 @@ clear
 
 while true; do
 clear
-
+sleep 3
 echo -e "${hong1}#############################################################${bai}"
 echo -e "${lv1}yuanzhou04@gmail.com ${bai}"
 echo -e "${lv1}https://yz.yz029.us.kg/ ${bai}"
@@ -6397,19 +6397,22 @@ EOF
                           clear
                           bash <(wget -qO- --no-check-certificate https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/pre_check.sh)
                           echo -e "${lv1}按任意键返回上一级...${bai}"
-                          read -r -n 1 
+                          read -r -n 1
+                          sleep 5 
                           ;;
                       2)
                           clear
                           bash <(wget -qO- --no-check-certificate https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/pre_check.sh)
                           echo -e "${lv1}按任意键返回上一级...${bai}"
                           read -r -n 1
+                          sleep 5
                           ;;
                       3)
                           clear
                           curl -L https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/lxdinstall.sh -o lxdinstall.sh && chmod +x lxdinstall.sh && bash lxdinstall.sh
                           echo -e "${lv1}按任意键重启母鸡（VPS）重启后需要手动从新连接输入${hong1}yz${lv1}后继续进入脚本工具...${bai}"
                           read -r -n 1
+                          sleep 20
                           reboot 
                           ;;
                       4)
@@ -6417,6 +6420,7 @@ EOF
                           curl -L https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/buildone.sh -o buildone.sh && chmod +x buildone.sh && dos2unix buildone.sh
                           echo -e "${lv1}按任意键重启母鸡（VPS）重启后需要手动从新连接输入${hong1}yz${lv1}后继续进入脚本工具...${bai}"
                           read -r -n 1
+                          sleep 5
                           ;;
                       5)
                           function get_server_config(){
@@ -6456,12 +6460,14 @@ EOF
                           curl -L https://cdn.spiritlhl.net/https://raw.githubusercontent.com/spiritLHLS/addswap/main/addswap.sh -o addswap.sh && chmod +x addswap.sh && bash addswap.sh
                           echo -e "${lv1}按任意键返回上一级...${bai}"
                           read -r -n 1 
+                          sleep 5
                           ;;
                       12)
                           clear
                           curl -L https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/docker/main/scripts/dockerinstall.sh -o dockerinstall.sh && chmod +x dockerinstall.sh && bash dockerinstall.sh
                           echo -e "${lv1}按任意键重启母鸡（VPS）重启后需要手动从新连接输入${hong1}yz${lv1}后继续进入脚本工具...${bai}"
                           read -r -n 1
+                          sleep 20
                           reboot 
                           ;;
                       13)
@@ -6469,6 +6475,7 @@ EOF
                           curl -L https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/docker/main/scripts/onedocker.sh -o onedocker.sh && chmod +x onedocker.sh
                           echo -e "${lv1}按任意键返回上一级...${bai}"
                           read -r -n 1 
+                          sleep 5
                           ;;
                       14)
                           function get_server_config_docker(){
@@ -6487,7 +6494,7 @@ EOF
                               read -p "请确认以上信息 (Y/N): " confirm
                               if [[ "$confirm" == "Y" || "$confirm" == "y" ]]; then
                                 echo "配置信息已确认."
-                                ./onedocker.sh "$docker_name" "$docker_cpu" "$docker_Memory" "$docker_password" "$docker_ssh" "$Sdocker_Starting_port" "$docker_Start_Port" "$download_speed" "$docker_ipv6" "$docker_system"
+                                ./buildone.sh "$docker_name" "$docker_cpu" "$docker_Memory" "$docker_password" "$docker_ssh" "$Sdocker_Starting_port" "$docker_Start_Port" "$download_speed" "$docker_ipv6" "$docker_system"
                                 read -p "buildone.sh 执行完毕，是否返回配置信息填写 (Y/N)?" return_choice
                                 if [[ "$return_choice" == "Y" || "$return_choice" == "y" ]]; then
                                   break 
