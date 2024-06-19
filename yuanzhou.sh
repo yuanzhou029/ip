@@ -15,10 +15,10 @@ cp ./yuanzhou.sh /usr/local/bin/yz > /dev/null 2>&1
 
 
 
-ip_address() {
-ipv4_address=$(curl -s ipv4.ip.sb)
-ipv6_address=$(curl -s --max-time 1 ipv6.ip.sb)
-}
+#ip_address() {
+#ipv4_address=$(curl -s ipv4.ip.sb)
+#ipv6_address=$(curl -s --max-time 1 ipv6.ip.sb)
+#}
 
 #系统信息查询函数
 System_query(){
