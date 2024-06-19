@@ -1250,13 +1250,12 @@ clear
 while true; do
 clear
 
-echo -e "${lan}###############################${bai}"
+echo -e "${hong1}#############################################################${bai}"
 echo "yuanzhou04@gmail.com "
 echo "https://yz.yz029.us.kg/ "
-echo -e "${lan}###############################${bai}"
 echo -e "${lan}一键脚本工具 v$sh_v （支持Ubuntu/Debian/CentOS/Alpine系统）${bai}"
-echo -e "${lan}-输入${huang}k${lan}可快速启动此脚本-${bai}"
-echo "------------------------"
+echo -e "${lan}-输入${huang1}yz${lan}可快速启动此脚本-${bai}"
+echo -e "${hong1}#############################################################${bai}"
 echo "1. 系统信息查询"
 echo "2. 系统更新"
 echo "3. 系统清理"
@@ -6432,7 +6431,7 @@ EOF
                               if [[ "$confirm" == "Y" || "$confirm" == "y" ]]; then
                                 echo "配置信息已确认."
                                 ./buildone.sh "$name" "$cpu" "$Memory" "$Mharddisk" "$ssh" "$Starting_port" "$Start_Port" "$download_speed" "$Upload_speed" "$ipv6" "$system"
-                                read -p "${lv1}buildone.sh 执行完毕，是否返回配置信息填写 (Y/N)? ${bai}" return_choice
+                                read -p "buildone.sh 执行完毕，是否返回配置信息填写 (Y/N)?" return_choice
                                 if [[ "$return_choice" == "Y" || "$return_choice" == "y" ]]; then
                                   break 
                                 else
