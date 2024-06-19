@@ -7,7 +7,7 @@ bai='\033[0m'
 lv='\033[0;32m'
 lan='\033[0;34m'
 hong='\033[31m'
-qingse='\033[96m'
+qingse='\033[1;96m'
 hui='\e[37m'
 
 cp ./yuanzhou.sh /usr/local/bin/yz > /dev/null 2>&1
@@ -1136,7 +1136,7 @@ clear
 echo -e "${qingse}###############################${bai}"
 echo "yuanzhou04@gmail.com "
 echo "https://yz.yz029.us.kg/ "
-echo -e"${qingse}################################${bai}"
+echo -e "${qingse}###############################${bai}"
 echo -e "${qingse}一键脚本工具 v$sh_v （支持Ubuntu/Debian/CentOS/Alpine系统）${bai}"
 echo -e "${qingse}-输入${huang}k${qingse}可快速启动此脚本-${bai}"
 echo "------------------------"
