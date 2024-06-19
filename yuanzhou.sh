@@ -6382,9 +6382,10 @@ EOF
                         PS: 如果硬件资源更烂，虚拟化不支持，可使用docker版本的，适配面更广"
                   echo "操作如下"
                   echo "------------------------"
-                  echo "1. LXC检测环境（国内版）  2. LXC检测环境（国际版）  3. LXC主体安装（国际版）  4. 生成一个NAT服务器（国际版）  5. 使用方法"
+                  echo "1. LXC检测环境（国内版）  2. LXC检测环境（国际版）  3. LXC主体安装（国际版）  4. LXC虚拟化（国际版）  5. 单开一个NAT服务器"
                   echo "------------------------"
-                  echo "11. 安装科技lion脚本         12. 更新系统              13. 清理系统"
+                  echo "用Docker开NAT服务器"
+                  echo "11. 开设虚拟内存        12. 环境预设              13. 单开NAT服务器"
                   echo "14. 安装docker               15. 安装BBR3              16. 设置1G虚拟内存"
                   echo "17. 设置时区到上海           18. 开放所有端口"
                   echo "------------------------"
@@ -6430,12 +6431,12 @@ EOF
                               read -p "请填写小鸡的硬盘大小：" Mharddisk
                               read -p "请填写小鸡的SSH端口：" ssh
                               read -p "请填写小鸡的外网起端口：" Starting_port
-                              read -p "请填写小鸡的外网始端口：" Start_Port
+                              read -p "请填写小鸡的外网止端口：" Start_Port
                               read -p "请填写小鸡的下载速度：" download_speed
                               read -p "请填写小鸡的上传速度：" Upload_speed
                               read -p "请填写小鸡的IPV6是否开启（Y/N）：" ipv6
                               read -p "请填写小鸡的系统（debian ，ubuntu ，centos ，alpine  可以自定义版本号 留空则为 debian）：" system
-                              echo "您输入的小鸡配置信息：名称:$name CPU:$cpu 内存：$Memory 硬盘：$Mharddisk SSH端口：$ssh 外网起端口：$Starting_port 网始端口：$Start_Port 下载速度：$download_speed 上传速度：$Upload_speed IPV6是否开启：$ipv6 系统：$system"
+                              echo "您输入的小鸡配置信息：名称:$name CPU:$cpu 内存：$Memory 硬盘：$Mharddisk SSH端口：$ssh 外网起端口：$Starting_port 外网止端口：$Start_Port 下载速度：$download_speed 上传速度：$Upload_speed IPV6是否开启：$ipv6 系统：$system"
                               read -p "请确认以上信息 (Y/N): " confirm
                               if [[ "$confirm" == "Y" || "$confirm" == "y" ]]; then
                                 echo "配置信息已确认."
@@ -6454,21 +6455,55 @@ EOF
                            get_server_config
                         ;;
                       11)
-                          py_task=install_yuanz.py
-                          cluster_python3
+                         clear
+                          curl -L https://cdn.spiritlhl.net/https://raw.githubusercontent.com/spiritLHLS/addswap/main/addswap.sh -o addswap.sh && chmod +x addswap.sh && bash addswap.sh
+                          echo -e "${lv1}按任意键返回上一级...${bai}"
+                          read -r -n 1 
                           ;;
                       12)
-                          py_task=update.py
-                          cluster_python3
+                          clear
+                          curl -L https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/docker/main/scripts/dockerinstall.sh -o dockerinstall.sh && chmod +x dockerinstall.sh && bash dockerinstall.sh
+                          echo -e "${lv1}按任意键重启母鸡（VPS）重启后需要手动从新连接输入${hong1}yz${lv1}后继续进入脚本工具...${bai}"
+                          read -r -n 1
+                          reboot 
                           ;;
                       13)
-                          py_task=clean.py
-                          cluster_python3
+                        clear
+                          curl -L https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/docker/main/scripts/onedocker.sh -o onedocker.sh && chmod +x onedocker.sh
+                          echo -e "${lv1}按任意键返回上一级...${bai}"
+                          read -r -n 1 
                           ;;
                       14)
-                          py_task=install_docker.py
-                          cluster_python3
-                          ;;
+                          function get_server_config_docker(){
+                            while true; do  # 使用循环，直到用户确认信息
+                              echo -e "${lv1}依次填写：容器名字 SSH登录的用户名 SSH登录的密码 CPU核数 内存大小 SSH端口 外网起端口 外网止端口 是否启用IPV6(Y or N) 系统(留空则为debian11)${bai}"
+                              read -p "请填写小鸡的容器名称：" docker_name
+                              read -p "请填写小鸡的CPU核数：" docker_cpu
+                              read -p "请填写小鸡的内存大小：" docker_Memory
+                              read -p "请填写小鸡的SSH密码：" docker_password
+                              read -p "请填写小鸡的SSH端口：" docker_ssh
+                              read -p "请填写小鸡的外网起端口：" docker_Starting_port
+                              read -p "请填写小鸡的外网止端口：" docker_Start_Port
+                              read -p "请填写小鸡的IPV6是否开启（Y/N）：" docker_ipv6
+                              read -p "请填写小鸡的系统（debian ，ubuntu ，centos ，alpine  可以自定义版本号 留空则为 debian）：" docker_system
+                              echo "您输入的小鸡配置信息：容器名字:$docker_name CPU:$docker_cpu 内存：$docker_Memory SSH密码：$docker_password SSH端口：$docker_ssh 外网起端口：$Sdocker_Starting_port 外网止端口：$docker_Start_Port IPV6是否开启：$docker_ipv6 系统：$docker_system"
+                              read -p "请确认以上信息 (Y/N): " confirm
+                              if [[ "$confirm" == "Y" || "$confirm" == "y" ]]; then
+                                echo "配置信息已确认."
+                                ./buildone.sh "$docker_name" "$docker_cpu" "$docker_Memory" "$docker_password" "$docker_ssh" "$Sdocker_Starting_port" "$docker_Start_Port" "$download_speed" "$docker_ipv6" "$docker_system"
+                                read -p "buildone.sh 执行完毕，是否返回配置信息填写 (Y/N)?" return_choice
+                                if [[ "$return_choice" == "Y" || "$return_choice" == "y" ]]; then
+                                  break 
+                                else
+                                  echo "配置信息已取消，请重新填写."
+                                fi
+                              else
+                                echo "配置信息已取消，请重新填写."
+                              fi
+                            done
+                        } 
+                           get_server_config_docker
+                        ;;
                       15)
                           py_task=install_bbr3.py
                           cluster_python3
