@@ -6416,7 +6416,7 @@ EOF
                       5)
                           function get_server_config(){
                             while true; do  # 使用循环，直到用户确认信息
-                              echo -e ${lv1} "依次填写：服务器名称 CPU核数 内存大小 硬盘大小 SSH端口 外网起端口 外网止端口 下载速度 上传速度 是否启用IPV6(Y or N) 系统(留空则为debian11)"
+                              echo -e "${lv1}依次填写：服务器名称 CPU核数 内存大小 硬盘大小 SSH端口 外网起端口 外网止端口 下载速度 上传速度 是否启用IPV6(Y or N) 系统(留空则为debian11)${bai}"
                               read -p "请填写小鸡的服务器名称：" name
                               read -p "请填写小鸡的CPU核数：" cpu
                               read -p "请填写小鸡的内存大小：" Memory
@@ -6433,9 +6433,9 @@ EOF
                               if [[ "$confirm" == "Y" || "$confirm" == "y" ]]; then
                                 echo "配置信息已确认."
                                 ./buildone.sh "$server_name" "$cpu_cores" "$memory_size" "$harddisk_size" "$ssh_port" "$starting_port" "$end_port" "$download_speed" "$upload_speed" "$ipv6_enabled" "$system"
-                                break ${bai}  # 跳出循环
+                                break  # 跳出循环
                               else
-                                echo "配置信息已取消，请重新填写."${bai}
+                                echo "配置信息已取消，请重新填写."
                               fi
                             done
                            }
