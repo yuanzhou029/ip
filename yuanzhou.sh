@@ -1607,7 +1607,8 @@ case $choice in
 
               ;;
           3)
-              while true; do
+              Docker_container(){
+                while true; do
                   clear
                   echo "Docker容器列表"
                   docker ps -a
@@ -1714,6 +1715,8 @@ case $choice in
                           ;;
                   esac
               done
+              }
+              #Docker_container
               ;;
           4)
               while true; do
