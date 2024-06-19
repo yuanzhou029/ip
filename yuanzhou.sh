@@ -6398,27 +6398,26 @@ EOF
                       1)
                           clear
                           bash <(wget -qO- --no-check-certificate https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/pre_check.sh)
-                          echo "按任意键继续..."
-                          read -r -n 1
-                          reboot 
+                          echo -e "${lv1}按任意键返回上一级...${bai}"
+                          read -r -n 1 
                           ;;
                       2)
                           clear
                           bash <(wget -qO- --no-check-certificate https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/pre_check.sh)
-                          echo "按任意键继续..."
+                          echo -e "${lv1}按任意键返回上一级...${bai}"
                           read -r -n 1
                           ;;
                       3)
                           clear
                           curl -L https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/buildone.sh -o buildone.sh && chmod +x buildone.sh && dos2unix buildone.sh
-                          echo "按任意键继续..."
+                          echo -e "${lv1}按任意键重启母鸡（VPS）重启后需要手动从新连接输入${hong1}yz${lv1}后继续进入脚本工具...${bai}"
                           read -r -n 1
                           reboot 
                           ;;
                       4)
                           clear
                           curl -L https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/buildone.sh -o buildone.sh && chmod +x buildone.sh && dos2unix buildone.sh
-                          echo "按任意键继续..."
+                          echo -e "${lv1}按任意键重启母鸡（VPS）重启后需要手动从新连接输入${hong1}yz${lv1}后继续进入脚本工具...${bai}"
                           read -r -n 1
                           reboot 
                           ;;
