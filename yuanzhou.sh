@@ -6487,7 +6487,7 @@ EOF
                               read -p "请确认以上信息 (Y/N): " confirm
                               if [[ "$confirm" == "Y" || "$confirm" == "y" ]]; then
                                 echo "配置信息已确认."
-                                ./buildone.sh "$docker_name" "$docker_cpu" "$docker_Memory" "$docker_password" "$docker_ssh" "$Sdocker_Starting_port" "$docker_Start_Port" "$download_speed" "$docker_ipv6" "$docker_system"
+                                ./onedocker.sh "$docker_name" "$docker_cpu" "$docker_Memory" "$docker_password" "$docker_ssh" "$Sdocker_Starting_port" "$docker_Start_Port" "$download_speed" "$docker_ipv6" "$docker_system"
                                 read -p "buildone.sh 执行完毕，是否返回配置信息填写 (Y/N)?" return_choice
                                 if [[ "$return_choice" == "Y" || "$return_choice" == "y" ]]; then
                                   break 
