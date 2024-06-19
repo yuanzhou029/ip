@@ -6435,7 +6435,7 @@ EOF
                                 ./buildone.sh "$name" "$cpu" "$Memory" "$Mharddisk" "$ssh" "$Starting_port" "$Start_Port" "$download_speed" "$Upload_speed" "$ipv6" "$system"
                                 read -p "${blue}buildone.sh 执行完毕，是否返回配置信息填写 (Y/N)? ${reset}" return_choice
                                 if [[ "$return_choice" != "Y" && "$return_choice" != "y" ]]; then
-                                  break
+                            break
                                 fi 
                               else
                                 echo "配置信息已取消，请重新填写."
