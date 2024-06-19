@@ -1539,6 +1539,7 @@ case $choice in
       echo "7. 清理无用的docker容器和镜像网络数据卷"
       echo "------------------------"
       echo "8. 更换Docker源"
+      echo "8. 添加Docker镜像站"
       echo "------------------------"
       echo "11. 开启Docker-ipv6访问"
       echo "12. 关闭Docker-ipv6访问"
