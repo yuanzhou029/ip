@@ -6384,14 +6384,14 @@ EOF
                   echo
                   echo -e "${bai1}1. LXC检测环境（国内版）  2. LXC检测环境（国际版）  3. LXC主体安装（国际版）"  
                   echo      
-                  echo "4. LXC虚拟化（国际版）  5. 单开一个NAT服务器${bai}"
+                  echo -e "${bai1}4. LXC虚拟化（国际版）  5. 单开一个NAT服务器${bai}"
                   echo
                   echo "------------------------"
                   echo -e "${hong1}用Docker开NAT服务器${bai}按顺序11-14"
                   echo
                   echo -e "${bai1}11. 开设虚拟内存        12. 环境预设              13. 单开NAT服务器"
                   echo  
-                  echo "14. 服务器生成          15. 服务器列表 ${bai}"
+                  echo -e "${bai1}14. 服务器生成          15. 服务器列表 ${bai}"
                   echo 
                   echo "------------------------"
                   echo "51. 自定义指令"
