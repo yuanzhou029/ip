@@ -1133,7 +1133,7 @@ clear
 while true; do
 clear
 
-echo -e "${qingse}###############################"
+echo -e ${qingse}###############################
 echo "yuanzhou04@gmail.com "
 echo "https://yz.yz029.us.kg/ "
 echo "#####################################"
