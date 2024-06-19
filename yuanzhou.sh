@@ -6411,10 +6411,16 @@ EOF
                       3)
                           clear
                           curl -L https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/buildone.sh -o buildone.sh && chmod +x buildone.sh && dos2unix buildone.sh
+                          echo "按任意键继续..."
+                          read -r -n 1
+                          reboot 
                           ;;
                       4)
                           clear
                           curl -L https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/buildone.sh -o buildone.sh && chmod +x buildone.sh && dos2unix buildone.sh
+                          echo "按任意键继续..."
+                          read -r -n 1
+                          reboot 
                           ;;
                       5)
                           function get_server_config(){
