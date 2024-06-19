@@ -248,12 +248,12 @@ install_add_docker() {
         country=$(curl -s ipinfo.io/country)
         if [ "$country" = "CN" ]; then           
             cd ~
-            curl -sS -O https://raw.gitmirror.com/yuanz/docker/main/install && chmod +x install
+            curl -sS -O https://raw.gitmirror.com/yuanzhou029/docker/main/install && chmod +x install
             sh install --mirror Aliyun
             rm -f install          
             cat > /etc/docker/daemon.json << EOF
 {
-    "registry-mirrors": ["https://docker.yuanz.pro"]
+    "registry-mirrors": ["https://docker.51281868.xyz"]
 }
 EOF
         else
