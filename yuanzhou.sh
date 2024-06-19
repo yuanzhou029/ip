@@ -7,7 +7,7 @@ bai='\033[0m'
 lv='\033[0;32m'
 lan='\033[0;34m'
 hong='\033[31m'
-kjlan='\033[96m'
+qingse='\033[96m'
 hui='\e[37m'
 
 cp ./yuanzhou.sh /usr/local/bin/yz > /dev/null 2>&1
@@ -89,7 +89,7 @@ break_end() {
 }
 
 kejilion() {
-            k
+            yz
             exit
 }
 
@@ -1133,12 +1133,12 @@ clear
 while true; do
 clear
 
-echo -e "${kjlan}_  _ ____  _ _ _    _ ____ _  _ "
-echo "|_/  |___  | | |    | |  | |\ | "
-echo "| \_ |___ _| | |___ | |__| | \| "
-echo "                                "
-echo -e "${kjlan}一键脚本工具 v$sh_v （支持Ubuntu/Debian/CentOS/Alpine系统）${bai}"
-echo -e "${kjlan}-输入${huang}k${kjlan}可快速启动此脚本-${bai}"
+echo -e "${qingse}###############################"
+echo "yuanzhou04@gmail.com "
+echo "https://yz.yz029.us.kg/ "
+echo "#####################################"
+echo -e "${qingse}一键脚本工具 v$sh_v （支持Ubuntu/Debian/CentOS/Alpine系统）${bai}"
+echo -e "${qingse}-输入${huang}k${qingse}可快速启动此脚本-${bai}"
 echo "------------------------"
 echo "1. 系统信息查询"
 echo "2. 系统更新"
