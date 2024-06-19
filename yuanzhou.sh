@@ -6336,7 +6336,7 @@ EOF
     echo "------------------------"
     echo "全部日志: https://raw.githubusercontent.com/yuanzhou029/ip/main/yuanzhou_sh_log.txt"
     echo "------------------------"
-    curl -s https://raw.githubusercontent.com/yuanzhou029/ip/main/yuanzhou_sh_log.txt | tail -n 35
+    curl -s https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/yuanzhou_sh_log.txt | tail -n 35
 
     sh_v_new=$(curl -s https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/yuanzhou.sh | grep -o 'sh_v="[0-9.]*"' | cut -d '"' -f 2)
 
