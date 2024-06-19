@@ -1865,7 +1865,6 @@ case $choice in
               bash <(curl -sSL https://linuxmirrors.cn/docker.sh)
               ;;
           9）
-              clear
               mkdir -p /etc/docker
               tee /etc/docker/daemon.json <<-'EOF'
               {
