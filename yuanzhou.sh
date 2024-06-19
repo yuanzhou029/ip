@@ -6439,7 +6439,7 @@ EOF
                                 if
                                 echo "配置信息已取消，请重新填写."
                               fi
-                            done
+                          done
                            }
                            get_server_config
                         ;;
