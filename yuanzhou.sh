@@ -15,6 +15,7 @@ lv1='\033[1;32m'
 lan1='\033[1;34m'
 hong1='\033[1;31m'
 hui='\e[1;37m'
+cognzhi= '\033[0m'
 cp ./yuanzhou.sh /usr/local/bin/yz > /dev/null 2>&1
 
 
@@ -6432,8 +6433,8 @@ EOF
                               if [[ "$confirm" == "Y" || "$confirm" == "y" ]]; then
                                 echo "配置信息已确认."
                                 ./buildone.sh "$name" "$cpu" "$Memory" "$Mharddisk" "$ssh" "$Starting_port" "$Start_Port" "$download_speed" "$Upload_speed" "$ipv6" "$system"
-                              read -p "${lv1}buildone.sh 执行完毕，是否返回配置信息填写 (Y/N)? ${bai}" return_choice
-                              if [[ "$return_choice" == "Y" && "$return_choice" == "y" ]]; then
+                                read -p "${lv1}buildone.sh 执行完毕，是否返回配置信息填写 (Y/N)? ${bai}" return_choice
+                              if [[ "$return_choice" == "Y" || "$return_choice" == "y" ]]; then
                                 break 
                               else
                                 echo "配置信息已取消，请重新填写."
