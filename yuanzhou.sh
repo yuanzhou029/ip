@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sh_v="2.6.0"
+sh_v="2.6.0 bast"
 
 huang='\033[33m'
 bai='\033[0m'
