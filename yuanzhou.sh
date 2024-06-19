@@ -15,7 +15,6 @@ lv1='\033[1;32m'
 lan1='\033[1;34m'
 hong1='\033[1;31m'
 hui='\e[1;37m'
-cognzhi= '\033[0m'
 cp ./yuanzhou.sh /usr/local/bin/yz > /dev/null 2>&1
 
 
