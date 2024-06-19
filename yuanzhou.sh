@@ -6382,7 +6382,7 @@ EOF
                         PS: 如果硬件资源更烂，虚拟化不支持，可使用docker版本的，适配面更广"
                   echo "操作如下"
                   echo "------------------------"
-                  echo "1. LXC主体安装（国内版）  2. LXC主体安装（国际版）  3. 单独生成一个NAT服务器（国际版）  4. 单独生成一个NAT服务器（国内版）  5. 使用方法"
+                  echo "1. LXC检测环境（国内版）  2. LLXC检测环境（国际版）  3. 单独生成一个NAT服务器（国际版）  4. 单独生成一个NAT服务器（国内版）  5. 使用方法"
                   echo "------------------------"
                   echo "11. 安装科技lion脚本         12. 更新系统              13. 清理系统"
                   echo "14. 安装docker               15. 安装BBR3              16. 设置1G虚拟内存"
@@ -6399,18 +6399,21 @@ EOF
                           clear
                           bash <(wget -qO- --no-check-certificate https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/pre_check.sh)
                           echo "按任意键继续..."
-                          read -r -n 1 
+                          read -r -n 1
+                          reboot 
                           ;;
                       2)
-                          lear
+                          clear
                           bash <(wget -qO- --no-check-certificate https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/pre_check.sh)
+                          echo "按任意键继续..."
+                          read -r -n 1
                           ;;
                       3)
-                          lear
+                          clear
                           curl -L https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/buildone.sh -o buildone.sh && chmod +x buildone.sh && dos2unix buildone.sh
                           ;;
                       4)
-                          lear
+                          clear
                           curl -L https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/buildone.sh -o buildone.sh && chmod +x buildone.sh && dos2unix buildone.sh
                           ;;
                       5)
