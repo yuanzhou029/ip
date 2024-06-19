@@ -6174,29 +6174,20 @@ EOF
       echo "------------------------"
       read -p "请输入你的选择: " sub_choice
 
-      case $sub_choice in
-  1)
-    clear
-    install python3 python3-paramiko speedtest-cli lrzsz
-    mkdir cluster && cd cluster
-    touch servers.py
+     case $sub_choice in
+          1)
+            clear
+            install python3 python3-paramiko speedtest-cli lrzsz
+            mkdir cluster && cd cluster
+            touch servers.py
 
-    cat > ./servers.py << EOF
-   servers = [
+            cat > ./servers.py << EOF
+servers = [
 
-    ]
+]
 EOF
 
-    ;;
-  2)
-    clear
-    linux_update
-    ;;
-
-  3)
-    clear
-    linux_clean
-    ;;
+              ;;
           2)
 
               while true; do
@@ -6241,7 +6232,7 @@ EOF
                           nano ~/cluster/servers.py
                           ;;
                       11)
-                          py_task=install_yuanz.py
+                          py_task=install_kejilion.py
                           cluster_python3
                           ;;
                       12)
@@ -6277,7 +6268,7 @@ EOF
                           read -p "请输入批量执行的命令: " mingling
                           py_task=custom_tasks.py
                           cd ~/cluster/
-                          curl -sS -O https://raw.githubusercontent.com/yuanz/python-for-vps/main/cluster/$py_task
+                          curl -sS -O https://raw.githubusercontent.com/kejilion/python-for-vps/main/cluster/$py_task
                           sed -i "s#Customtasks#$mingling#g" ~/cluster/$py_task
                           python3 ~/cluster/$py_task
                           ;;
@@ -6331,7 +6322,7 @@ EOF
               ;;
 
           0)
-              yuanz
+              kejilion
               ;;
           *)
               echo "无效的输入!"
@@ -6342,6 +6333,7 @@ EOF
     done
 
     ;;
+
 
   p)
     clear
