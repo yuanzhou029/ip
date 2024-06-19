@@ -6417,8 +6417,8 @@ EOF
                           function get_server_config(){
                             while true; do  # 使用循环，直到用户确认信息
                               echo -e "${lv1}依次填写：服务器名称 CPU核数 内存大小 硬盘大小 SSH端口 外网起端口 外网止端口 下载速度 上传速度 是否启用IPV6(Y or N) 系统(留空则为debian11)${bai}"
-                              read -p "请填写小鸡的服务器名称：" name
-                              read -p "请填写小鸡的CPU核数：" cpu
+                              read -p -e "${lv1}请填写小鸡的服务器名称：${bai}" name
+                              read -p -e "${lv1}请填写小鸡的CPU核数：" cpu
                               read -p "请填写小鸡的内存大小：" Memory
                               read -p "请填写小鸡的硬盘大小：" Mharddisk
                               read -p "请填写小鸡的SSH端口：" ssh
