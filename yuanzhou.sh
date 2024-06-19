@@ -6323,10 +6323,25 @@ EOF
     ;;
 
   p)
-    cd ~
-    curl -sS -O https://raw.githubusercontent.com/yuanz/sh/main/palworld.sh && chmod +x palworld.sh && ./palworld.sh
-    exit
-    ;;
+    clear
+    while true; do
+      clear
+      echo "自动开小鸡"
+      echo "在母鸡的基础上开出小鸡来）"
+      echo "------------------------"
+      echo "1. 安装集群环境"
+      echo "------------------------"
+      echo "2. 集群控制中心"
+      echo "------------------------"
+      echo "7. 备份集群环境"
+      echo "8. 还原集群环境"
+      echo "9. 卸载集群环境"
+      echo "------------------------"
+      echo "0. 返回主菜单"
+      echo "------------------------"
+      read -p "请输入你的选择: " sub_choice
+
+      case $sub_choice in
 
 
   00)
