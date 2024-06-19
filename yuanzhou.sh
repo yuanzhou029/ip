@@ -6396,10 +6396,11 @@ EOF
 
                   case $sub_choice in
                       1)
-                          lear
+                          clear
                           bash <(wget -qO- --no-check-certificate https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/pre_check.sh)
-                          chmod +x pre_check.sh
-                          ./pre_check.sh  
+                          read -r -p "pre_check.sh 执行完毕，是否返回上一级菜单？ [y/N] " response
+                          case "$response" in
+                            [yY][eE][sS]|[yY]) 
                           ;;
                       2)
                           lear
