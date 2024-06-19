@@ -23,6 +23,7 @@ ipv6_address=$(curl -s --max-time 1 ipv6.ip.sb)
 #系统信息查询函数
 System_query(){
     clear
+    ip_address
     if [ "$(uname -m)" == "x86_64" ]; then
       cpu_info=$(cat /proc/cpuinfo | grep 'model name' | uniq | sed -e 's/model name[[:space:]]*: //')
     else
@@ -128,6 +129,7 @@ System_query(){
     echo "系统运行时长: $runtime"
     echo
 }
+##################################################
 
 
 
@@ -1277,7 +1279,7 @@ case $choice in
   1)
     clear
     # 函数: 获取IPv4和IPv6地址
-    ip_address
+    #ip_address
     # 函数: 获取服务器信息
     System_query
     ;;
