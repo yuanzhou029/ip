@@ -1385,7 +1385,7 @@ echo "12. 我的工作区 ▶ "
 echo "13. 系统工具 ▶ "
 echo "14. VPS集群控制 ▶ "
 echo "------------------------"
-echo "p. 全自动脚本开小鸡 ▶"
+echo "88. 全自动脚本开小鸡 ▶"
 echo "------------------------"
 echo "00. 脚本更新"
 echo "------------------------"
@@ -6342,20 +6342,23 @@ EOF
     ;;
 
 
-  p)
+  88)
     clear
     while true; do
       clear
-      echo "全自动脚本开小鸡"
-      echo "在原有的母鸡上开出若干个小机"
+      echo
+      echo -e "${huang1}全自动脚本开小鸡"
+      echo
+      echo -e "${huang1}在原有的母鸡上开出若干个小机${bai}"
+      echo
       echo "------------------------"
       echo "1. 服务器信息"
       echo "------------------------"
       echo "2. 开虚拟机（小鸡）"
       echo "------------------------"
-      echo "7. 备份集群环境"
-      echo "8. 还原集群环境"
-      echo "9. 卸载集群环境"
+      echo "7. 待开发"
+      echo "8. 待开发"
+      echo "9. 待开发"
       echo "------------------------"
       echo "0. 返回主菜单"
       echo "------------------------"
@@ -6560,37 +6563,18 @@ EOF
               ;;
           7)
             clear
-            echo "将下载服务器列表数据，按任意键下载！"
-            read -n 1 -s -r -p ""
-            sz -y ~/cluster/servers.py
-
+            echo "待开发，不要乱点！"
               ;;
 
           8)
             clear
-            echo "请上传您的servers.py，按任意键开始上传！"
-            read -n 1 -s -r -p ""
-            cd ~/cluster/
-            rz -y
+            echo "待开发，不要乱点！"
               ;;
 
           9)
 
             clear
-            read -p "请先备份环境，确定要卸载集群控制环境吗？(Y/N): " choice
-            case "$choice" in
-              [Yy])
-                remove python3-paramiko speedtest-cli lrzsz
-                rm -rf ~/cluster/
-                ;;
-              [Nn])
-                echo "已取消"
-                ;;
-              *)
-                echo "无效的选择，请输入 Y 或 N。"
-                ;;
-            esac
-
+            echo "待开发，不要乱点！"
               ;;
 
           0)
