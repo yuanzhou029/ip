@@ -6410,6 +6410,8 @@ EOF
                       3)
                           clear
                           curl -L https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/buildone.sh -o buildone.sh && chmod +x buildone.sh && dos2unix buildone.sh
+                          chmod +x buildone.sh
+                          dos2unix buildone.sh
                           echo -e "${lv1}按任意键重启母鸡（VPS）重启后需要手动从新连接输入${hong1}yz${lv1}后继续进入脚本工具...${bai}"
                           read -r -n 1
                           reboot 
