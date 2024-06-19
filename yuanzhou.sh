@@ -15,6 +15,7 @@ lv1='\033[1;32m'
 lan1='\033[1;34m'
 hong1='\033[1;31m'
 hui='\e[1;37m'
+bai1='\033[1;0m'
 cp ./yuanzhou.sh /usr/local/bin/yz > /dev/null 2>&1
 
 
@@ -1716,7 +1717,7 @@ case $choice in
                   esac
               done
               }
-              #Docker_container
+              Docker_container
               ;;
           4)
               while true; do
@@ -6381,13 +6382,17 @@ EOF
                   echo 
                   echo -e "${hong1}LXC开NAT服务器${bai}按顺序1-5"
                   echo
-                  echo "1. LXC检测环境（国内版）  2. LXC检测环境（国际版）  3. LXC主体安装（国际版）  4. LXC虚拟化（国际版）  5. 单开一个NAT服务器"
+                  echo -e "${bai1}1. LXC检测环境（国内版）  2. LXC检测环境（国际版）  3. LXC主体安装（国际版）"  
+                  echo      
+                  echo "4. LXC虚拟化（国际版）  5. 单开一个NAT服务器${bai}"
+                  echo
                   echo "------------------------"
                   echo -e "${hong1}用Docker开NAT服务器${bai}按顺序11-14"
                   echo
-                  echo "11. 开设虚拟内存        12. 环境预设              13. 单开NAT服务器                14. 服务器生成"  
-                  echo "14. 安装docker               15. 安装BBR3              16. 设置1G虚拟内存"
-                  echo "17. 设置时区到上海           18. 开放所有端口"
+                  echo -e "${bai1}11. 开设虚拟内存        12. 环境预设              13. 单开NAT服务器"
+                  echo  
+                  echo "14. 服务器生成          15. 服务器列表 ${bai}"
+                  echo 
                   echo "------------------------"
                   echo "51. 自定义指令"
                   echo "------------------------"
@@ -6511,10 +6516,9 @@ EOF
                             done
                         } 
                            get_server_config_docker
-                        ;;
+                          ;;
                       15)
-                          py_task=install_bbr3.py
-                          cluster_python3
+                          Docker_container
                           ;;
                       16)
                           py_task=swap1024.py
