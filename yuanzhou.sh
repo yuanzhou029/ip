@@ -241,8 +241,8 @@ check_port() {
 
 install_add_docker() {
     if [ -f "/etc/alpine-release" ]; then
-        apk update
-        apk add docker docker-compose
+        apt update
+        apt add docker docker-compose
         rc-update add docker default
         service docker start
     else
@@ -6239,7 +6239,7 @@ EOF
                           nano ~/cluster/servers.py
                           ;;
                       11)
-                          py_task=install_kejilion.py
+                          1py_task=install_kejilion.py
                           cluster_python3
                           ;;
                       12)
@@ -6478,6 +6478,8 @@ EOF
                           ;;
                       12)
                           clear
+                          sudo apt update
+                          sudo apt install --reinstall network-manager
                           curl -L https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/docker/main/scripts/dockerinstall.sh -o dockerinstall.sh && chmod +x dockerinstall.sh && bash dockerinstall.sh
                           echo -e "${lv1}按任意键重启母鸡（VPS）重启后需要手动从新连接输入${hong1}yz${lv1}后继续进入脚本工具...${bai}"
                           read -r -n 1
