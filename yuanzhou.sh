@@ -6342,6 +6342,7 @@ EOF
       read -p "请输入你的选择: " sub_choice
 
       case $sub_choice in
+    done  
 
 
   00)
