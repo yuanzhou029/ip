@@ -6351,7 +6351,7 @@ EOF
             [Yy])
                 clear
                 curl -sS -O https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/yuanzhou.sh && chmod +x yuanzhou.sh
-                cp ./yuanzhou.sh /usr/local/bin/k > /dev/null 2>&1
+                cp ./yuanzhou.sh /usr/local/bin/yz > /dev/null 2>&1
                 echo -e "${lv}脚本已更新到最新版本！${huang}v$sh_v_new${bai}"
                 break_end
                 yuanz
