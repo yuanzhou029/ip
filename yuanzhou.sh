@@ -6347,7 +6347,7 @@ EOF
       echo "------------------------"
       echo "1. 服务器信息"
       echo "------------------------"
-      echo "2. 集群控制中心"
+      echo "2. 开虚拟机（小鸡）"
       echo "------------------------"
       echo "7. 备份集群环境"
       echo "8. 还原集群环境"
@@ -6367,13 +6367,18 @@ EOF
 
               while true; do
                   clear
-                  echo "集群服务器列表"
-                  cat ~/cluster/servers.py
-
-                  echo ""
-                  echo "操作"
+                  echo "开虚拟化小鸡"
+                  echo "硬件要求:
+                        系统：Debian 8+, Ubuntu 18+(推荐20.04)
+                        虚拟化：推荐KVM、VMWARE虚拟化
+                        内存：内存至少1G
+                        硬盘：硬盘(系统盘)至少10G
+                        网络：独立的IPV4地址，IPV6可有可无，带宽能下载脚本就行，网络能连接Github的raw页面就行
+                        PS: 如果硬件非常好资源很多，可使用PVE批量开KVM虚拟化的虚拟机
+                        PS: 如果硬件资源更烂，虚拟化不支持，可使用docker版本的，适配面更广"
+                  echo "操作如下"
                   echo "------------------------"
-                  echo "1. 添加服务器                2. 删除服务器             3. 编辑服务器"
+                  echo "1. LXC主体安装（国内版）  2. LXC主体安装（国际版）  3. 单独生成一个NAT服务器（国际版）  4. 单独生成一个NAT服务器（国内版）  5. 使用方法"
                   echo "------------------------"
                   echo "11. 安装科技lion脚本         12. 更新系统              13. 清理系统"
                   echo "14. 安装docker               15. 安装BBR3              16. 设置1G虚拟内存"
@@ -6387,25 +6392,50 @@ EOF
 
                   case $sub_choice in
                       1)
-                          read -p "服务器名称: " server_name
-                          read -p "服务器IP: " server_ip
-                          read -p "服务器端口（22）: " server_port
-                          server_port=${server_port:-22}
-                          read -p "服务器用户名（root）: " server_username
-                          server_username=${server_username:-root}
-                          read -p "服务器用户密码: " server_password
-
-                          sed -i "/servers = \[/a\    {\"name\": \"$server_name\", \"hostname\": \"$server_ip\", \"port\": $server_port, \"username\": \"$server_username\", \"password\": \"$server_password\", \"remote_path\": \"/home/\"}," ~/cluster/servers.py
-
+                          lear
+                          bash <(wget -qO- --no-check-certificate https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/pre_check.sh)  
                           ;;
                       2)
-                          read -p "请输入需要删除的关键字: " rmserver
-                          sed -i "/$rmserver/d" ~/cluster/servers.py
+                          lear
+                          bash <(wget -qO- --no-check-certificate https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/pre_check.sh)
                           ;;
                       3)
-                          install nano
-                          nano ~/cluster/servers.py
+                          lear
+                          curl -L https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/buildone.sh -o buildone.sh && chmod +x buildone.sh && dos2unix buildone.sh
                           ;;
+                      4)
+                          lear
+                          curl -L https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/buildone.sh -o buildone.sh && chmod +x buildone.sh && dos2unix buildone.sh
+                          ;;
+                      5)
+                          function get_server_config(){
+                            while true; do  # 使用循环，直到用户确认信息
+                              lear
+                              echo "./buildone.sh 服务器名称 CPU核数 内存大小 硬盘大小 SSH端口 外网起端口 外网止端口 下载速度 上传速度 是否启用IPV6(Y or N) 系统(留空则为debian11)"
+                              read -p "请填写小鸡的服务器名称：" name
+                              read -p "请填写小鸡的CPU核数：" cpu
+                              read -p "请填写小鸡的内存大小：" Memory
+                              read -p "请填写小鸡的硬盘大小：" Mharddisk
+                              read -p "请填写小鸡的SSH端口：" ssh
+                              read -p "请填写小鸡的外网起端口：" Starting_port
+                              read -p "请填写小鸡的外网始端口：" Start_Port
+                              read -p "请填写小鸡的下载速度：" download_speed
+                              read -p "请填写小鸡的上传速度：" Upload_speed
+                              read -p "请填写小鸡的IPV6是否开启（Y/N）：" ipv6
+                              read -p "请填写小鸡的系统（debian ，ubuntu ，centos ，alpine  可以自定义版本号 留空则为 debian）：" system
+                              echo "您输入的小鸡配置信息：名称:$name CPU:$cpu 内存：$Memory 硬盘：$Mharddisk SSH端口：$ssh 外网起端口：$Starting_port 网始端口：$Start_Port 下载速度：$download_speed 上传速度：$Upload_speed IPV6是否开启：$ipv6 系统：$system"
+                              read -p "请确认以上信息 (Y/N): " confirm
+                              if [[ "$confirm" == "Y" || "$confirm" == "y" ]]; then
+                                echo "配置信息已确认."
+                                ./buildone.sh "$server_name" "$cpu_cores" "$memory_size" "$harddisk_size" "$ssh_port" "$starting_port" "$end_port" "$download_speed" "$upload_speed" "$ipv6_enabled" "$system"
+                                break  # 跳出循环
+                              else
+                                echo "配置信息已取消，请重新填写."
+                              fi
+                            done
+                           }
+                           get_server_config
+                        ;;
                       11)
                           py_task=install_yuanz.py
                           cluster_python3
