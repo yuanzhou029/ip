@@ -6397,7 +6397,9 @@ EOF
                   case $sub_choice in
                       1)
                           lear
-                          bash <(wget -qO- --no-check-certificate https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/pre_check.sh)  
+                          bash <(wget -qO- --no-check-certificate https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/pre_check.sh)
+                          chmod +x pre_check.sh
+                          ./pre_check.sh  
                           ;;
                       2)
                           lear
