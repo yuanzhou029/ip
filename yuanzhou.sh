@@ -6284,7 +6284,6 @@ EOF
     clear
     linux_clean
     ;;
-              ;;
           2)
 
               while true; do
