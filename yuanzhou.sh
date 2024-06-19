@@ -6382,7 +6382,7 @@ EOF
                         PS: 如果硬件资源更烂，虚拟化不支持，可使用docker版本的，适配面更广"
                   echo "操作如下"
                   echo "------------------------"
-                  echo "1. LXC检测环境（国内版）  2. LLXC检测环境（国际版）  3. 单独生成一个NAT服务器（国际版）  4. 单独生成一个NAT服务器（国内版）  5. 使用方法"
+                  echo "1. LXC检测环境（国内版）  2. LXC检测环境（国际版）  3. LXC主体安装（国际版）  4. 生成一个NAT服务器（国际版）  5. 使用方法"
                   echo "------------------------"
                   echo "11. 安装科技lion脚本         12. 更新系统              13. 清理系统"
                   echo "14. 安装docker               15. 安装BBR3              16. 设置1G虚拟内存"
@@ -6416,10 +6416,9 @@ EOF
                           ;;
                       4)
                           clear
-                          curl -L https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/lxdinstall.sh -o lxdinstall.sh && chmod +x lxdinstall.sh && bash lxdinstall.sh
+                          curl -L https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/buildone.sh -o buildone.sh && chmod +x buildone.sh && dos2unix buildone.sh
                           echo -e "${lv1}按任意键重启母鸡（VPS）重启后需要手动从新连接输入${hong1}yz${lv1}后继续进入脚本工具...${bai}"
                           read -r -n 1
-                          reboot 
                           ;;
                       5)
                           function get_server_config(){
