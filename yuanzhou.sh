@@ -513,7 +513,7 @@ install_certbot() {
     cd ~ || exit
 
     # 下载并使脚本可执行
-    curl -O https://raw.githubusercontent.com/yuanz/sh/main/auto_cert_renewal.sh
+    curl -O https://raw.githubusercontent.com/yuanzhou029/sh/main/auto_cert_renewal.sh
     chmod +x auto_cert_renewal.sh
 
     # 设置定时任务字符串
@@ -642,7 +642,7 @@ add_db() {
 
 reverse_proxy() {
       ip_address
-      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanz/nginx/main/reverse-proxy.conf
+      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/reverse-proxy.conf
       sed -i "s/yuming.com/$yuming/g" /home/web/conf.d/$yuming.conf
       sed -i "s/0.0.0.0/$ipv4_address/g" /home/web/conf.d/$yuming.conf
       sed -i "s/0000/$duankou/g" /home/web/conf.d/$yuming.conf
@@ -779,7 +779,7 @@ fi
 
 cluster_python3() {
     cd ~/cluster/
-    curl -sS -O https://raw.githubusercontent.com/yuanz/python-for-vps/main/cluster/$py_task
+    curl -sS -O https://raw.githubusercontent.com/yuanzhou029/python-for-vps/main/cluster/$py_task
     python3 ~/cluster/$py_task
 }
 
@@ -827,19 +827,20 @@ f2b_install_sshd() {
     sleep 3
     if grep -q 'Alpine' /etc/issue; then
         cd /path/to/fail2ban/config/fail2ban/filter.d
-        curl -sS -O https://raw.githubusercontent.com/yuanz/config/main/fail2ban/alpine-sshd.conf
-        curl -sS -O https://raw.githubusercontent.com/yuanz/config/main/fail2ban/alpine-sshd-ddos.conf
+        https://raw.githubusercontent.com/kejilion/config/main/fail2ban
+        curl -sS -O https://raw.githubusercontent.com/yuanzhou029/config/main/fail2ban/alpine-sshd.conf
+        curl -sS -O https://raw.githubusercontent.com/yuanzhou029/config/main/fail2ban/alpine-sshd-ddos.conf
         cd /path/to/fail2ban/config/fail2ban/jail.d/
-        curl -sS -O https://raw.githubusercontent.com/yuanz/config/main/fail2ban/alpine-ssh.conf
+        curl -sS -O https://raw.githubusercontent.com/yuanzhou029/config/main/fail2ban/alpine-ssh.conf
     elif grep -qi 'CentOS' /etc/redhat-release; then
         cd /path/to/fail2ban/config/fail2ban/jail.d/
-        curl -sS -O https://raw.githubusercontent.com/yuanz/config/main/fail2ban/centos-ssh.conf
+        curl -sS -O https://raw.githubusercontent.com/yuanzhou029/config/main/fail2ban/centos-ssh.conf
     else
         install rsyslog
         systemctl start rsyslog
         systemctl enable rsyslog
         cd /path/to/fail2ban/config/fail2ban/jail.d/
-        curl -sS -O https://raw.githubusercontent.com/yuanz/config/main/fail2ban/linux-ssh.conf
+        curl -sS -O https://raw.githubusercontent.com/yuanzhou029/config/main/fail2ban/linux-ssh.conf
     fi
 }
 
@@ -2250,12 +2251,12 @@ case $choice in
       # 创建必要的目录和文件
       cd /home && mkdir -p web/html web/mysql web/certs web/conf.d web/redis web/log/nginx && touch web/docker-compose.yml
 
-      wget -O /home/web/nginx.conf https://raw.githubusercontent.com/yuanz/nginx/main/nginx10.conf
-      wget -O /home/web/conf.d/default.conf https://raw.githubusercontent.com/yuanz/nginx/main/default10.conf
+      wget -O /home/web/nginx.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/nginx10.conf
+      wget -O /home/web/conf.d/default.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/default10.conf
       default_server_ssl
 
       # 下载 docker-compose.yml 文件并进行替换
-      wget -O /home/web/docker-compose.yml https://raw.githubusercontent.com/yuanz/docker/main/LNMP-docker-compose-10.yml
+      wget -O /home/web/docker-compose.yml https://raw.githubusercontent.com/yuanzhou029/docker/main/LNMP-docker-compose-10.yml
 
       dbrootpasswd=$(openssl rand -base64 16) && dbuse=$(openssl rand -hex 4) && dbusepasswd=$(openssl rand -base64 8)
 
@@ -2276,7 +2277,7 @@ case $choice in
       install_ssltls
       add_db
 
-      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanz/nginx/main/wordpress.com.conf
+      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/wordpress.com.conf
       sed -i "s/yuming.com/$yuming/g" /home/web/conf.d/$yuming.conf
 
       cd /home/web/html
@@ -2308,14 +2309,14 @@ case $choice in
       install_ssltls
       add_db
 
-      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanz/nginx/main/discuz.com.conf
+      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/discuz.com.conf
 
       sed -i "s/yuming.com/$yuming/g" /home/web/conf.d/$yuming.conf
 
       cd /home/web/html
       mkdir $yuming
       cd $yuming
-      wget -O latest.zip https://github.com/yuanz/Website_source_code/raw/main/Discuz_X3.5_SC_UTF8_20240520.zip
+      wget -O latest.zip https://github.com/kejilion/Website_source_code/raw/main/Discuz_X3.5_SC_UTF8_20240520.zip
       unzip latest.zip
       rm latest.zip
 
@@ -2341,7 +2342,7 @@ case $choice in
       install_ssltls
       add_db
 
-      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanz/nginx/main/kdy.com.conf
+      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/kdy.com.conf
       sed -i "s/yuming.com/$yuming/g" /home/web/conf.d/$yuming.conf
 
       cd /home/web/html
@@ -2371,7 +2372,7 @@ case $choice in
       install_ssltls
       add_db
 
-      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanz/nginx/main/maccms.com.conf
+      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/maccms.com.conf
 
       sed -i "s/yuming.com/$yuming/g" /home/web/conf.d/$yuming.conf
 
@@ -2383,7 +2384,7 @@ case $choice in
       cd /home/web/html/$yuming/template/ && wget https://github.com/yuanz/Website_source_code/raw/main/DYXS2.zip && unzip DYXS2.zip && rm /home/web/html/$yuming/template/DYXS2.zip
       cp /home/web/html/$yuming/template/DYXS2/asset/admin/Dyxs2.php /home/web/html/$yuming/application/admin/controller
       cp /home/web/html/$yuming/template/DYXS2/asset/admin/dycms.html /home/web/html/$yuming/application/admin/view/system
-      mv /home/web/html/$yuming/admin.php /home/web/html/$yuming/vip.php && wget -O /home/web/html/$yuming/application/extra/maccms.php https://raw.githubusercontent.com/yuanz/Website_source_code/main/maccms.php
+      mv /home/web/html/$yuming/admin.php /home/web/html/$yuming/vip.php && wget -O /home/web/html/$yuming/application/extra/maccms.php https://raw.githubusercontent.com/kejilion/Website_source_code/main/maccms.php
 
       restart_ldnmp
 
@@ -2410,7 +2411,7 @@ case $choice in
       install_ssltls
       add_db
 
-      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanz/nginx/main/dujiaoka.com.conf
+      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/dujiaoka.com.conf
 
       sed -i "s/yuming.com/$yuming/g" /home/web/conf.d/$yuming.conf
 
@@ -2454,7 +2455,7 @@ case $choice in
       install_ssltls
       add_db
 
-      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanz/nginx/main/flarum.com.conf
+      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/flarum.com.conf
       sed -i "s/yuming.com/$yuming/g" /home/web/conf.d/$yuming.conf
 
       cd /home/web/html
@@ -2492,7 +2493,7 @@ case $choice in
       install_ssltls
       add_db
 
-      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanz/nginx/main/typecho.com.conf
+      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/typecho.com.conf
       sed -i "s/yuming.com/$yuming/g" /home/web/conf.d/$yuming.conf
 
       cd /home/web/html
@@ -2523,7 +2524,7 @@ case $choice in
       install_ssltls
       add_db
 
-      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanz/nginx/main/index_php.conf
+      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/index_php.conf
       sed -i "s/yuming.com/$yuming/g" /home/web/conf.d/$yuming.conf
 
       cd /home/web/html
@@ -2646,8 +2647,8 @@ case $choice in
 
       cd /home && mkdir -p web/html web/mysql web/certs web/conf.d web/redis web/log/nginx && touch web/docker-compose.yml
 
-      wget -O /home/web/nginx.conf https://raw.githubusercontent.com/yuanz/nginx/main/nginx10.conf
-      wget -O /home/web/conf.d/default.conf https://raw.githubusercontent.com/yuanz/nginx/main/default10.conf
+      wget -O /home/web/nginx.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/nginx10.conf
+      wget -O /home/web/conf.d/default.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/default10.conf
       default_server_ssl
       docker rm -f nginx >/dev/null 2>&1
       docker rmi nginx nginx:alpine >/dev/null 2>&1
@@ -2671,7 +2672,7 @@ case $choice in
 
       install_ssltls
 
-      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanz/nginx/main/rewrite.conf
+      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/rewrite.conf
       sed -i "s/yuming.com/$yuming/g" /home/web/conf.d/$yuming.conf
       sed -i "s/baidu.com/$reverseproxy/g" /home/web/conf.d/$yuming.conf
 
@@ -2693,7 +2694,7 @@ case $choice in
 
       install_ssltls
 
-      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanz/nginx/main/reverse-proxy.conf
+      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/reverse-proxy.conf
       sed -i "s/yuming.com/$yuming/g" /home/web/conf.d/$yuming.conf
       sed -i "s/0.0.0.0/$reverseproxy/g" /home/web/conf.d/$yuming.conf
       sed -i "s/0000/$port/g" /home/web/conf.d/$yuming.conf
@@ -2715,7 +2716,7 @@ case $choice in
 
       install_ssltls
 
-      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanz/nginx/main/reverse-proxy-domain.conf
+      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/reverse-proxy-domain.conf
       sed -i "s/yuming.com/$yuming/g" /home/web/conf.d/$yuming.conf
       sed -i "s|fandaicom|$fandai_yuming|g" /home/web/conf.d/$yuming.conf
 
@@ -2733,7 +2734,7 @@ case $choice in
       add_yuming
       install_ssltls
 
-      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanz/nginx/main/html.conf
+      wget -O /home/web/conf.d/$yuming.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/html.conf
       sed -i "s/yuming.com/$yuming/g" /home/web/conf.d/$yuming.conf
 
       cd /home/web/html
@@ -2971,7 +2972,7 @@ case $choice in
       read -p "输入远程服务器密码: " usepasswd
 
       cd ~
-      wget -O ${useip}_beifen.sh https://raw.githubusercontent.com/yuanz/sh/main/beifen.sh > /dev/null 2>&1
+      wget -O ${useip}_beifen.sh https://raw.githubusercontent.com/yuanzhou029/sh/main/beifen.sh > /dev/null 2>&1
       chmod +x ${useip}_beifen.sh
 
       sed -i "s/0.0.0.0/$useip/g" ${useip}_beifen.sh
@@ -3113,14 +3114,14 @@ case $choice in
                       read -p "输入CF的账号: " cfuser
                       read -p "输入CF的Global API Key: " cftoken
 
-                      wget -O /home/web/conf.d/default.conf https://raw.githubusercontent.com/yuanz/nginx/main/default11.conf
+                      wget -O /home/web/conf.d/default.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/default11.conf
                       docker restart nginx
 
                       cd /path/to/fail2ban/config/fail2ban/jail.d/
-                      curl -sS -O https://raw.githubusercontent.com/yuanz/config/main/fail2ban/nginx-docker-cc.conf
+                      curl -sS -O https://raw.githubusercontent.com/yuanzhou029/config/main/fail2ban/nginx-docker-cc.conf
 
                       cd /path/to/fail2ban/config/fail2ban/action.d
-                      curl -sS -O https://raw.githubusercontent.com/yuanz/config/main/fail2ban/cloudflare-docker.conf
+                      curl -sS -O https://raw.githubusercontent.com/yuanzhou029/config/main/fail2ban/cloudflare-docker.conf
 
                       sed -i "s/yuanz@outlook.com/$cfuser/g" /path/to/fail2ban/config/fail2ban/action.d/cloudflare-docker.conf
                       sed -i "s/APIKEY00000/$cftoken/g" /path/to/fail2ban/config/fail2ban/action.d/cloudflare-docker.conf
@@ -3163,8 +3164,8 @@ case $choice in
           install_docker
 
           docker rm -f nginx
-          wget -O /home/web/nginx.conf https://raw.githubusercontent.com/yuanz/nginx/main/nginx10.conf
-          wget -O /home/web/conf.d/default.conf https://raw.githubusercontent.com/yuanz/nginx/main/default10.conf
+          wget -O /home/web/nginx.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/nginx10.conf
+          wget -O /home/web/conf.d/default.conf https://raw.githubusercontent.com/yuanzhou029/nginx/main/default10.conf
           default_server_ssl
           docker run -d --name nginx --restart always --network web_default -p 80:80 -p 443:443 -p 443:443/udp -v /home/web/nginx.conf:/etc/nginx/nginx.conf -v /home/web/conf.d:/etc/nginx/conf.d -v /home/web/certs:/etc/nginx/certs -v /home/web/html:/var/www/html -v /home/web/log/nginx:/var/log/nginx nginx:alpine
           docker exec -it nginx chmod -R 777 /var/www/html
@@ -3172,9 +3173,9 @@ case $choice in
           f2b_install_sshd
 
           cd /path/to/fail2ban/config/fail2ban/filter.d
-          curl -sS -O https://raw.githubusercontent.com/yuanz/sh/main/fail2ban-nginx-cc.conf
+          curl -sS -O https://raw.githubusercontent.com/yuanzhou029/sh/main/fail2ban-nginx-cc.conf
           cd /path/to/fail2ban/config/fail2ban/jail.d/
-          curl -sS -O https://raw.githubusercontent.com/yuanz/config/main/fail2ban/nginx-docker-cc.conf
+          curl -sS -O https://raw.githubusercontent.com/yuanzhou029/config/main/fail2ban/nginx-docker-cc.conf
           sed -i "/cloudflare/d" /path/to/fail2ban/config/fail2ban/jail.d/nginx-docker-cc.conf
 
           cd ~
@@ -3201,19 +3202,19 @@ case $choice in
                   sed -i 's/worker_connections.*/worker_connections 1024;/' /home/web/nginx.conf
 
                   # php调优
-                  wget -O /home/optimized_php.ini https://raw.githubusercontent.com/yuanz/sh/main/optimized_php.ini
+                  wget -O /home/optimized_php.ini https://raw.githubusercontent.com/yuanzhou029/sh/main/optimized_php.ini
                   docker cp /home/optimized_php.ini php:/usr/local/etc/php/conf.d/optimized_php.ini
                   docker cp /home/optimized_php.ini php74:/usr/local/etc/php/conf.d/optimized_php.ini
                   rm -rf /home/optimized_php.ini
 
                   # php调优
-                  wget -O /home/www.conf https://raw.githubusercontent.com/yuanz/sh/main/www-1.conf
+                  wget -O /home/www.conf https://raw.githubusercontent.com/yuanzhou029/sh/main/www-1.conf
                   docker cp /home/www.conf php:/usr/local/etc/php-fpm.d/www.conf
                   docker cp /home/www.conf php74:/usr/local/etc/php-fpm.d/www.conf
                   rm -rf /home/www.conf
 
                   # mysql调优
-                  wget -O /home/custom_mysql_config.cnf https://raw.githubusercontent.com/yuanz/sh/main/custom_mysql_config-1.cnf
+                  wget -O /home/custom_mysql_config.cnf https://raw.githubusercontent.com/yuanzhou029/sh/main/custom_mysql_config-1.cnf
                   docker cp /home/custom_mysql_config.cnf mysql:/etc/mysql/conf.d/
                   rm -rf /home/custom_mysql_config.cnf
 
@@ -3231,13 +3232,13 @@ case $choice in
                   sed -i 's/worker_connections.*/worker_connections 10240;/' /home/web/nginx.conf
 
                   # php调优
-                  wget -O /home/www.conf https://raw.githubusercontent.com/yuanz/sh/main/www.conf
+                  wget -O /home/www.conf https://raw.githubusercontent.com/yuanzhou029/sh/main/www.conf
                   docker cp /home/www.conf php:/usr/local/etc/php-fpm.d/www.conf
                   docker cp /home/www.conf php74:/usr/local/etc/php-fpm.d/www.conf
                   rm -rf /home/www.conf
 
                   # mysql调优
-                  wget -O /home/custom_mysql_config.cnf https://raw.githubusercontent.com/yuanz/sh/main/custom_mysql_config.cnf
+                  wget -O /home/custom_mysql_config.cnf https://raw.githubusercontent.com/yuanzhou029/sh/main/custom_mysql_config.cnf
                   docker cp /home/custom_mysql_config.cnf mysql:/etc/mysql/conf.d/
                   rm -rf /home/custom_mysql_config.cnf
 
@@ -3823,7 +3824,7 @@ case $choice in
                             docker rmi -f p3terx/aria2-pro
 
                             cd /home/ && mkdir -p docker/cloud && cd docker/cloud && mkdir temp_data && mkdir -vp cloudreve/{uploads,avatar} && touch cloudreve/conf.ini && touch cloudreve/cloudreve.db && mkdir -p aria2/config && mkdir -p data/aria2 && chmod -R 777 data/aria2
-                            curl -o /home/docker/cloud/docker-compose.yml https://raw.githubusercontent.com/yuanz/docker/main/cloudreve-docker-compose.yml
+                            curl -o /home/docker/cloud/docker-compose.yml https://raw.githubusercontent.com/yuanzhou029/docker/main/cloudreve-docker-compose.yml
                             cd /home/docker/cloud/ && docker compose up -d
 
 
@@ -3873,7 +3874,7 @@ case $choice in
                     clear
                     install_docker
                     cd /home/ && mkdir -p docker/cloud && cd docker/cloud && mkdir temp_data && mkdir -vp cloudreve/{uploads,avatar} && touch cloudreve/conf.ini && touch cloudreve/cloudreve.db && mkdir -p aria2/config && mkdir -p data/aria2 && chmod -R 777 data/aria2
-                    curl -o /home/docker/cloud/docker-compose.yml https://raw.githubusercontent.com/yuanz/docker/main/cloudreve-docker-compose.yml
+                    curl -o /home/docker/cloud/docker-compose.yml https://raw.githubusercontent.com/yuanzhou029/docker/main/cloudreve-docker-compose.yml
                     cd /home/docker/cloud/ && docker compose up -d
 
 
@@ -5249,13 +5250,13 @@ case $choice in
                         update-grub
 
                         # wget -qO - https://dl.xanmod.org/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
-                        wget -qO - https://raw.githubusercontent.com/yuanz/sh/main/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
+                        wget -qO - https://raw.githubusercontent.com/yuanzhou029/sh/main/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
 
                         # 步骤3：添加存储库
                         echo 'deb [signed-by=/usr/share/keyrings/xanmod-archive-keyring.gpg] http://deb.xanmod.org releases main' | tee /etc/apt/sources.list.d/xanmod-release.list
 
                         # version=$(wget -q https://dl.xanmod.org/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
-                        version=$(wget -q https://raw.githubusercontent.com/yuanz/sh/main/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
+                        version=$(wget -q https://raw.githubusercontent.com/yuanzhou029/sh/main/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
 
                         apt update -y
                         apt install -y linux-xanmod-x64v$version
@@ -5319,13 +5320,13 @@ case $choice in
             install wget gnupg
 
             # wget -qO - https://dl.xanmod.org/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
-            wget -qO - https://raw.githubusercontent.com/yuanz/sh/main/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
+            wget -qO - https://raw.githubusercontent.com/yuanzhou029/sh/main/archive.key | gpg --dearmor -o /usr/share/keyrings/xanmod-archive-keyring.gpg --yes
 
             # 步骤3：添加存储库
             echo 'deb [signed-by=/usr/share/keyrings/xanmod-archive-keyring.gpg] http://deb.xanmod.org releases main' | tee /etc/apt/sources.list.d/xanmod-release.list
 
             # version=$(wget -q https://dl.xanmod.org/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
-            version=$(wget -q https://raw.githubusercontent.com/yuanz/sh/main/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
+            version=$(wget -q https://raw.githubusercontent.com/yuanzhou029/sh/main/check_x86-64_psabi.sh && chmod +x check_x86-64_psabi.sh && ./check_x86-64_psabi.sh | grep -oP 'x86-64-v\K\d+|x86-64-v\d+')
 
             apt update -y
             apt install -y linux-xanmod-x64v$version
@@ -5974,7 +5975,7 @@ EOF
                 echo "如果实际服务器就100G流量，可设置阈值为95G，提前关机，以免出现流量误差或溢出."
                 read -p "请输入流量阈值（单位为GB）: " threshold_gb
                 cd ~
-                curl -Ss -O https://raw.githubusercontent.com/yuanz/sh/main/Limiting_Shut_down.sh
+                curl -Ss -O https://raw.githubusercontent.com/yuanzhou029/sh/main/Limiting_Shut_down.sh
                 chmod +x ~/Limiting_Shut_down.sh
                 sed -i "s/110/$threshold_gb/g" ~/Limiting_Shut_down.sh
                 crontab -l | grep -v '~/Limiting_Shut_down.sh' | crontab -
@@ -6380,12 +6381,16 @@ EOF
                         网络：独立的IPV4地址，IPV6可有可无，带宽能下载脚本就行，网络能连接Github的raw页面就行
                         PS: 如果硬件非常好资源很多，可使用PVE批量开KVM虚拟化的虚拟机
                         PS: 如果硬件资源更烂，虚拟化不支持，可使用docker版本的，适配面更广"
+                  echo      
                   echo "操作如下"
-                  echo "------------------------"
+                  echo 
+                  echo -e "${hong1}LXC开NAT服务器${bai}按顺序1-5"
+                  echo
                   echo "1. LXC检测环境（国内版）  2. LXC检测环境（国际版）  3. LXC主体安装（国际版）  4. LXC虚拟化（国际版）  5. 单开一个NAT服务器"
                   echo "------------------------"
-                  echo "用Docker开NAT服务器"
-                  echo "11. 开设虚拟内存        12. 环境预设              13. 单开NAT服务器"
+                  echo -e "${hong1}用Docker开NAT服务器${bai}按顺序11-14"
+                  echo
+                  echo "11. 开设虚拟内存        12. 环境预设              13. 单开NAT服务器                14. 服务器生成"  
                   echo "14. 安装docker               15. 安装BBR3              16. 设置1G虚拟内存"
                   echo "17. 设置时区到上海           18. 开放所有端口"
                   echo "------------------------"
