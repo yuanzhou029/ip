@@ -6436,11 +6436,13 @@ EOF
                                 if [[ "$return_choice" == "Y" || "$return_choice" == "y" ]]; then
                                   break 
                                 else
-                                if
+                                  echo "配置信息已取消，请重新填写."
+                                fi
+                              else
                                 echo "配置信息已取消，请重新填写."
                               fi
                             done
-                            } 
+                        } 
                            get_server_config
                         ;;
                       11)
