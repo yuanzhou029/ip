@@ -6417,8 +6417,8 @@ EOF
                           function get_server_config(){
                             while true; do  # 使用循环，直到用户确认信息
                               echo -e "${lv1}依次填写：服务器名称 CPU核数 内存大小 硬盘大小 SSH端口 外网起端口 外网止端口 下载速度 上传速度 是否启用IPV6(Y or N) 系统(留空则为debian11)${bai}"
-                              read -p -e "${lv1}请填写小鸡的服务器名称：${bai}" name
-                              read -p -e "${lv1}请填写小鸡的CPU核数：" cpu
+                              read -p "${lv1}请填写小鸡的服务器名称：${bai}" name
+                              read -p "${lan1}请填写小鸡的CPU核数：" cpu
                               read -p "请填写小鸡的内存大小：" Memory
                               read -p "请填写小鸡的硬盘大小：" Mharddisk
                               read -p "请填写小鸡的SSH端口：" ssh
@@ -6428,7 +6428,7 @@ EOF
                               read -p "请填写小鸡的上传速度：" Upload_speed
                               read -p "请填写小鸡的IPV6是否开启（Y/N）：" ipv6
                               read -p "请填写小鸡的系统（debian ，ubuntu ，centos ，alpine  可以自定义版本号 留空则为 debian）：" system
-                              echo "您输入的小鸡配置信息：名称:$name CPU:$cpu 内存：$Memory 硬盘：$Mharddisk SSH端口：$ssh 外网起端口：$Starting_port 网始端口：$Start_Port 下载速度：$download_speed 上传速度：$Upload_speed IPV6是否开启：$ipv6 系统：$system"
+                              echo "您输入的小鸡配置信息：名称:$name CPU:$cpu 内存：$Memory 硬盘：$Mharddisk SSH端口：$ssh 外网起端口：$Starting_port 网始端口：$Start_Port 下载速度：$download_speed 上传速度：$Upload_speed IPV6是否开启：$ipv6 系统：$system ${bai}"
                               read -p "请确认以上信息 (Y/N): " confirm
                               if [[ "$confirm" == "Y" || "$confirm" == "y" ]]; then
                                 echo "配置信息已确认."
