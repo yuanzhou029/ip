@@ -6397,10 +6397,7 @@ EOF
                   case $sub_choice in
                       1)
                           clear
-                          bash <(wget -qO- --no-check-certificate https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/pre_check.sh)
-                          read -r -p "pre_check.sh 执行完毕，是否返回上一级菜单？ [y/N] " response
-                          case "$response" in
-                            [yY][eE][sS]|[yY]) 
+                          bash <(wget -qO- --no-check-certificate https://cdn.spiritlhl.net/https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/pre_check.sh) 
                           ;;
                       2)
                           lear
