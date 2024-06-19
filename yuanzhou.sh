@@ -1251,10 +1251,10 @@ while true; do
 clear
 
 echo -e "${hong1}#############################################################${bai}"
-echo "yuanzhou04@gmail.com "
-echo "https://yz.yz029.us.kg/ "
-echo -e "${lan}一键脚本工具 v$sh_v （支持Ubuntu/Debian/CentOS/Alpine系统）${bai}"
-echo -e "${lan}-输入${huang1}yz${lan}可快速启动此脚本-${bai}"
+echo -e "${lv1}yuanzhou04@gmail.com ${bai}"
+echo -e "${lv1}https://yz.yz029.us.kg/ ${bai}"
+echo -e "${lv1}一键脚本工具 v$sh_v （支持Ubuntu/Debian/CentOS/Alpine系统）${bai}"
+echo -e "${lv1}-输入${hong1}yz${lv1}可快速启动此脚本-${bai}"
 echo -e "${hong1}#############################################################${bai}"
 echo "1. 系统信息查询"
 echo "2. 系统更新"
