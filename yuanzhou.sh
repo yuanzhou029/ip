@@ -6338,7 +6338,7 @@ EOF
     echo "------------------------"
     curl -s https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/yuanzhou_sh_log.txt | tail -n 35
 
-    sh_v_new=$(curl -s https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/yuanzhou.sh | grep -o 'sh_v="[0-9.]*"' | cut -d '"' -f 2)
+    sh_v_new=$(curl -s https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/yuanzhou.sh | grep -o 'sh_v="[0-9.]*"' | cut -d '"' -f 3)
 
     if [ "$sh_v" = "$sh_v_new" ]; then
         echo -e "${lv}你已经是最新版本！${huang}v$sh_v${bai}"
