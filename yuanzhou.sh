@@ -6163,11 +6163,19 @@ EOF
       read -p "请输入你的选择: " sub_choice
 
       case $sub_choice in
-1)
+  1)
     clear
     install python3 python3-paramiko speedtest-cli lrzsz
     mkdir cluster && cd cluster
     touch servers.py
+
+    cat > ./servers.py << EOF
+   servers = [
+
+    ]
+EOF
+
+    ;;
   2)
     clear
     linux_update
