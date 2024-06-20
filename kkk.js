@@ -482,7 +482,7 @@
       "url": "Web"
     },
     {
-      "name": "公众号：肥猫宝贝",
+      "name": "公众号：",
       "type": 1,
       "url": "http://json.84jia.com/home/api?type=ys&uid=335253&key=demprsyzBMQRVY0234&url=",
       "ext": {
