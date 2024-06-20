@@ -74,6 +74,6 @@
   {"name":"智远测试-TV","type":1,"url":"http://xn--ihqu10cn4c.xn--z7x900a.live/jx.php?id=2&url=","ext":{"flag":["qq","腾讯","qiyi","爱奇艺","奇艺","youku","优酷","tucheng","sohu","搜狐","letv","乐视","mgtv","芒果","tnmb","seven","yzm","aliyun","RJuMao","bilibili","1905","xinvip","XAL","qiqi","XALS","YuMi-vip"]}}
   ],
   "lives":[
-  {"name":"live","type":0,"playerType":1,"url":"https://raw.githubusercontent.com/yuanzhou029/ip/main/iptv.txt","epg":"http://epg.112114.xyz/?ch={name}&date={date}","logo":"https://epg.112114.xyz/logo/{name}.png"}
+  {"name":"live","type":0,"playerType":1,"url":"https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/iptv.txt","epg":"http://epg.112114.xyz/?ch={name}&date={date}","logo":"https://epg.112114.xyz/logo/{name}.png"}
   ]
   }
