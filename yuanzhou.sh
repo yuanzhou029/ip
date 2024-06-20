@@ -6374,15 +6374,9 @@ EOF
 
               while true; do
                   clear
-                  echo "开虚拟化小鸡"
-                  echo "硬件要求:
-                        系统：Debian 8+, Ubuntu 18+(推荐20.04)
-                        虚拟化：推荐KVM、VMWARE虚拟化
-                        内存：内存至少1G
-                        硬盘：硬盘(系统盘)至少10G
-                        网络：独立的IPV4地址，IPV6可有可无，带宽能下载脚本就行，网络能连接Github的raw页面就行
-                        PS: 如果硬件非常好资源很多，可使用PVE批量开KVM虚拟化的虚拟机
-                        PS: 如果硬件资源更烂，虚拟化不支持，可使用docker版本的，适配面更广"
+                  echo -e "${lv}开虚拟化小鸡"
+                  echo 
+                  echo "硬件要求:系统：(Debian 8+, Ubuntu 18+(推荐20.04)${bai1}"
                   echo      
                   echo "操作如下"
                   echo 
@@ -6390,7 +6384,7 @@ EOF
                   echo
                   echo -e "${bai1}1. LXC检测环境（国内版）  2. LXC检测环境（国际版）  3. LXC主体安装（国际版）"  
                   echo      
-                  echo "4. LXC虚拟化（国际版）  5. 单开一个NAT服务器${bai}  6.查询小鸡信息   7.进入小鸡系统"
+                  echo "4. LXC虚拟化（国际版）  5. 单开一个NAT服务器  6.查询小鸡信息   7.管理LXC小鸡"
                   echo
                   echo "------------------------"
                   echo -e "${hong1}用Docker开NAT服务器${bai}按顺序11-14"
