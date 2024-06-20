@@ -65,7 +65,7 @@
   "ext":"https://gitlab.com/fantaiying/ext/-/raw/main/初中课堂.json"},
   {"key":"高中","name":"高中课堂","type":3,"api":"csp_Bili","searchable":0,"quickSearch":0,"changeable":0,"style":{"type":"rect","ratio":1.597},
   "ext":"https://gitlab.com/fantaiying/ext/-/raw/main/高中课堂.json"},
-  //{"key":"push_agent","name":"关注公众号：肥猫宝贝","type":3,"api":"csp_Push","playerType":"1","searchable":0,"ext":"http://127.0.0.1:9978/file/fatcat/token.txt"}
+  {"key":"push_agent","name":"智远测试TV","type":3,"api":"csp_Push","playerType":"1","searchable":0,"ext":"http://127.0.0.1:9978/file/fatcat/token.txt"}
   ],
   "parses":[
   {"name":"Json聚合","type":3,"url":"Demo"},
