@@ -19,13 +19,13 @@
       "searchable": 0
     },
     {
-            "key": "csp_Duopan",
-            "name": "🖍︎┃蜡笔┃影视",
-            "type": 3,
-            "api": "csp_Duopan",
-            "playerType": 2,
-            "filterable": 1,
-            "ext": "https://duopan.fun/"
+      "key": "csp_Duopan",
+      "name": "🖍︎┃蜡笔┃影视",
+      "type": 3,
+      "api": "csp_Duopan",
+      "playerType": 2,
+      "filterable": 1,
+      "ext": "https://duopan.fun/"
         },
     {
       "key": "nangua",
@@ -53,59 +53,6 @@
       "filterable": 1
     },
     {
-      "key": "胖虎",
-      "name": "🐯┃胖虎┃影视",
-      "type": 3,
-      "api": "csp_Panghu",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1,
-      "playerType": 1,
-      "ext": "https://physvod.com"
-    },
-    {
-        "key": "csp_FengGo",
-        "name": "🐕┃疯狗┃影视",
-        "type": 3,
-        "api": "csp_FengGo",
-        "playerType": 2
-    },
-    {
-      "key": "csp_Nkdy",
-      "name": "🏔┃耐看┃影视",
-      "type": 3,
-      "playerType": "2",
-      "api": "csp_Nkdy"
-    },
-    {
-      "key": "csp_Juqq",
-      "name": "⭕┃剧圈┃影视",
-      "type": 3,
-      "playerType": "2",
-      "api": "csp_Juqq"
-    },
-    {
-      "key": "csp_LiteApple",
-      "name": "🍎┃苹果┃影视",
-      "type": 3,
-      "playerType": "2",
-      "api": "csp_LiteApple",
-    "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
-      "key": "csp_Panda_玩偶哥哥",
-      "name": "👲┃玩偶┃影视",
-      "api": "csp_Wogg",
-      "type": 3,
-      "searchable": 1,
-      "playerType": 2,
-      "timeout": 30,
-      "changeable": 0,
-      "ext": "http://127.0.0.1:9978/file/fatcat/token.txt"
-    },
-    {
       "key": "比特",
       "name": "✌️️┃比特┃影视",
       "type": 3,
@@ -118,26 +65,6 @@
       "type": 3,
       "playerType": "2",
       "ext": "http://api2.rinhome.com"
-    },
-    {
-      "key": "csp_Vidhub2",
-      "name": "🎼┃Vid┃影视",
-      "type": 3,
-      "api": "csp_Vidhub2",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
-      "key": "厂长",
-      "name": "🏭┃厂长┃影视",
-      "type": 3,
-      "playerType": "2",
-      "api": "csp_Czsapp",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1,
-      "ext":"https://czzy.top/"
     },
     {
       "key": "csp_AppRZ",
@@ -174,31 +101,6 @@
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1
-    },
-    {
-      "key": "可可",
-      "name": " 😝┃可可┃影视",
-      "type": 3,
-      "playerType": "2",
-      "api": "csp_Keke",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
-      "key": "云播影视",
-      "name": "☁️┃云播┃影视",
-      "type": 3,
-      "playerType": "2",
-      "api": "http://js.xn--z7x900a.com/js/lib/drpy2.min.js",
-      "ext": "http://js.xn--z7x900a.com/js/TVB云播.js"
-    },
-    {
-      "key": "csp_Xb6v",
-      "name": "🐤┃6V磁力┃影视",
-      "type": 3,
-      "api": "csp_Xb6v",
-      "playerType": "2"
     },
     {
       "key": "低端",
