@@ -3,7 +3,7 @@
   "wallpaper":"http://我不是.肥猫.live/ppic/feimao.php","logo":"http://我不是.肥猫.live/fatcat.jpg",
   "sites":[
   {"key":"drpy_js_豆瓣","name":"豆瓣官网","type":3,"api":"csp_Douban","searchable":0},
-  {"key":"豆瓣","name":"🐼┃豆瓣┃预告","type":3,"api":"csp_YGP","playerType":2,"searchable":0},
+  //{"key":"豆瓣","name":"🐼┃豆瓣┃预告","type":3,"api":"csp_YGP","playerType":2,"searchable":0},
   {"key":"csp_Duopan","name":"🖍︎┃蜡笔┃影视","type":3,"api":"csp_Duopan","playerType":2,"filterable":1,"ext":"https://duopan.fun/"},
   {"key":"nangua","name":"🎃┃南瓜┃影视","type":3,"playerType":"2","api":"http://js.xn--z7x900a.com/js/ng_open.js"},
   {"key":"新视觉","name":"🐦┃视觉┃影视","type":3,"api":"csp_Xinsj","searchable":1,"quickSearch":1,"filterable":1},
