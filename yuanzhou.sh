@@ -6390,7 +6390,7 @@ EOF
                   echo
                   echo -e "${bai1}1. LXC检测环境（国内版）  2. LXC检测环境（国际版）  3. LXC主体安装（国际版）"  
                   echo      
-                  echo -e "${bai1}4. LXC虚拟化（国际版）  5. 单开一个NAT服务器${bai}"
+                  echo "4. LXC虚拟化（国际版）  5. 单开一个NAT服务器${bai}  6.查询小鸡信息   7.进入小鸡系统"
                   echo
                   echo "------------------------"
                   echo -e "${hong1}用Docker开NAT服务器${bai}按顺序11-14"
@@ -6469,6 +6469,115 @@ EOF
                         } 
                            get_server_config
                         ;;
+
+                       6)
+                         clear
+                         if lxc list | grep -q .; then
+                           echo "所有容器："
+                           lxc list  # 列出所有容器
+                         else
+                           echo "没有信息可供查询."
+                         fi
+                         echo -e "${lv1}按任意键返回上一级...${bai}"
+                         read -r -n 1
+                          ;;
+                       7)
+                         clear
+                         # 函数：列出所有容器
+                         list_containers() {
+                           if lxc list | grep -q .; then
+                             echo "所有容器："
+                             lxc list
+                           else
+                             echo "没有信息可供查询."
+                           fi
+                         }
+
+                         # 函数：启动容器
+                         start_container() {
+                           read -p "请输入要启动的容器名称: " container_name
+                           if lxc info ${container_name} > /dev/null 2>&1; then
+                             echo "正在启动容器 ${container_name}..."
+                             lxc start ${container_name}
+                           else
+                             echo "错误：容器 ${container_name} 不存在！"
+                           fi
+                         }
+
+                         # 函数：停止容器
+                         stop_container() {
+                           read -p "请输入要停止的容器名称: " container_name
+                           if lxc info ${container_name} > /dev/null 2>&1; then
+                             echo "正在停止容器 ${container_name}..."
+                             lxc stop ${container_name}
+                           else
+                             echo "错误：容器 ${container_name} 不存在！"
+                           fi
+                         }
+
+                         # 函数：进入容器
+                         enter_container() {
+                           read -p "请输入要进入的容器名称: " container_name
+                           if lxc info ${container_name} > /dev/null 2>&1; then
+                              echo "正在进入容器 ${container_name}..."
+                              lxc exec ${container_name} bash
+                           else
+                              echo "错误：容器 ${container_name} 不存在！"
+                           fi
+                         }
+
+                         # 函数：删除容器
+                         delete_container() {
+                           read -p "请输入要删除的容器名称: " container_name
+                           if lxc info ${container_name} > /dev/null 2>&1; then
+                         # 停止容器
+                             echo "正在停止容器 ${container_name}..."
+                             lxc stop ${container_name}
+
+                         # 确认删除
+                             read -p "确认删除容器 ${container_name} 吗？(y/n) " confirm
+                             if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
+                               lxc delete ${container_name}
+                               echo "容器 ${container_name} 已删除。"
+                             else
+                               echo "操作已取消。"
+                             fi
+                             else
+                               echo "错误：容器 ${container_name} 不存在！"
+                             fi
+                         }
+
+                         # 主菜单
+                         while true; do
+                           clear
+                           list_containers
+                           echo -e "${lv}
+                              操作菜单：
+                           1. 启动容器
+                           2. 停止容器
+                           3. 进入容器
+                           4. 删除容器
+                           0. 退出返回上一级
+                           ${bai}"
+                           read -p "请选择操作: " choice
+
+                           case $choice in
+                             1) start_container ;;
+                             2) stop_container ;;
+                             3) enter_container ;;
+                             4) delete_container ;;
+                             0)
+                               break  # 跳出循环，退出菜单
+                               ;;
+                             0)
+                               break  # 跳出循环，退出菜单
+                               ;;
+
+                             *)
+                              break  # 跳出循环，退出菜单
+                           esac
+                         done  
+                          ;;
                       11)
                          clear
                           curl -L https://cdn.spiritlhl.net/https://raw.githubusercontent.com/spiritLHLS/addswap/main/addswap.sh -o addswap.sh && chmod +x addswap.sh && bash addswap.sh
