@@ -2,8 +2,8 @@
 
 {
   "spider": "http://like.xn--z7x900a.com/jar/PandaQ240616.jar;md5;53fd0f0582cd66035dbdae77a2eadeb3",
-  "wallpaper": "http://like.xn--z7x900a.com/ppic/feimao.php",
-  "logo":"http://like.xn--z7x900a.com/panda/0262.png",
+  "wallpaper": "http://like.xn--z7x900a.com/ppic/feimao.php1",
+  "logo":"http://like.xn--z7x900a.com/panda/0262.png1",
   "sites": [
     {
       "key": "drpy_js_豆瓣",
