@@ -393,7 +393,7 @@
       "url": "Web"
     },
     {
-      "name": "影视资源站",
+      "name": "公众号：肥猫宝贝",
       "type": 1,
       "url": "http://json.84jia.com/home/api?type=ys&uid=335253&key=demprsyzBMQRVY0234&url=",
       "ext": {
@@ -428,7 +428,7 @@
       }
     },
     {
-      "name": "中资源影视站",
+      "name": "肥猫最可爱",
       "type": 1,
       "url": "http://xn--ihqu10cn4c.xn--z7x900a.live/jx.php?id=2&url=",
       "ext": {
