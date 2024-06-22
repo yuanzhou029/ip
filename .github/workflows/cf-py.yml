@@ -23,6 +23,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Run baipiao.py
+      run: |
+        python baipiao.py
+        sleep 5  # 暂停5秒钟
+
     - name: Run ip-cf.py
       run: |
         python ip-cf.py
