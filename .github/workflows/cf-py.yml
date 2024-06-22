@@ -27,16 +27,19 @@ jobs:
       run: |
         python baipiao.py
         sleep 5  # 暂停5秒钟
+      continue-on-error: true
         
     - name: Run cf-gf.py
       run: |
         python cf-gf.py
         sleep 5  # 暂停5秒钟
+      continue-on-error: true
 
     - name: Run cf-fd.py
       run: |
         python cf-fd.py
         sleep 5  # 暂停5秒钟
+      continue-on-error: true
 
     - name: Run ip-cf.py
       run: |
