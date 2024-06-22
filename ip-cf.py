@@ -1,22 +1,22 @@
-import os
 import csv
 import time
 import requests
 from requests.exceptions import RequestException
 
-# 从环境变量中读取 Cloudflare API 认证信息
+# Cloudflare API 认证信息（从环境变量中获取）
 zone_id = os.getenv("CF_ZONE_ID")
 x_email = os.getenv("CF_EMAIL")
 api_key = os.getenv("CF_API_KEY")
-subdomain = {
-    "bpcdn": "result.csv",
-    "cf-gf": "cf-gf.csv",
-    "cf-fd": "cf-fd.csv"
+
+# 固定的子域名和对应的 CSV 文件名
+subdomain_files = {
+    "subdomain1": "result.csv",
+    "subdomain2": "cf-gf.csv",
+    "subdomain3": "cf-fd.csv"
 }
-domain = os.getenv("CF_DOMAIN")
 
 # 获取 DNS 记录的函数
-def get_dns_records():
+def get_dns_records(subdomain):
     url = f"https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records"
     params = {
         "name": f"{subdomain}.{domain}",
@@ -61,7 +61,7 @@ def parse_csv_file(csv_file):
         return []
 
 # 添加 IP 地址到 Cloudflare DNS 记录
-def add_ips_to_dns_records(ips):
+def add_ips_to_dns_records(subdomain, ips):
     url = f"https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records"
     headers = {
         "X-Auth-Email": x_email,
@@ -94,13 +94,14 @@ def add_ips_to_dns_records(ips):
 
 # 主函数
 def main():
-    print("正在更新解析：多个优选IP解析到一个域名。请稍后...")
-    get_dns_records()
-    
-    csv_file = 'result.csv'
-    ips = parse_csv_file(csv_file)
-    if ips:
-        add_ips_to_dns_records(ips)
+    print("正在更新解析：多个优选IP解析到不同域名。请稍后...")
+    for subdomain, csv_file in subdomain_files.items():
+        ips = parse_csv_file(csv_file)
+        if ips:
+            get_dns_records(subdomain)
+            add_ips_to_dns_records(subdomain, ips)
+        else:
+            print(f"子域名 {subdomain} 的 CSV 文件未找到或没有有效数据")
 
 if __name__ == "__main__":
     main()
