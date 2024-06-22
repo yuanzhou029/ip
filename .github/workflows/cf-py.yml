@@ -33,6 +33,11 @@ jobs:
         python cf-gf.py
         sleep 5  # 暂停5秒钟
 
+    - name: Run cf-fd.py
+      run: |
+        python cf-fd.py
+        sleep 5  # 暂停5秒钟
+
     - name: Run ip-cf.py
       run: |
         python ip-cf.py
