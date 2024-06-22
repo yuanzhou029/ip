@@ -8,7 +8,11 @@ from requests.exceptions import RequestException
 zone_id = os.getenv("CF_ZONE_ID")
 x_email = os.getenv("CF_EMAIL")
 api_key = os.getenv("CF_API_KEY")
-subdomain = os.getenv("CF_SUBDOMAIN")
+subdomain = {
+    "bpcdn": "result.csv",
+    "cf-gf": "cf-gf.csv",
+    "cf-fd": "cf-fd.csv"
+}
 domain = os.getenv("CF_DOMAIN")
 
 # 获取 DNS 记录的函数
