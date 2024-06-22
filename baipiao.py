@@ -23,18 +23,18 @@ def fetch_and_save_ips(url, key, delay_limit, output_csv='result.csv'):
                         try:
                             delay = float(delay_str)
                             if delay <= delay_limit:
-                               line = ip_info.get("line", "")
-                            if line in ["CM", "CU", ]:
-                                print(f"处理 IP 地址: {ip_info['ip']}，延迟: {delay}")
-                                writer.writerow({
-                                    "IP地址": ip_info["ip"],
-                                    "节点类别": category,
-                                    "线路": line,
-                                    "节点": ip_info["node"],
-                                    "延迟": delay,
-                                    "下载速度": ip_info["downloadspeed"],
-                                    "时间": ip_info["time"]
-                                })
+                                line = ip_info.get("line")
+                                if line in ["CM", "CU", "CT"]:  # 这里检查线路是否符合要求
+                                    print(f"处理 IP 地址: {ip_info['ip']}，延迟: {delay}")
+                                    writer.writerow({
+                                        "IP地址": ip_info["ip"],
+                                        "节点类别": category,
+                                        "线路": line,
+                                        "节点": ip_info["node"],
+                                        "延迟": delay,
+                                        "下载速度": ip_info["downloadspeed"],
+                                        "时间": ip_info["time"]
+                                    })
                         except ValueError:
                             print(f"无法转换延迟值为浮点数：{ip_info['delay']}")
         else:
@@ -42,10 +42,9 @@ def fetch_and_save_ips(url, key, delay_limit, output_csv='result.csv'):
     except RequestException as e:
         print(f"请求 IP 数据时发生异常: {str(e)}")
 
-
 def main():
     parser = argparse.ArgumentParser(description='Fetch and save IPs with a delay limit.')
-    parser.add_argument('--delay-limit', type=float, default=200, help='The delay limit for IPs.')
+    parser.add_argument('--delay-limit', type=float, default=100, help='The delay limit for IPs.')
     args = parser.parse_args()
 
     url = "https://api.345673.xyz/get_data"
@@ -61,7 +60,7 @@ def main():
             with open(result_file, 'r', newline='', encoding='utf-8') as csvfile:
                 csvreader = csv.reader(csvfile)
                 lines = list(csvreader)
-                if len(lines) >= 3 and lines[2]:
+                if len(lines) >= 5 and lines[2]:
                     print("result.csv 文件存在且第三行有数据")
                     break
                 else:
@@ -72,9 +71,13 @@ def main():
             print("result.csv 文件第三行无数据，重试中...")
         
         retry_count += 1
+        # 每次重试增加延迟限制30
+        args.delay_limit += 30
+        print(f"增加延迟限制为: {args.delay_limit}")
 
     if retry_count >= max_retries:
         print(f"达到最大重试次数 {max_retries}，程序退出。")
+
 
 if __name__ == "__main__":
     main()
