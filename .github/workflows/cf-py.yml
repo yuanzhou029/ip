@@ -27,6 +27,11 @@ jobs:
       run: |
         python baipiao.py
         sleep 5  # 暂停5秒钟
+        
+    - name: Run cf-gf.py
+      run: |
+        python cf-gf.py
+        sleep 5  # 暂停5秒钟
 
     - name: Run ip-cf.py
       run: |
