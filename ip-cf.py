@@ -4,10 +4,11 @@ import time
 import requests
 from requests.exceptions import RequestException
 
-# Cloudflare API 认证信息（从环境变量中获取）
+# 从环境变量中读取 Cloudflare API 认证信息
 zone_id = os.getenv("CF_ZONE_ID")
 x_email = os.getenv("CF_EMAIL")
 api_key = os.getenv("CF_API_KEY")
+domain = os.getenv("CF_DOMAIN")
 
 # 固定的子域名和对应的 CSV 文件名
 subdomain_files = {
@@ -17,7 +18,7 @@ subdomain_files = {
 }
 
 # 获取 DNS 记录的函数
-def get_dns_records(subdomain):
+def get_dns_records(subdomain, domain):
     url = f"https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records"
     params = {
         "name": f"{subdomain}.{domain}",
@@ -62,7 +63,7 @@ def parse_csv_file(csv_file):
         return []
 
 # 添加 IP 地址到 Cloudflare DNS 记录
-def add_ips_to_dns_records(subdomain, ips):
+def add_ips_to_dns_records(subdomain, domain, ips):
     url = f"https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records"
     headers = {
         "X-Auth-Email": x_email,
@@ -99,8 +100,8 @@ def main():
     for subdomain, csv_file in subdomain_files.items():
         ips = parse_csv_file(csv_file)
         if ips:
-            get_dns_records(subdomain)
-            add_ips_to_dns_records(subdomain, ips)
+            get_dns_records(subdomain, domain)
+            add_ips_to_dns_records(subdomain, domain, ips)
         else:
             print(f"子域名 {subdomain} 的 CSV 文件未找到或没有有效数据")
 
