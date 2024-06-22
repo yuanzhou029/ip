@@ -50,3 +50,6 @@ jobs:
         CF_API_KEY: ${{ secrets.CF_API_KEY }}
         CF_SUBDOMAIN: ${{ secrets.CF_SUBDOMAIN }}
         CF_DOMAIN: ${{ secrets.CF_DOMAIN }}
+    - name: Clean up temporary files
+      run: |
+        rm -rf result.csv ，cf-gf.csv ，cf-fd.csv
