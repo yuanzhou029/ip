@@ -1,4 +1,4 @@
-name: Cloudflare Update
+name: cf-ip
 
 on:
   schedule:
