@@ -3,14 +3,6 @@ import csv
 from requests.exceptions import RequestException
 
 def fetch_and_save_ips(url, key, output_csv='result.csv'):
-    """
-    从指定的URL获取IP数据并将符合条件的IP地址保存到CSV文件中
-
-    参数:
-    url (str): 请求IP数据的URL
-    key (str): 请求所需的密钥
-    output_csv (str): 保存结果的CSV文件名，默认是'result.csv'
-    """
     data = {
         "key": key  # 请求体数据包含密钥
     }
@@ -56,8 +48,6 @@ def fetch_and_save_ips(url, key, output_csv='result.csv'):
             print(f"请求失败，错误信息：{result.get('info')}")
     except RequestException as e:
         print(f"请求 IP 数据时发生异常: {str(e)}")
-
-# 使用示例
 url = "https://api.345673.xyz/get_data"
 key = "o1zrmHAF"
 fetch_and_save_ips(url, key)
