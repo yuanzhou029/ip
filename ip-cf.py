@@ -4,12 +4,12 @@ import time
 import requests
 from requests.exceptions import RequestException
 
-# Cloudflare API 认证信息
-zone_id = "6c6c3a0fe916a6dfda125dd976f3c9a3"
-x_email = "yuanzhou04@gmail.com"
-api_key = "7340d37de52b18b6974c1eccb7c4cded7e4d0"
-subdomain = "ddn"
-domain = "140407.filegear-sg.me"
+# 从环境变量中读取 Cloudflare API 认证信息
+zone_id = os.getenv("CF_ZONE_ID")
+x_email = os.getenv("CF_EMAIL")
+api_key = os.getenv("CF_API_KEY")
+subdomain = os.getenv("CF_SUBDOMAIN")
+domain = os.getenv("CF_DOMAIN")
 
 # 获取 DNS 记录的函数
 def get_dns_records():
@@ -47,7 +47,7 @@ def get_dns_records():
 # 解析 CSV 文件中的 IP 地址
 def parse_csv_file(csv_file):
     try:
-        with open(csv_file, 'r') as file:
+        with open(csv_file, 'r', encoding='utf-8') as file:
             reader = csv.reader(file)
             next(reader)  # 跳过标题行
             ips = [row[0] for row in reader]
