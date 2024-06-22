@@ -26,3 +26,9 @@ jobs:
     - name: Run ip-cf.py
       run: |
         python ip-cf.py
+      env:
+        CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+        CF_EMAIL: ${{ secrets.CF_EMAIL }}
+        CF_API_KEY: ${{ secrets.CF_API_KEY }}
+        CF_SUBDOMAIN: ${{ secrets.CF_SUBDOMAIN }}
+        CF_DOMAIN: ${{ secrets.CF_DOMAIN }}
