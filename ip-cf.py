@@ -12,9 +12,9 @@ domain = os.getenv("CF_DOMAIN")
 
 # 固定的子域名和对应的 CSV 文件名
 subdomain_files = {
-    "subdomain1": "result.csv",
-    "subdomain2": "cf-gf.csv",
-    "subdomain3": "cf-fd.csv"
+    "cf-bp": "result.csv",
+    "cf-gf": "cf-gf.csv",
+    "cf-fd": "cf-fd.csv"
 }
 
 # 获取 DNS 记录的函数
