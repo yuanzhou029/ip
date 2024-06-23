@@ -60,7 +60,7 @@ def main():
             with open(result_file, 'r', newline='', encoding='utf-8') as csvfile:
                 csvreader = csv.reader(csvfile)
                 lines = list(csvreader)
-                if len(lines) >= 5 and lines[2]:
+                if len(lines) >= 4 and lines[2]:
                     print("result.csv 文件存在且第三行有数据")
                     break
                 else:
