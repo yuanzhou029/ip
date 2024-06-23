@@ -44,7 +44,7 @@ def fetch_and_save_ips(url, key, delay_limit, output_csv='result.csv'):
 
 def main():
     parser = argparse.ArgumentParser(description='Fetch and save IPs with a delay limit.')
-    parser.add_argument('--delay-limit', type=float, default=70, help='The delay limit for IPs.')
+    parser.add_argument('--delay-limit', type=float, default=100, help='The delay limit for IPs.')
     args = parser.parse_args()
 
     url = "https://api.345673.xyz/get_data"
