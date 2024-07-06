@@ -4,7 +4,7 @@ import zipfile
 import geoip2.database
 from git import Repo
 
-def get_and_filter_ips(input_filename="ip.txt", output_filename="japan_ips.txt", start_line=15):
+def get_and_filter_ips(input_filename="ip.txt", output_filename="japan_ips.txt", start_line=16):
     """
     通过API获取IP地址并保存到文件，然后筛选出指定地区的IP并保存到另一个文件。
 
@@ -153,7 +153,7 @@ def save_to_file(ips, filename):
 
 if __name__ == "__main__":
     merge_txt_from_zip("https://zip.baipiao.eu.org", "zip.txt") 
-    get_and_filter_ips(start_line=15)   # 获取并筛选IP地址
+    get_and_filter_ips(start_line=16)   # 获取并筛选IP地址从第16行开始
     
     # 在这里调用 commit_and_push，确保 ip.txt 仍然存在
     commit_and_push(['japan_ips.txt', 'ip.txt', 'zip.txt']) 
