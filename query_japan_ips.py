@@ -79,23 +79,20 @@ def commit_and_push(filenames):
     origin = repo.remote('origin')
     origin.push()
 
-def download_and_merge_txt(url, output_filename):
+def download_and_merge_txt(zip_url, output_filename):
     """
     下载一个zip文件，解压并合并所有txt文件，去重后保存到指定文件。
 
     Args:
-        url (str): zip文件的下载链接
+        zip_url (str): zip文件的下载链接
         output_filename (str): 合并后的txt文件保存路径
     """
+    zip_filename = os.path.basename(zip_url)
 
     try:
         # 下载zip文件
-        response = requests.get(url)
-        response.raise_for_status()  # 如果下载失败抛出异常
-
-        zip_filename = os.path.basename(url)
         with open(zip_filename, 'wb') as f:
-            f.write(response.content)
+            f.write(requests.get(zip_url).content)
 
         # 解压zip文件
         with zipfile.ZipFile(zip_filename, 'r') as zip_ref:
