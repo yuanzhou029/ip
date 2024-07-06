@@ -149,7 +149,7 @@ def save_to_file(ips, filename):
             f.write(ip + '\n')                
 
 if __name__ == "__main__":
-    download_and_merge_txt("https://zip.baipiao.eu.org", "zip.txt") 
+    merge_txt_from_zip("https://zip.baipiao.eu.org", "zip.txt") 
     get_and_filter_ips()  # 获取并筛选IP地址
     
     # 在这里调用 commit_and_push，确保 ip.txt 仍然存在
