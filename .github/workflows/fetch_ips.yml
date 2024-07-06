@@ -24,14 +24,6 @@ jobs:
 
       - name: 安装GeoIP2库
         run: pip install geoip2
-        
-      - name: Download IP file
-        run: curl -o ip.txt https://ipdb.api.030101.xyz/?type=proxy&country=true&down=true
-
-      - name: Read downloaded file and write content to ip.txt
-        run: |
-          content=$(cat ip.txt)
-          echo "$content" > ./ip.txt
 
       - name: 运行Python脚本
         run: python query_japan_ips.py
