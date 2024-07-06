@@ -4,46 +4,49 @@ import zipfile
 import geoip2.database
 from git import Repo
 
-def get_and_filter_ips(input_filename="ip.txt", output_filename="japan_ips.txt"):
+def get_and_filter_ips(input_filename="ip.txt", output_filename="japan_ips.txt", start_line=15):
     """
     通过API获取IP地址并保存到文件，然后筛选出指定地区的IP并保存到另一个文件。
 
     Args:
         input_filename (str, optional): 存放所有IP地址的文件名. Defaults to "ip.txt".
         output_filename (str, optional): 存放筛选后IP地址的文件名. Defaults to "japan_ips.txt".
+        start_line (int, optional): 从哪一行开始读取IP地址. Defaults to 15.
     """
 
-    # 1. 获取IP地址并保存到文件
+    # --- 1. 下载IP地址文件 ---
     try:
         response = requests.get("https://ipdb.api.030101.xyz/?type=cfv4;proxy&down=true")
-        response.raise_for_status()  # 检查请求是否成功
+        response.raise_for_status()
 
-        with open(input_filename, 'w') as f:
-            f.write(response.text)
+        with open(input_filename, 'wb') as f: 
+            f.write(response.content)  
 
-        print(f"IP地址已保存到 {input_filename}")  # 提示信息
+        print(f"IP地址文件已下载到 {input_filename}") 
 
     except requests.exceptions.RequestException as e:
-        print(f"获取IP地址时出错: {e}")
-        return  # 提前结束函数
+        print(f"下载IP地址文件时出错: {e}")
+        return 
 
-    # 2. 加载GeoIP2数据库
+    # --- 2. 加载GeoIP2数据库 ---
     try:
         reader = geoip2.database.Reader('GeoLite2-Country.mmdb')
     except Exception as e:
         print(f"加载GeoIP2数据库时出错: {e}")
-        return  # 提前结束函数
+        return 
 
-    # 3. 读取IP地址并筛选
-    japan_ips = []
+    # --- 3. 读取IP地址并筛选 ---
+    japan_ips = [] 
     try:
         with open(input_filename, 'r') as f:
-            for line in f:
-                ip = line.strip()
+            for i, line in enumerate(f):  # 使用 enumerate 获取行号
+                if i < start_line - 1:  # 跳过前面的行
+                    continue
+                ip = line.strip() 
                 try:
                     response = reader.country(ip)
                     if response.country.iso_code in ['JP', 'KR', 'HK', 'TW', 'SG', 'VN']:
-                        japan_ips.append(ip)
+                        japan_ips.append(ip) 
                 except geoip2.errors.AddressNotFoundError:
                     print(f"IP地址 {ip} 未找到")
                 except Exception as e:
@@ -51,11 +54,11 @@ def get_and_filter_ips(input_filename="ip.txt", output_filename="japan_ips.txt")
 
     except FileNotFoundError:
         print(f"文件未找到: {input_filename}")
-        return  # 提前结束函数
+        return 
 
-    # 4. 保存筛选后的IP地址
-    save_to_file(japan_ips, output_filename)  # 使用 save_to_file 函数
-    print(f"筛选后的IP地址已保存到 {output_filename}")
+    # --- 4. 保存筛选后的IP地址 ---
+    save_to_file(japan_ips, output_filename)  
+    print(f"筛选后的IP地址已保存到 {output_filename}") 
 
 def commit_and_push(filenames):
     """提交和推送到远程存储库"""
