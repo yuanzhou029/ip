@@ -65,7 +65,7 @@ def commit_and_push(filenames):
     repo_dir = os.getcwd()
     repo = Repo(repo_dir)
 
-    # 在提交前修改 ip.txt，只保留前20行
+    # 在提交前修改 ip.txt，只保留前15行
     with open("ip.txt", "r+") as f:
         lines = f.readlines()
         f.seek(0)
