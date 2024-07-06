@@ -79,33 +79,44 @@ def commit_and_push(filenames):
     origin = repo.remote('origin')
     origin.push()
 
-def download_and_merge_txt(zip_url, output_filename):
+def merge_txt_from_zip(zip_url, output_filename):
     """
-    下载一个zip文件，解压并合并所有txt文件，去重后保存到指定文件。
+    下载一个zip文件，解压其中的所有txt文件，
+    合并所有解压后的txt文件的内容（去重），并将合并后的内容保存到指定文件。
 
     Args:
         zip_url (str): zip文件的下载链接
-        output_filename (str): 合并后的txt文件保存路径
+        output_filename (str): 合并后的内容要保存的文件名
     """
+
+    # 获取zip文件名
     zip_filename = os.path.basename(zip_url)
 
     try:
         # 下载zip文件
+        print(f"正在下载 {zip_filename} ...")
         with open(zip_filename, 'wb') as f:
             f.write(requests.get(zip_url).content)
+        print(f"下载完成: {zip_filename}")
 
         # 解压zip文件
+        print(f"正在解压 {zip_filename} ...")
         with zipfile.ZipFile(zip_filename, 'r') as zip_ref:
             zip_ref.extractall()
+        print(f"解压完成: {zip_filename}")
 
-        # 合并所有txt文件内容
+        # 获取解压后的txt文件名列表
+        extracted_txt_files = [filename for filename in zip_ref.namelist() if filename.endswith(".txt")]
+
+        # 合并所有解压后的txt文件内容
         merged_lines = set()  # 使用set去重
-        for filename in os.listdir():
-            if filename.endswith(".txt"):
-                with open(filename, 'r', encoding='utf-8') as f:
-                    merged_lines.update(f.readlines())
+        print(f"正在合并txt文件...")
+        for filename in extracted_txt_files:
+            with open(filename, 'r', encoding='utf-8') as f:
+                merged_lines.update(f.readlines())
 
         # 保存合并后的内容到指定文件
+        print(f"正在保存合并后的内容到 {output_filename} ...")
         with open(output_filename, 'w', encoding='utf-8') as f:
             for line in merged_lines:
                 f.write(line)
@@ -117,12 +128,14 @@ def download_and_merge_txt(zip_url, output_filename):
 
     finally:
         # 删除下载的zip文件
+        print(f"正在清理临时文件...")
         if os.path.exists(zip_filename):
             os.remove(zip_filename)
         # 删除解压后的txt文件
-        for filename in os.listdir():
-            if filename.endswith(".txt") and filename != output_filename:
+        for filename in extracted_txt_files:
+            if os.path.exists(filename):
                 os.remove(filename)
+        print(f"清理完成")
 
 def save_to_file(ips, filename):
     """将IP地址列表保存到指定文件。
