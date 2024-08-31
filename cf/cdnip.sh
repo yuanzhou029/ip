@@ -1,12 +1,12 @@
 #!/bin/bash
 export LANG=en_US.UTF-8
-ports=( 2053 ) #443 8443 2096 2053 2087 2083 # 80 8080 8880 2052 2086 2095 2082
-point=443
-point1=2096
+ports=( 443 2096 2053 2083 ) #443 8443 2096 2053 2087 2083 # 80 8080 8880 2052 2086 2095 2082 #单IP接口
+point=2083   #官方优选
+point1=2083  #单选IP
 IP_ADDR=ipv4
 x_email=yuanzhou04@gmail.com
 hostname=(NO_name)
-zone_id=9252a863a3342a467135cc53edc4b9e0
+zone_id=6044ec16fd7d799a2ec7c1370c25c886
 api_key=7340d37de52b18b6974c1eccb7c4cded7e4d0
 pause=true
 clien=1
@@ -17,30 +17,32 @@ CFST_N=500
 
 CFST_T=8
 
-CFST_DN=10
+CFST_DN=10    #官方优选数量
 
-CFST2_DN=10
+CFST2_DN=5   #单IP数量
 
-CFST_TL=300
+CFST3_DN=10
 
-CFST2_TL=300
+CFST_TL=260   #官方优选延时
 
-CFST3_TL=280
+CFST2_TL=230  #单IP延时
+
+CFST3_TL=260  #反带IP延时
 
 CFST_TLL=35
 
-CFST_SL=8
+CFST_SL=5   #官方优选速度
 
-CFST2_SL=3
+CFST2_SL=3   #单IP最大下载速度
 
-CFST3_SL=2
+CFST3_SL=3
 
 telegramBotToken=7417673149:AAFfd6bTzLBxXUDpHl3E2fGJhYpVfaljXOU
 telegramBotUserId=6515075481
 
 CFST_SPD=""
 ymorip=1
-domain=yh-iot.top
+domain=yh-iot.us.kg
 subdomain=cdn
 subdomain1=cdn1
 ymoryms=1
@@ -58,9 +60,10 @@ echo
 echo      ==========================================
 echo
 echo
-curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/ip.txt' > ip.txt
-curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/japan_ips.txt' > fd-ip.txt
-#curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/zip.txt' > zip-ip.txt 
+#curl 'https://raw.githubusercontent.com/yuanzhou029/ip/main/ip.txt' > ip.txt
+#curl 'https://raw.githubusercontent.com/yuanzhou029/ip/main/japan_ips.txt' > fd-ip.txt     
+curl 'https://ipdb.api.030101.xyz/?type=cfv4;proxy&down=true' | tail -n +16 > fd-ip.txt
+#curl 'https://raw.githubusercontent.com/yuanzhou029/ip/main/zip.txt' > zip-ip.txt 
 
 tgaction(){
 if [[ -z ${telegramBotToken} ]]; then
@@ -167,7 +170,7 @@ for port in "${ports[@]}"; do
   if [ "$IP_ADDR" = "ipv6" ]; then
     ./cfst -tp $port $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST_DN -p $CFST_DN -tl $CFST_TL -tll $CFST_TLL -sl $CFST_SL -f ipv6.txt $CFST_SPD -dt 8
   else
-    ./cfst -tp $port $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST2_DN -p $CFST2_DN -tl $CFST2_TL -tll $CFST_TLL -sl $CFST2_SL -f fd-ip.txt $CFST_SPD -dt 8
+    ./cfst -tp $port $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST2_DN -p $CFST2_DN -tl $CFST2_TL -tll $CFST_TLL -sl $CFST2_SL -f zip-ip.txt $CFST_SPD -dt 8  #fd-ip.txt
   fi
 
   if [ ! -f "/root/cfipopw/result.csv" ]; then
@@ -195,7 +198,7 @@ sleep 2
 if [ "$IP_ADDR" = "ipv6" ] ; then
     ./cfst -tp $point $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST_DN -p $CFST_DN -tl $CFST_TL -tll $CFST_TLL -sl $CFST_SL -f ipv6.txt $CFST_SPD -dt 8
     else
-    ./cfst -tp $point1 $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST_DN -p $CFST_DN -tl $CFST3_TL -tll $CFST_TLL -sl $CFST3_SL -f fd-ip.txt  $CFST_SPD -dt 8
+    ./cfst -tp $point1 $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST_DN -p $CFST3_DN -tl $CFST3_TL -tll $CFST_TLL -sl $CFST3_SL -f zip-ip.txt  $CFST_SPD -dt 8  #zip-ip.txt
 fi
 
 num=$CFST_DN
@@ -218,7 +221,6 @@ if [ "$IP_ADDR" = "ipv6" ] ; then
     else
     ./cfst -tp $point $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST_DN -p $CFST_DN -tl $CFST_TL -tll $CFST_TLL -sl $CFST_SL -f ip.txt  $CFST_SPD -dt 8
 fi
-# 添加延时
 sleep 2     
 for port in "${!cfst_results[@]}"; do
   echo "${cfst_results[$port]}" >> $DEST_FILE
