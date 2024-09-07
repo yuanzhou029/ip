@@ -1,15 +1,15 @@
 #!/bin/bash
 export LANG=en_US.UTF-8
-ports=( 443 2096 2053 2083 ) #443 8443 2096 2053 2087 2083 # 80 8080 8880 2052 2086 2095 2082 #单IP接口
-point=2083   #官方优选
-point1=2083  #单选IP
+ports=( 2096 443 2087 2083) #443 8443 2096 2053 2087 2083 # 80 8080 8880 2052 2086 2095 2082 #单IP接口
+point=2096   #官方优选
+point1=2053  #反带IP
 IP_ADDR=ipv4
 x_email=yuanzhou04@gmail.com
 hostname=(NO_name)
 zone_id=6044ec16fd7d799a2ec7c1370c25c886
 api_key=7340d37de52b18b6974c1eccb7c4cded7e4d0
 pause=true
-clien=1
+clien=7
  
 CFST_URL_R="-url https://cs.yz029.us.kg"
 
@@ -19,13 +19,13 @@ CFST_T=8
 
 CFST_DN=10    #官方优选数量
 
-CFST2_DN=5   #单IP数量
+CFST2_DN=3   #单IP数量
 
 CFST3_DN=10
 
 CFST_TL=260   #官方优选延时
 
-CFST2_TL=230  #单IP延时
+CFST2_TL=260  #单IP延时
 
 CFST3_TL=260  #反带IP延时
 
@@ -35,7 +35,7 @@ CFST_SL=5   #官方优选速度
 
 CFST2_SL=3   #单IP最大下载速度
 
-CFST3_SL=3
+CFST3_SL=3   #反带IP最大下载速度
 
 telegramBotToken=7417673149:AAFfd6bTzLBxXUDpHl3E2fGJhYpVfaljXOU
 telegramBotUserId=6515075481
@@ -47,24 +47,59 @@ subdomain=cdn
 subdomain1=cdn1
 ymoryms=1
 token=
-sleepTime=40
+sleepTime=80
 tgapi=api.telegram.org
 # 变量定义
 DIRECTORY=~/openai.js # 存储库的本地路径
 DEST_FILE=$DIRECTORY/ip_geo.txt # 目标文件路径
-COMMIT_MESSAGE="Update ip_geo.txt" # 提交信息
-echo      ==========================================
+DEST_FILE80=$DIRECTORY/ip_80.txt
+COMMIT_MESSAGE="Update ip_geo.txt ip_80.txt" # 提交信息
+echo
+echo
+echo
+echo -e     "\033[31m======================================\033[0m"
 echo                    
-echo        cdn.yh-iot.com by yuanzhou04@gmail.com
+echo -e     "\033[33myh-iot.us.kg by yuanzhou04@gmail.com\033[0m"
 echo 
-echo      ==========================================
+echo -e     "\033[31m=======================================\033[0m"
 echo
 echo
-#curl 'https://raw.githubusercontent.com/yuanzhou029/ip/main/ip.txt' > ip.txt
-#curl 'https://raw.githubusercontent.com/yuanzhou029/ip/main/japan_ips.txt' > fd-ip.txt     
-curl 'https://ipdb.api.030101.xyz/?type=cfv4;proxy&down=true' | tail -n +16 > fd-ip.txt
-#curl 'https://raw.githubusercontent.com/yuanzhou029/ip/main/zip.txt' > zip-ip.txt 
+#从githubu下载数据的sh函数
+zip(){
+#echo -n > /root/cfipopw/zip-ip.txt
+curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/ip.txt' > ip.txt
+sleep 2
+curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/japan_ips.txt' > yuanzhou.txt 
+sleep 2    
+curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/222.txt' >> yuanzhou.txt
+sleep 2
+curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/zip.txt' >> yuanzhou.txt
+sleep 2
+curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/123.txt' >> yuanzhou.txt
+sleep 2
 
+if [ ! -f "yuanzhou.txt" ]; then
+  echo "Error: yuanzhou.txt 文件不存在."
+  exit 1
+fi
+sleep 2
+# 使用 sort 和 uniq 命令去重 IP 地址
+sort yuanzhou.txt | uniq > zip-ip.txt
+sleep 2
+rm yuanzhou.txt
+echo
+echo -e "\033[33m合并后的ip去重已保存到 zip-ip.txt 文件中.\033[0m"
+echo
+sleep 2
+curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/cmliu/CFcdnVmess2sub/main/addressesapi.txt' > ip-80.txt
+sleep 2
+cp /root/cfipopw/ip-80.txt $DEST_FILE80
+sleep 2
+echo
+echo -e "\033[33m80端口的资源内容已经准备同步远程库ip_80.txt文件.\033[0m"
+echo
+echo
+}
 tgaction(){
 if [[ -z ${telegramBotToken} ]]; then
    echo "未配置TG推送"
@@ -142,10 +177,9 @@ if [ "$IP_ADDR" = "ipv6" ] ; then
     else
         echo "当前工作模式为ipv4";
 fi
-
 case $clien in
   "8") CLIEN=vssr;;
-  "7") CLIEN=v2raya;;
+  "7") CLIEN=homeproxy;;
   "6") CLIEN=bypass;;
   "5") CLIEN=openclash;;
   "4") CLIEN=clash;;
@@ -161,7 +195,8 @@ else
 /etc/init.d/$CLIEN stop;
 echo "已停止$CLIEN";
 fi
-
+#从githubu上下载需要测试的ip地址
+zip
 declare -A cfst_results
 
 for port in "${ports[@]}"; do
@@ -186,11 +221,12 @@ for port in "${ports[@]}"; do
 
       # 将结果添加到数组中
       cfst_results["$col1:$port"]="${col1}:${port}#${geo_info}"
-      echo "值已添加到数组中 cfst_results[$col1:$port]"
+      echo "值已添加到数组中 cfst_results[$col1:$port:$geo_info]"
     else
       echo "条件未满足，跳过行：${col1}, ${col5}, ${col6}"
     fi
   done < <(tail -n +2 /root/cfipopw/result.csv)  # 跳过表头
+  sleep 3
 done
 # 添加延时
 sleep 2
@@ -198,7 +234,7 @@ sleep 2
 if [ "$IP_ADDR" = "ipv6" ] ; then
     ./cfst -tp $point $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST_DN -p $CFST_DN -tl $CFST_TL -tll $CFST_TLL -sl $CFST_SL -f ipv6.txt $CFST_SPD -dt 8
     else
-    ./cfst -tp $point1 $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST_DN -p $CFST3_DN -tl $CFST3_TL -tll $CFST_TLL -sl $CFST3_SL -f zip-ip.txt  $CFST_SPD -dt 8  #zip-ip.txt
+    ./cfst -tp $point1 $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST_DN -p $CFST3_DN -tl $CFST3_TL -tll $CFST_TLL -sl $CFST3_SL -f zip-ip.txt $CFST_SPD -dt 8  #zip-ip.txt
 fi
 
 num=$CFST_DN
@@ -242,7 +278,7 @@ awk -F, "NR<=$new_num" /root/cfipopw/result.csv > /root/cfipopw/new_result.csv
 mv /root/cfipopw/new_result.csv /root/cfipopw/result.csv
 fi
 if [[ $(awk -F ',' 'NR==2 {print $1}' /root/cfipopw/result.csv) ]]; then
-awk -F ',' 'NR>1 && NR<=6 {print $1}' /root/cfipopw/result.csv > /root/cfipopw/new_result.csv
+awk -F ',' 'NR>1 && NR<=8 {print $1}' /root/cfipopw/result.csv > /root/cfipopw/new_result.csv
 mv /root/cfipopw/new_result.csv /root/cfipopw/result.csv
 fi
 sed -i '/api.cloudflare.com/d' /etc/hosts
@@ -323,7 +359,7 @@ fi
 }
 #########################################
 yuan(){
-echo "正在更新解析第一个域名：多个优选IP解析到一个域名。请稍后...";
+echo "正在更新解析第二个域名：多个优选IP解析到一个域名。请稍后...";
 url="https://api.cloudflare.com/client/v4/zones/$zone_id/dns_records"
 params="name=${subdomain1}.${domain}&type=A,AAAA"
 response=$(curl -sm10 -X GET "$url?$params" -H "X-Auth-Email: $x_email" -H "X-Auth-Key: $api_key")
