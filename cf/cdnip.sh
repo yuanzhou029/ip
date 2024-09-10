@@ -71,8 +71,8 @@ curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main
 sleep 2
 curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/japan_ips.txt' > yuanzhou.txt 
 sleep 2    
-curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/222.txt' >> yuanzhou.txt
-sleep 2
+#curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/222.txt' >> yuanzhou.txt
+#sleep 2
 curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/zip.txt' >> yuanzhou.txt
 sleep 2
 curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/123.txt' >> yuanzhou.txt
