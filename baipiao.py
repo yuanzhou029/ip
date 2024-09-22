@@ -47,7 +47,7 @@ def main():
     parser.add_argument('--delay-limit', type=float, default=100, help='The delay limit for IPs.')
     args = parser.parse_args()
 
-    url = "	https://www.182682.xyz/api/cf2dns/get_cloudfront_ip"
+    url = "https://api.345673.xyz/get_data"
     key = "o1zrmHAF"
     max_retries = 3
     retry_count = 0
