@@ -3,7 +3,7 @@ name: Cleaning up logs
 on:
   schedule:
     # 每三天运行一次
-    - cron: '0 0 */3 * *'
+    #- cron: '0 0 */3 * *'
 
   # 添加手动触发
   workflow_dispatch:
