@@ -1,105 +1,40 @@
 #!/bin/bash
 export LANG=en_US.UTF-8
-ports=( 2096 443 2087 2083) #443 8443 2096 2053 2087 2083 # 80 8080 8880 2052 2086 2095 2082 #单IP接口
-point=2096   #官方优选
-point1=2053  #反带IP
+point=2083
 IP_ADDR=ipv4
 x_email=yuanzhou04@gmail.com
 hostname=(NO_name)
-zone_id=6044ec16fd7d799a2ec7c1370c25c886
+zone_id=1715e9b8da3a4dfd88e22dff53f39bd7
 api_key=7340d37de52b18b6974c1eccb7c4cded7e4d0
 pause=true
-clien=7
+clien=10
  
-CFST_URL_R="-url https://cs.yz029.us.kg"
+CFST_URL_R="-url https://cs.yz029.dpdns.org"
 
-CFST_N=500
+CFST_N=200
 
-CFST_T=8
+CFST_T=4
 
-CFST_DN=10    #官方优选数量
+CFST_DN=10
 
-CFST2_DN=3   #单IP数量
+CFST_TL=150
 
-CFST3_DN=10
+CFST_TLL=30
 
-CFST_TL=260   #官方优选延时
-
-CFST2_TL=260  #单IP延时
-
-CFST3_TL=260  #反带IP延时
-
-CFST_TLL=35
-
-CFST_SL=5   #官方优选速度
-
-CFST2_SL=3   #单IP最大下载速度
-
-CFST3_SL=3   #反带IP最大下载速度
+CFST_SL=3
 
 telegramBotToken=7417673149:AAFfd6bTzLBxXUDpHl3E2fGJhYpVfaljXOU
 telegramBotUserId=6515075481
 
 CFST_SPD=""
 ymorip=1
-domain=yh-iot.us.kg
-subdomain=cdn
-subdomain1=cdn1
+domain=yh-iot.cloudns.org
+subdomain=ipv6
 ymoryms=1
 token=
-sleepTime=80
+sleepTime=40
 tgapi=api.telegram.org
-# 变量定义
-DIRECTORY=~/openai.js # 存储库的本地路径
-DEST_FILE=$DIRECTORY/ip_geo.txt # 目标文件路径
-DEST_FILE80=$DIRECTORY/ip_80.txt
-COMMIT_MESSAGE="Update ip_geo.txt ip_80.txt" # 提交信息
-echo
-echo
-echo
-echo -e     "\033[31m======================================\033[0m"
-echo                    
-echo -e     "\033[33myh-iot.us.kg by yuanzhou04@gmail.com\033[0m"
-echo 
-echo -e     "\033[31m=======================================\033[0m"
-echo
-echo
-#从githubu下载数据的sh函数
-zip(){
-#echo -n > /root/cfipopw/zip-ip.txt
-curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/ip.txt' > ip.txt
-sleep 2
-curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/japan_ips.txt' > yuanzhou.txt 
-sleep 2    
-#curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/222.txt' >> yuanzhou.txt
-#sleep 2
-curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/zip.txt' >> yuanzhou.txt
-sleep 2
-curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/yuanzhou029/ip/main/123.txt' >> yuanzhou.txt
-sleep 2
 
-if [ ! -f "yuanzhou.txt" ]; then
-  echo "Error: yuanzhou.txt 文件不存在."
-  exit 1
-fi
-sleep 2
-# 使用 sort 和 uniq 命令去重 IP 地址
-sort yuanzhou.txt | uniq > zip-ip.txt
-sleep 2
-rm yuanzhou.txt
-echo
-echo -e "\033[33m合并后的ip去重已保存到 zip-ip.txt 文件中.\033[0m"
-echo
-sleep 2
-curl 'https://proxy.api.030101.xyz/raw.githubusercontent.com/cmliu/CFcdnVmess2sub/main/addressesapi.txt' > ip-80.txt
-sleep 2
-cp /root/cfipopw/ip-80.txt $DEST_FILE80
-sleep 2
-echo
-echo -e "\033[33m80端口的资源内容已经准备同步远程库ip_80.txt文件.\033[0m"
-echo
-echo
-}
 tgaction(){
 if [[ -z ${telegramBotToken} ]]; then
    echo "未配置TG推送"
@@ -134,9 +69,8 @@ else
    fi
 fi
 }
-#清空目标文件
-: > $DEST_FILE
-cd /root/cfipopw/ && rm -rf informlog-cdn && rm -rf informlog-cdn1 && bash cdnac.sh
+
+cd /root/cfipopw/ && rm -rf informlog && bash cdnac.sh
 if [ "$ymorip" == "1" ]; then
 sed -i '/api.cloudflare.com/d' /etc/hosts
 proxy="false";
@@ -177,9 +111,13 @@ if [ "$IP_ADDR" = "ipv6" ] ; then
     else
         echo "当前工作模式为ipv4";
 fi
+
 case $clien in
+  "11") CLIEN=shellcrash;;
+  "10") CLIEN=nikki;;
+  "9") CLIEN=homeproxy;;
   "8") CLIEN=vssr;;
-  "7") CLIEN=homeproxy;;
+  "7") CLIEN=v2raya;;
   "6") CLIEN=bypass;;
   "5") CLIEN=openclash;;
   "4") CLIEN=clash;;
@@ -195,74 +133,13 @@ else
 /etc/init.d/$CLIEN stop;
 echo "已停止$CLIEN";
 fi
-#从githubu上下载需要测试的ip地址
-zip
-declare -A cfst_results
 
-for port in "${ports[@]}"; do
-  echo "开始对端口 $port 进行测速..."
-  > /root/cfipopw/result.csv
-  if [ "$IP_ADDR" = "ipv6" ]; then
-    ./cfst -tp $port $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST_DN -p $CFST_DN -tl $CFST_TL -tll $CFST_TLL -sl $CFST_SL -f ipv6.txt $CFST_SPD -dt 8
-  else
-    ./cfst -tp $port $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST2_DN -p $CFST2_DN -tl $CFST2_TL -tll $CFST_TLL -sl $CFST2_SL -f zip-ip.txt $CFST_SPD -dt 8  #fd-ip.txt
-  fi
-
-  if [ ! -f "/root/cfipopw/result.csv" ]; then
-    echo "错误：文件 /root/cfipopw/result.csv 未找到。"
-    exit 1
-  fi
-
-   while IFS=',' read -r col1 col2 col3 col4 col5 col6; do
-    # 检查第六列的值是否大于或等于 CFST2_SL，并且第五列的值是否小于 CFST2_TL
-    if awk -v col6="$col6" -v col5="$col5" -v CFST2_SL="$CFST2_SL" -v CFST2_TL="$CFST2_TL" 'BEGIN {exit !(col6 >= CFST2_SL && col5 < CFST2_TL)}'; then
-      # 使用 curl 进行 API 查询地理信息
-      geo_info=$(curl -s "http://ip-api.com/json/${col1}?lang=zh-CN" | jq -r '.country')
-
-      # 将结果添加到数组中
-      cfst_results["$col1:$port"]="${col1}:${port}#${geo_info}"
-      echo "值已添加到数组中 cfst_results[$col1:$port:$geo_info]"
-    else
-      echo "条件未满足，跳过行：${col1}, ${col5}, ${col6}"
-    fi
-  done < <(tail -n +2 /root/cfipopw/result.csv)  # 跳过表头
-  sleep 3
-done
-# 添加延时
-sleep 2
- 
 if [ "$IP_ADDR" = "ipv6" ] ; then
     ./cfst -tp $point $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST_DN -p $CFST_DN -tl $CFST_TL -tll $CFST_TLL -sl $CFST_SL -f ipv6.txt $CFST_SPD -dt 8
     else
-    ./cfst -tp $point1 $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST_DN -p $CFST3_DN -tl $CFST3_TL -tll $CFST_TLL -sl $CFST3_SL -f zip-ip.txt $CFST_SPD -dt 8  #zip-ip.txt
+    ./cfst -tp $point $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST_DN -p $CFST_DN -tl $CFST_TL -tll $CFST_TLL -sl $CFST_SL $CFST_SPD -dt 8
 fi
 
-num=$CFST_DN
-new_num=$((num + 1))
-if [ $(awk -F, 'NR==2 {print $6}' /root/cfipopw/result.csv) == 0.00 ]; then
-awk -F, "NR<=$new_num" /root/cfipopw/result.csv > /root/cfipopw/new_result.csv
-mv /root/cfipopw/new_result.csv /root/cfipopw/result1.csv
-fi
-if [[ $(awk -F ',' 'NR==2 {print $1}' /root/cfipopw/result.csv) ]]; then
-awk -F ',' 'NR>1 && NR<=6 {print $1}' /root/cfipopw/result.csv > /root/cfipopw/new_result.csv
-mv /root/cfipopw/new_result.csv /root/cfipopw/result1.csv
-fi
-  echo""
-  # 添加延时2秒
-  sleep 2 
-
-###############################
-if [ "$IP_ADDR" = "ipv6" ] ; then
-    ./cfst -tp $point $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST_DN -p $CFST_DN -tl $CFST_TL -tll $CFST_TLL -sl $CFST_SL -f ipv6.txt $CFST_SPD -dt 8
-    else
-    ./cfst -tp $point $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST_DN -p $CFST_DN -tl $CFST_TL -tll $CFST_TLL -sl $CFST_SL -f ip.txt  $CFST_SPD -dt 8
-fi
-sleep 2     
-for port in "${!cfst_results[@]}"; do
-  echo "${cfst_results[$port]}" >> $DEST_FILE
-done
-# 添加延时
-sleep 5
 if [ -f "/root/cfipopw/result.csv" ]; then
 second_line=$(sed -n '2p' /root/cfipopw/result.csv | tr -d '[:space:]')
 if [ -z "$second_line" ]; then
@@ -277,8 +154,8 @@ if [ $(awk -F, 'NR==2 {print $6}' /root/cfipopw/result.csv) == 0.00 ]; then
 awk -F, "NR<=$new_num" /root/cfipopw/result.csv > /root/cfipopw/new_result.csv
 mv /root/cfipopw/new_result.csv /root/cfipopw/result.csv
 fi
-if [[ $(awk -F ',' 'NR==2 {print $1}' /root/cfipopw/result.csv) ]]; then
-awk -F ',' 'NR>1 && NR<=8 {print $1}' /root/cfipopw/result.csv > /root/cfipopw/new_result.csv
+if [[ $(awk -F ',' 'NR==12 {print $1}' /root/cfipopw/result.csv) ]]; then
+awk -F ',' 'NR>1 && NR<=11 {print $1}' /root/cfipopw/result.csv > /root/cfipopw/new_result.csv
 mv /root/cfipopw/new_result.csv /root/cfipopw/result.csv
 fi
 sed -i '/api.cloudflare.com/d' /etc/hosts
@@ -328,7 +205,7 @@ else
 fi
 csv_file='result.csv'
 if [[ -f $csv_file ]]; then
-    ips=$(awk -F ',' 'NR > 0 {print $1}' "$csv_file")
+    ips=$(awk -F ',' 'NR > 1 {print $1}' "$csv_file")
     for ip in $ips; do
         url="https://api.cloudflare.com/client/v4/zones/$zone_id/dns_records"
         if [[ "$ip" =~ ":" ]]; then
@@ -340,16 +217,16 @@ if [[ -f $csv_file ]]; then
             "type": "'"$record_type"'",
             "name": "'"$subdomain.$domain"'",
             "content": "'"$ip"'",
-            "ttl": 60,
+	    "ttl": 60,
             "proxied": false
         }'
         response=$(curl -s -X POST "$url" -H "X-Auth-Email: $x_email" -H "X-Auth-Key: $api_key" -H "Content-Type: application/json" -d "$data")
         if [[ $(echo "$response" | jq -r '.success') == "true" ]]; then
             echo "IP地址 $ip 成功解析到 ${subdomain}.${domain}"
-            echo "IP地址 $ip 成功解析到 ${subdomain}.${domain}" >> informlog-cdn
+            echo "IP地址 $ip 成功解析到 ${subdomain}.${domain}" >> informlog
         else
             echo "导入IP地址 $ip 失败"
-            echo "导入IP地址 $ip 失败" >> informlog-cdn
+            echo "导入IP地址 $ip 失败" >> informlog
         fi
         sleep 3
        done
@@ -357,65 +234,9 @@ else
     echo "CSV文件 $csv_file 不存在"
 fi
 }
-#########################################
-yuan(){
-echo "正在更新解析第二个域名：多个优选IP解析到一个域名。请稍后...";
-url="https://api.cloudflare.com/client/v4/zones/$zone_id/dns_records"
-params="name=${subdomain1}.${domain}&type=A,AAAA"
-response=$(curl -sm10 -X GET "$url?$params" -H "X-Auth-Email: $x_email" -H "X-Auth-Key: $api_key")
-if [[ $(echo "$response" | jq -r '.success') == "true" ]]; then
-    records=$(echo "$response" | jq -r '.result')
-    if [[ $(echo "$records" | jq 'length') -gt 0 ]]; then
-        for record in $(echo "$records" | jq -c '.[]'); do
-            record_id=$(echo "$record" | jq -r '.id')
-            delete_url="$url/$record_id"
-            delete_response=$(curl -s -X DELETE "$delete_url" -H "X-Auth-Email: $x_email" -H "X-Auth-Key: $api_key")
-            if [[ $(echo "$delete_response" | jq -r '.success') == "true" ]]; then
-                echo "成功删除 DNS 记录：$(echo "$record" | jq -r '.name')"
-            else
-                echo "删除 DNS 记录失败"
-            fi
-        done
-    else
-        echo "没有找到指定的 DNS 记录"
-    fi
-else
-    echo "获取 DNS 记录失败"
-fi
-csv_file='result1.csv'
-if [[ -f $csv_file ]]; then
-    ips=$(awk -F ',' 'NR > 0 {print $1}' "$csv_file")
-    for ip in $ips; do
-        url="https://api.cloudflare.com/client/v4/zones/$zone_id/dns_records"
-        if [[ "$ip" =~ ":" ]]; then
-            record_type="AAAA"
-        else
-            record_type="A"
-        fi
-        data='{
-            "type": "'"$record_type"'",
-            "name": "'"$subdomain1.$domain"'",
-            "content": "'"$ip"'",
-            "ttl": 60,
-            "proxied": false
-        }'
-        response=$(curl -s -X POST "$url" -H "X-Auth-Email: $x_email" -H "X-Auth-Key: $api_key" -H "Content-Type: application/json" -d "$data")
-        if [[ $(echo "$response" | jq -r '.success') == "true" ]]; then
-            echo "IP地址 $ip 成功解析到 ${subdomain1}.${domain}"
-            echo "IP地址 $ip 成功解析到 ${subdomain1}.${domain}" >> informlog-cdn1
-        else
-            echo "导入IP地址 $ip 失败"
-            echo "导入IP地址 $ip 失败" >> informlog-cdn1
-        fi
-        sleep 3
-       done
-else
-    echo "CSV文件 $csv_file 不存在"
-fi
-}
-#########################################
+
 ym(){
-echo "正在更新解析第二个域名：每个优选IP解析到每个域名。请稍后...";
+echo "正在更新解析：每个优选IP解析到每个域名。请稍后...";
 ipv4Regex="((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])";
 x=0;
 while [[ ${x} -lt $num ]]; do
@@ -458,10 +279,7 @@ done > informlog
 
 if [ "$ymorip" == "1" ]; then
 if [ "$ymoryms" == "1" ]; then
-#echo"第一个域名开始解析"
 ymonly
-#echo"第二个域名开始解析"
-yuan
 else
 ym
 fi
@@ -470,33 +288,10 @@ echo "优选IP排名如下" > informlog
 awk -F ',' 'NR > 1 {print $1}' result.csv >> informlog
 fi
 bash cdnac.sh
-pushmessage="恭喜IP地址已经解析完成";
-echo
-
-tgaction
-sleep 1
-#推送优选ip到远程存储库中
-# 切换到存储库路径
-cd $DIRECTORY
-
-# 获取最新代码
-git pull
-
-# 添加所有修改
-git add .
-
-# 创建一个新的提交
-git commit -m "$COMMIT_MESSAGE"
-
-# 推送提交到远程仓库
-git push origin master
-echo
-
-pushmessage="已成功推送到远程仓库";
+pushmessage=$(cat informlog);
 tgaction
 echo
 echo "切记：在软路由-计划任务选项中，加入优选IP自动执行时间的cron表达式"
-echo "比如每两天早上四点五十执行：50 4 */2 * * cd /root/cfipopw/ && bash cdnip.sh
-"
+echo "比如每天早上三点执行：0 3 * * * cd /root/cfipopw/ && bash cdnip.sh"
 echo
 exit
