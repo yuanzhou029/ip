@@ -28,7 +28,6 @@ jobs:
           --compact true \
           --control-flow-flattening true \
           --control-flow-flattening-threshold 1 \
-          --dead-code-injection true \
           --dead-code-injection-threshold 1 \
           --identifier-names-generator hexadecimal \
           --rename-globals true \
