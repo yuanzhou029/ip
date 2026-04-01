@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # 获取完整的 Git 历史记录
 
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -45,6 +45,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add _worker.js
+          git status  # 确保文件已经被修改
           git commit -m "Obfuscate _worker.js" || echo "No changes to commit"
 
       - name: Debug push branch
@@ -53,5 +54,5 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # 推荐使用默认的 GITHUB_TOKEN
           branch: main  # 推送到 "main" 分支
