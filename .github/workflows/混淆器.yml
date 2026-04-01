@@ -1,8 +1,6 @@
-name: Obfuscate and Commit
+name: js代码混淆器
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 jobs:
