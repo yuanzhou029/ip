@@ -49,7 +49,8 @@ jobs:
           git commit -m "Obfuscate _worker.js" || echo "No changes to commit"
 
       - name: Debug push branch
-        run: echo "Pushing to branch: ${{ github.ref }}"
+        run: |
+             echo "Pushing to branch: ${{ github.ref }}"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
