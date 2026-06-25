@@ -2,7 +2,7 @@ import {
     connect
 } from 'cloudflare:sockets';
 
-const UUID = '772b7e8f-afda-4a36-ab76-6020cbea48aa';
+const UUID = '974096a6-262d-4c38-bf7d-93406211168f';
 // 反向代理IP，无法访问时通过代理访问
 const DEFAULT_PROXY_IP = 'jp.toi.cc.cd'; // 来源：https://ipdb.030101.xyz/bestdomain/
 // 优选域名/IP
