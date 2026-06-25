@@ -21,15 +21,7 @@ const directDomains = [
   { name: "cloudflare.182682.xyz", domain: "cloudflare.182682.xyz" },
   { name: "speed.marisalnc.com", domain: "speed.marisalnc.com" },
   { domain: "freeyx.cloudflare88.eu.org" }, { domain: "bestcf.top" },
-  { domain: "cdn.2020111.xyz" }, { domain: "cfip.cfcdn.vip" },
-  { domain: "cf.0sm.com" }, { domain: "cf.090227.xyz" },
-  { domain: "cf.zhetengsha.eu.org" }, { domain: "cloudflare.9jy.cc" },
-  { domain: "cf.zerone-cdn.pp.ua" }, { domain: "cfip.1323123.xyz" },
-  { domain: "cnamefuckxxs.yuchen.icu" }, { domain: "cloudflare-ip.mofashi.ltd" },
-  { domain: "115155.xyz" }, { domain: "cname.xirancdn.us" },
-  { domain: "f3058171cad.002404.xyz" }, { domain: "8.889288.xyz" },
-  { domain: "cdn.tzpro.xyz" }, { domain: "cf.877771.xyz" },
-  { domain: "xn--b6gac.eu.org" }
+  { domain: "cdn.2020111.xyz" }, { domain: "cfip.cfcdn.vip" }
 ];
 
 const parsedSocks5Config = {};
@@ -42,13 +34,7 @@ const backupIPs = [
   { domain: 'ProxyIP.US.CMLiussss.net', region: 'US', regionCode: 'US', port: 443 },
   { domain: 'ProxyIP.SG.CMLiussss.net', region: 'SG', regionCode: 'SG', port: 443 },
   { domain: 'jp.toi.cc.cd', region: 'JP', regionCode: 'JP', port: 443 },
-  { domain: 'ProxyIP.HK.CMLiussss.net', region: 'HK', regionCode: 'HK', port: 443 },
-  { domain: 'ProxyIP.KR.CMLiussss.net', region: 'KR', regionCode: 'KR', port: 443 },
-  { domain: 'ProxyIP.DE.CMLiussss.net', region: 'DE', regionCode: 'DE', port: 443 },
-  { domain: 'ProxyIP.SE.CMLiussss.net', region: 'SE', regionCode: 'SE', port: 443 },
-  { domain: 'ProxyIP.NL.CMLiussss.net', region: 'NL', regionCode: 'NL', port: 443 },
-  { domain: 'ProxyIP.FI.CMLiussss.net', region: 'FI', regionCode: 'FI', port: 443 },
-  { domain: 'ProxyIP.GB.CMLiussss.net', region: 'GB', regionCode: 'GB', port: 443 }
+  { domain: 'ProxyIP.HK.CMLiussss.net', region: 'HK', regionCode: 'HK', port: 443 }
 ];
 
 const E_INVALID_DATA = atob('aW52YWxpZCBkYXRh');
