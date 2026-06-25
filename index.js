@@ -2,9 +2,9 @@ import {
     connect
 } from 'cloudflare:sockets';
 
-const UUID = '974096a6-262d-4c38-bf7d-93406211168f';
+const UUID = 'a0e7ce2a-4527-47a5-aeb7-d5b89c016aa8';
 // 反向代理IP，无法访问时通过代理访问
-const DEFAULT_PROXY_IP = 'jp.toi.cc.cd'; // 来源：https://ipdb.030101.xyz/bestdomain/
+const DEFAULT_PROXY_IP = 'jp.toi.cc.cd','hk.toi.cc.cd','us.toi.cc.cd'; // 来源：https://ipdb.030101.xyz/bestdomain/
 // 优选域名/IP
 const BEST_DOMAINS = ['ipv6.yh-iot.cloudns.org:443', 'cf.877774.xyz:443', '9888k.com:443', "cf.090227.xyz:443", "cdns.doon.eu.org:443", "sub.danfeng.eu.org:443", "cf.zhetengsha.eu.org:443", "japan.com:443"]
 
