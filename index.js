@@ -6,7 +6,7 @@ const UUID = 'cc7d3f6a-dc0c-4548-b88e-10f46e041c54';
 // 反向代理IP，无法访问时通过代理访问
 const DEFAULT_PROXY_IP = 'jp.toi.cc.cd'; 
 // 优选域名/IP
-const BEST_DOMAINS = ['ipv6.yh-iot.cloudns.org:443']
+const BEST_DOMAINS = 'ipv6.yh-iot.cloudns.org:443'
 
 
 export default {
