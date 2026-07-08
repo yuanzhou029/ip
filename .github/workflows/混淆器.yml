@@ -26,14 +26,14 @@ jobs:
         run: |
           javascript-obfuscator index.js --output _worker.js \
           --compact true \
-          --control-flow-flattening true \           
-          --control-flow-flattening-threshold 0.8 \  
-          --dead-code-injection-threshold 0.8 \   
+          --control-flow-flattening true \
+          --control-flow-flattening-threshold 0.8 \
+          --dead-code-injection-threshold 0.8 \
           --identifier-names-generator hexadecimal \
-          --rename-globals true \                   
-          --string-array true \                      
-          --string-array-encoding 'rc4' \            
-          --string-array-threshold 0.8 \            
+          --rename-globals true \
+          --string-array true \
+          --string-array-encoding 'rc4' \
+          --string-array-threshold 0.8 \
           --transform-object-keys true \
 
       - name: Commit changes
