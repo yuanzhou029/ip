@@ -1,4 +1,4 @@
-name: js代码混淆器
+name: js代码混淆器v2.0
 
 on:
   workflow_dispatch:
