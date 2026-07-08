@@ -1,11 +1,7 @@
 /* javascript-obfuscator:disable */
 import { connect } from 'cloudflare:sockets';
 /* javascript-obfuscator:enable */
-// --- 后续代码保持不变 ---
-const authToken = 'f64bdc57-0f54-4705-bf75-cfd646d98c06';
-// ...
 
-import { connect } from 'cloudflare:sockets';
 const auth = 'f64bdc57-0f54-4705-bf75-cfd646d98c06', fallback = 'ProxyIP.SG.CMLiussss.net:443', customPath = '',
   gitURL = 'https://raw.githubusercontent.com/qwer-search/bestip/refs/heads/main/kejilandbestip.txt',
   enGit = true, enOth = true, direct = [
