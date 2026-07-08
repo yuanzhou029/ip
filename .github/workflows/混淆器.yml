@@ -26,14 +26,14 @@ jobs:
         run: |
           javascript-obfuscator index.js --output _worker.js \
           --compact true \
-          --control-flow-flattening true \
-          --control-flow-flattening-threshold 1 \
-          --dead-code-injection-threshold 1 \
+          --control-flow-flattening true \  # 打乱代码的正常执行顺序，用复杂的 switch-case 循环将代码结构扁平化
+          --control-flow-flattening-threshold 0.8 \  # 设得极低（如 0.1 到 0.2），只混淆 10%~20% 的关键代码
+          --dead-code-injection-threshold 0.8 \  # 是一个控制死代码注入频率和比例的参数。它的取值范围是 0 到 1（即 0% 到 100%）
           --identifier-names-generator hexadecimal \
-          --rename-globals true \
-          --string-array true \
-          --string-array-encoding 'rc4' \
-          --string-array-threshold 1 \
+          --rename-globals true \           # 将全局范围内的变量、函数名也进行混淆。
+          --string-array true \              # 将代码中所有的字符串（包括 URL、错误信息、配置项）抽离出来，放进一个统一的全局数组中，在运行时通过函数索引调用
+          --string-array-encoding 'rc4' \   # 可选值：'none'（不加密，仅数组化） / 'base64'（Base64 编码） / 'rc4'（RC4 强加密）
+          --string-array-threshold 0.8 \       # 控制有多少比例的字符串会被放入混淆数组。1 代表 100% 混淆，0.75 代表 75%。
           --transform-object-keys true \
 
       - name: Commit changes
