@@ -65,7 +65,7 @@ jobs:
 
       - name: Delete completed workflow runs
         env:
-          GH_TOKEN: ${{ secrets.GT_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           echo "Fetching completed workflow runs..."
           RUN_IDS=$(curl -s -H "Authorization: token $GH_TOKEN" \
