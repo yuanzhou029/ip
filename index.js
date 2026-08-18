@@ -2,11 +2,11 @@ import {
     connect
 } from 'cloudflare:sockets';
 
-const UUID = 'cc7d3f6a-dc0c-4548-b88e-10f46e041c54';
+const UUID = '07d4afa4-ea6f-46c6-b8bb-e3269b36d1f0';
 // 反向代理IP，无法访问时通过代理访问
 const DEFAULT_PROXY_IP = 'jp.toi.cc.cd'; 
 // 优选域名/IP
-const BEST_DOMAINS = 'ipv6.yh-iot.cloudns.org:443'
+const BEST_DOMAINS = 'cm.d.b.9.f.0.7.4.0.1.0.0.2.ip6.arpa:443'
 
 
 export default {
