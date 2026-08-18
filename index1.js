@@ -2,7 +2,7 @@ import {
     connect
 } from 'cloudflare:sockets';
 
-const UUID_STR = '07d4afa4-ea6f-46c6-b8bb-e3269b36d1f0';
+const UUID = '07d4afa4-ea6f-46c6-b8bb-e3269b36d1f0';
 // 反向代理IP，无法访问时通过代理访问
 const DEFAULT_PROXY_IP = 'jp.toi.cc.cd'; 
 // 优选域名/IP
@@ -18,7 +18,7 @@ export default {
             if (u.pathname === '/') {
                 const html = "<h1>success</h1>";
                 return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
-            } else if (u.pathname.toLowerCase().includes(`/${UUID_STR}`)) {
+            } else if (u.pathname.toLowerCase().includes(`/${UUID}`)) {
                 return await handle_sub(req);
             }
         }
@@ -60,7 +60,7 @@ function gen_links(workerDomain) {
             host: workerDomain,
             path: wsPath
         });
-        links.push(`${proto}://${UUID_STR}@${item}?${wsParams.toString()}#${encodeURIComponent(name)}`);
+        links.push(`${proto}://${UUID}@${item}?${wsParams.toString()}#${encodeURIComponent(name)}`);
     })
     return links;
 }
@@ -179,11 +179,11 @@ async function handle_ws(req) {
 
             if (data.byteLength < 24) return;
 
-            // UUID_STR验证
-            const UUID_STRBytes = new Uint8Array(data.slice(1, 17));
-            const expectedUUID_STR = UUID_STR.replace(/-/g, '');
+            // UUID验证
+            const UUIDBytes = new Uint8Array(data.slice(1, 17));
+            const expectedUUID = UUID.replace(/-/g, '');
             for (let i = 0; i < 16; i++) {
-                if (UUID_STRBytes[i] !== parseInt(expectedUUID_STR.substr(i * 2, 2), 16)) return;
+                if (UUIDBytes[i] !== parseInt(expectedUUID.substr(i * 2, 2), 16)) return;
             }
 
             const view = new DataView(data);
