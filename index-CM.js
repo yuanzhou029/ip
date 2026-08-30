@@ -1,5 +1,5 @@
-const FIXED_UUID = 'a92073e5-8963-4ff6-ade1-30c657e33c4a';
-const SUB_ID = 'FLWgkTE';
+const FIXED_UUID = 'ouiw0lw7h3gx9fzmx';
+const SUB_ID = 'yuanzhou029';
 const EXTERNAL_SUB_BASE_URL = 'https://sub.kkii.eu.org';
 const FRONTEND_HTML_URL = 'https://tcs.yz029.dpdns.org';
 const PROXY_IPS = ['jp.toi.cc.cd'];
